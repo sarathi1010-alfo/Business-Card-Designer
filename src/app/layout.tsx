@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Business Card Designer | Create Professional Cards Instantly",
   description: "Design professional business cards in minutes — no design skills needed.",
+  other: {
+    "google-adsense-account": "ca-pub-6393936268623951",
+  },
 };
 
 export default function RootLayout({
