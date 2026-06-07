@@ -1,0 +1,12 @@
+# Indexing Failure Debugger
+
+| Status Code | Cause | Diagnosis Steps | Fix |
+| :--- | :--- | :--- | :--- |
+| **Crawled - currently not indexed** | Google crawled the page but decided not to index it, usually due to low perceived value, thin content, or overall site crawl budget limits. | 1. Check content depth. 2. Verify page isn't near-duplicate of another. 3. Check if page renders fully without JS. | Add unique value/content (EEAT). Differentiate from siblings. Consolidate if too similar. |
+| **Discovered - currently not indexed** | Google knows the URL exists (via sitemap or links) but hasn't crawled it yet. Often a crawl budget or site-wide quality issue. | 1. Check internal link depth (is it buried?). 2. Check server TTFB latency. | Improve internal linking to the page. Optimize server response times. |
+| **Duplicate, Google chose different canonical** | Google ignored your canonical tag and grouped this page with another it deemed more authoritative/relevant. | 1. Inspect URL in GSC to see which URL Google chose. 2. Compare the two pages. | Make the pages substantially different, or accept the consolidation and use a 301 redirect. |
+| **Page with redirect** | URL redirects to another URL. | 1. Check network tab for 301/308 redirects. 2. Check Next.js trailing slash settings. | Update internal links to point directly to the final destination URL. |
+| **Blocked by robots.txt** | `robots.txt` explicitly disallows crawling of this URL. | 1. Test URL in GSC robots.txt tester. 2. Check `src/app/robots.ts`. | Remove the disallow rule in `robots.ts` if the page should be indexed. |
+| **Server error (5xx)** | The Next.js server crashed, timed out, or returned a 500 when Googlebot requested it. | 1. Check Vercel logs for the specific URL. 2. Look for DB timeouts or unhandled exceptions. | Fix the runtime exception. Optimize slow database queries. |
+| **Soft 404** | Page returns a 200 OK status, but looks like an error page (e.g., "Item not found" UI) or is empty. | 1. View page as Googlebot. 2. Ensure dynamic routing properly returns a 404 status code (`notFound()` in Next.js) when data is missing. | Use Next.js `notFound()` explicitly so the server returns a 404 status code instead of a 200 with an empty UI. |
+| **Alternate page with proper canonical tag** | Expected behavior for URLs with parameters or alternative versions pointing to the primary canonical. | 1. Verify this URL *should* be an alternate. | No action needed if correct. If it shouldn't be an alternate, fix the canonical tag. |
