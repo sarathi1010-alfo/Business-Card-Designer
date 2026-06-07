@@ -13,12 +13,28 @@ export function Navbar() {
             <Link href="/templates" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Templates
             </Link>
-            <Link href="/templates?category=minimal" className="transition-colors hover:text-foreground/80 text-foreground/60">
-              Categories
+            <div className="relative group cursor-pointer text-foreground/60 hover:text-foreground/80 transition-colors">
+              <span>Related Tools ▾</span>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-background border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                <a href="https://paletteflow.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">Palette Flow</a>
+                <a href="https://fontfusion.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">Font Fusion</a>
+                <a href="https://brandforge.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">Brand Forge</a>
+                <a href="https://pdfutility.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">PDF Utility</a>
+                <a href="https://qrgenerator.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">QR Generator</a>
+              </div>
+            </div>
+            <Link href="/blog" className="transition-colors hover:text-foreground/80 text-foreground/60">
+              Blog
+            </Link>
+            <Link href="/about" className="transition-colors hover:text-foreground/80 text-foreground/60">
+              About
             </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
+          <span className="hidden lg:inline-block text-xs text-muted-foreground mr-2 font-medium">
+            Powered by <a href="https://alfo.online" className="hover:text-foreground transition-colors underline underline-offset-2">alfo.online</a>
+          </span>
           <Link href="/templates">
             <Button variant="ghost" size="sm">Log in</Button>
           </Link>

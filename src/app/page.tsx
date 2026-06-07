@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { mockTemplates } from "@/lib/templates/mock-data";
+import { RelatedTools } from "@/components/widgets/RelatedTools";
 
 export default function Home() {
   const featuredTemplates = mockTemplates.slice(0, 3);
@@ -64,6 +65,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Cross-linking Widget */}
+      <RelatedTools />
     </div>
   );
 }
