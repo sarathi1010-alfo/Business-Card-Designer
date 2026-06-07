@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
+      allow: ['/', '/tools/'],
+      disallow: ['/admin/', '/private/', '/api/'], // Blocks admin/non-public routes
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,
   };
