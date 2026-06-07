@@ -12,8 +12,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const titleCase = competitor.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
-    title: `CardStudio vs ${titleCase} | Best Business Card Maker Alternative`,
+    title: `CardStudio vs ${titleCase} | Best Alternative`,
     description: `Looking for an alternative to ${titleCase} for business cards? See why CardStudio is the faster, more private, and entirely free choice.`,
+    alternates: {
+      canonical: `/vs/${resolvedParams.competitor}`,
+    }
   };
 }
 

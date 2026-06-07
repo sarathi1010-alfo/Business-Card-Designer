@@ -12,8 +12,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
-    title: `${titleCase} Business Card Templates Free | alfo.online`,
+    title: `${titleCase} Business Card Templates Free`,
     description: `Browse our collection of free ${category} business card templates. Customize and download instantly.`,
+    alternates: {
+      canonical: `/templates/${resolvedParams.category}`,
+    }
   };
 }
 

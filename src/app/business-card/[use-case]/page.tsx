@@ -12,10 +12,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const titleCase = useCase.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
-    title: `Create a ${titleCase} Business Card Free | alfo.online`,
+    title: `Create a ${titleCase} Business Card Free`,
     description: `Design a professional ${useCase} business card in minutes. Free templates, instant downloads, no sign-up required.`,
     alternates: {
-      canonical: `https://business-card-designer.alfo.online/business-card/${resolvedParams['use-case']}`,
+      // Relative path utilizes the root metadataBase automatically avoiding Vercel domain bleeding
+      canonical: `/business-card/${resolvedParams['use-case']}`,
     }
   };
 }
