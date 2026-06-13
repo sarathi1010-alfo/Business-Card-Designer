@@ -6,6 +6,7 @@ import { Template } from "@/types/editor";
 import { useEditorStore } from "@/store/editor-store";
 import { EditorControls } from "@/components/editor/EditorControls";
 import { EditorToolbar } from "@/components/editor/EditorToolbar";
+import { ShareCardModal } from "@/components/editor/ShareCardModal";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -70,6 +71,7 @@ export default function EditorClient({ initialTemplate }: EditorClientProps) {
             <span className="text-sm font-medium ml-2">{initialTemplate.name}</span>
           </div>
           <div className="flex gap-2">
+            <ShareCardModal />
             <Button size="sm" onClick={handleExport} className="gap-2">
               <Download className="w-4 h-4" /> Export PNG
             </Button>

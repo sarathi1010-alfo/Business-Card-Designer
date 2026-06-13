@@ -174,7 +174,7 @@ export function CardCanvas() {
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
       <div
-        className="shadow-2xl ring-1 ring-border rounded-sm overflow-hidden"
+        className="shadow-2xl ring-1 ring-border rounded-sm overflow-hidden relative"
         style={{
           width: CARD_WIDTH * scale,
           height: CARD_HEIGHT * scale,
@@ -209,6 +209,16 @@ export function CardCanvas() {
                 onChange={updateElement}
               />
             ))}
+            {/* Built-in Virality: Made with BrandCard */}
+            <KonvaText
+              x={CARD_WIDTH - 200}
+              y={CARD_HEIGHT - 30}
+              text="Made with BrandCard"
+              fontSize={14}
+              fontFamily="Inter, sans-serif"
+              fill="#a1a1aa" // zinc-400
+              opacity={0.8}
+            />
           </Layer>
         </Stage>
       </div>

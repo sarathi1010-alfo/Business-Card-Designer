@@ -1,58 +1,47 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { notFound } from "next/navigation";
+import { HeroSection } from "@/components/home/HeroSection";
+import { BenefitsSection } from "@/components/home/BenefitsSection";
+import { ShowcaseGallery } from "@/components/home/ShowcaseGallery";
+import { RelatedTools } from "@/components/widgets/RelatedTools";
 
-interface PageProps {
-  params: Promise<{ 'use-case': string }>;
+const VALID_USE_CASES = [
+  "brand-card-for-developers",
+  "digital-business-card",
+  "portfolio-card",
+  "personal-brand-card",
+  "linkedin-brand-card",
+  "resume-card",
+  "startup-founder-profile",
+];
+
+interface UseCasePageProps {
+  params: Promise<{ "use-case": string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function UseCasePage({ params }: UseCasePageProps) {
   const resolvedParams = await params;
-  const useCase = resolvedParams['use-case'].replace(/-/g, ' ');
-  const titleCase = useCase.replace(/\b\w/g, (c) => c.toUpperCase());
+  const useCase = resolvedParams["use-case"];
 
-  return {
-    title: `Create a ${titleCase} Business Card Free`,
-    description: `Design a professional ${useCase} business card in minutes. Free templates, instant downloads, no sign-up required.`,
-    alternates: {
-      // Relative path utilizes the root metadataBase automatically avoiding Vercel domain bleeding
-      canonical: `/business-card/${resolvedParams['use-case']}`,
-    }
-  };
-}
+  if (!VALID_USE_CASES.includes(useCase)) {
+    notFound();
+  }
 
-export default async function UseCasePage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const useCase = resolvedParams['use-case'].replace(/-/g, ' ');
-  const titleCase = useCase.replace(/\b\w/g, (c) => c.toUpperCase());
+  // Formatting title based on the slug
+  const title = useCase
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-4xl">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
-          Free {titleCase} Business Card Maker
-        </h1>
-        <p className="text-xl text-muted-foreground mb-8">
-          Stand out with a custom {useCase} business card. Choose a template, customize it in our browser-based editor, and download it instantly.
-        </p>
-        <Link href="/templates">
-          <Button size="lg">Browse {titleCase} Templates</Button>
-        </Link>
+    <div className="flex flex-col w-full overflow-x-hidden">
+      <div className="bg-muted/20 py-12 text-center">
+        <h1 className="text-4xl font-bold">{title}</h1>
+        <p className="text-muted-foreground mt-4">Create your perfect {title.toLowerCase()} in seconds.</p>
       </div>
-
-      <div className="prose dark:prose-invert max-w-none mt-16">
-        <h2>Why use a specific {useCase} layout?</h2>
-        <p>
-          First impressions matter. When you hand someone a {useCase} business card, you want it to clearly communicate your profession and brand identity immediately.
-        </p>
-        <h2>How to make a {useCase} business card</h2>
-        <ol>
-          <li>Browse our free template library.</li>
-          <li>Select a design that fits your brand.</li>
-          <li>Use our drag-and-drop canvas editor to add your logo, contact info, and custom colors.</li>
-          <li>Export as a high-resolution PNG or PDF for printing.</li>
-        </ol>
-      </div>
+      <HeroSection />
+      <BenefitsSection />
+      <ShowcaseGallery />
+      <RelatedTools />
     </div>
   );
 }
