@@ -18,11 +18,12 @@ export async function generateSitemaps() {
 export default async function sitemap({
   id,
 }: {
-  id: string;
+  id: string | Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
+  const resolvedId = await id;
   const baseUrl = siteConfig.url;
 
-  if (id === 'core') {
+  if (resolvedId === 'core') {
     return [
       {
         url: baseUrl,
@@ -71,9 +72,9 @@ export default async function sitemap({
     { slug: 'compress-pdf', priority: 0.8 }
   ];
 
-  if (id === 'pdf-tools') {
+  if (resolvedId === 'pdf-tools') {
      return mockTools.map((tool) => ({
-      url: `${baseUrl}/tools/${id}/${tool.slug}`,
+      url: `${baseUrl}/tools/${resolvedId}/${tool.slug}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: tool.priority,
