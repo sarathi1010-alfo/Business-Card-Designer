@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
@@ -68,11 +69,13 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans min-h-screen flex flex-col`}>
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScrollProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

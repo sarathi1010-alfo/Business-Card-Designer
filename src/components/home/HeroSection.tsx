@@ -10,8 +10,22 @@ export function HeroSection() {
     <section className="relative overflow-hidden pt-24 pb-32 lg:pt-36 lg:pb-40 px-4">
       {/* Background gradients */}
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] opacity-30 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] opacity-20 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      <motion.div
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.4, 0.3],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[120px] pointer-events-none"
+      />
 
       <div className="container relative mx-auto max-w-5xl text-center">
         <motion.div
@@ -30,10 +44,11 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 font-heading text-balance leading-tight"
         >
-          Create professional digital brand cards in{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
-            30 seconds.
+          Your{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-blue-600">
+            AI-powered
           </span>
+          {" "}professional identity.
         </motion.h1>
 
         <motion.p
@@ -42,7 +57,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 text-balance leading-relaxed"
         >
-          Generate modern personal brand cards, portfolio cards, and business identity pages instantly. Replace boring resumes with a premium digital presence.
+          More than just a link. A dynamic conversion engine that generates leads, builds trust, and tracks analytics. Turn your profile into a high-converting digital identity.
         </motion.p>
 
         <motion.div

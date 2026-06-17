@@ -1,48 +1,75 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Share2, Briefcase, Zap } from "lucide-react";
+import { UserPlus, ShieldCheck, LineChart } from "lucide-react";
 
 const benefits = [
   {
-    icon: <Share2 className="w-8 h-8 text-primary" />,
-    title: "Share your identity instantly",
-    description: "One click, one link, or one QR scan is all it takes to share your complete professional portfolio and contact details.",
+    icon: <UserPlus className="w-8 h-8 text-primary" />,
+    title: "Lead Generation",
+    description: "Capture leads directly from your profile with integrated forms and smart CTAs.",
   },
   {
-    icon: <Briefcase className="w-8 h-8 text-blue-500" />,
-    title: "Look professional online",
-    description: "First impressions matter. Elevate your status with a premium, meticulously designed digital presence that builds immediate trust.",
+    icon: <ShieldCheck className="w-8 h-8 text-blue-500" />,
+    title: "Built for Trust",
+    description: "Showcase live case studies, testimonials, and verifiable credentials to build immediate trust.",
   },
   {
-    icon: <Zap className="w-8 h-8 text-amber-500" />,
-    title: "Replace boring resumes",
-    description: "Stand out from the stack of static PDFs. A dynamic brand card showcases your personality and skills in a modern, interactive format.",
+    icon: <LineChart className="w-8 h-8 text-purple-500" />,
+    title: "Smart Analytics",
+    description: "Track visitor behavior, scan analytics, and click-through rates in real-time.",
   }
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const }
+  }
+};
 
 export function BenefitsSection() {
   return (
     <section className="py-24 px-4 bg-background border-t">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 font-heading">
-            More than just a business card. <br className="hidden md:block" />
-            <span className="text-muted-foreground">It&apos;s your digital identity.</span>
-          </h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold tracking-tight mb-6 font-heading"
+          >
+            A true <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">conversion engine.</span> <br className="hidden md:block" />
+            <span className="text-muted-foreground">Not just a profile page.</span>
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12"
+        >
           {benefits.map((benefit, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="flex flex-col items-center text-center p-6 rounded-2xl hover:bg-muted/50 transition-colors"
+              variants={itemVariants}
+              className="group flex flex-col items-center text-center p-8 rounded-3xl bg-muted/30 border border-border/50 hover:bg-muted/80 hover:border-primary/20 transition-all duration-300"
             >
-              <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mb-6 shadow-sm">
+              <div className="w-16 h-16 rounded-2xl bg-background border flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
                 {benefit.icon}
               </div>
               <h3 className="text-2xl font-semibold mb-4">{benefit.title}</h3>
@@ -51,7 +78,7 @@ export function BenefitsSection() {
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
