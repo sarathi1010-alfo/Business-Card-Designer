@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ['/', '/tools/'],
       disallow: ['/admin/', '/private/', '/api/'], // Blocks admin/non-public routes
     },
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: 'https://brandcard.alfo.online/sitemap.xml',
   };
 }
