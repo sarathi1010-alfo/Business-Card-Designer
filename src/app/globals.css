@@ -127,3 +127,20 @@
     @apply font-sans;
   }
 }
+
+@media print {
+  header, footer, nav, button {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #dashboard-report-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
