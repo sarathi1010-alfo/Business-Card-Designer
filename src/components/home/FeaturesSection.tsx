@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2, QrCode, LayoutTemplate, BarChart3 } from "lucide-react";
+import Link from "next/link";
 
 const features = [
   {
@@ -49,7 +50,7 @@ export function FeaturesSection() {
             transition={{ delay: 0.1 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            A carefully crafted suite of tools designed to elevate your professional digital presence.
+            A carefully crafted suite of tools designed to elevate your professional digital presence. Check out our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">guide on creating high-converting digital cards</Link>.
           </motion.p>
         </div>
 

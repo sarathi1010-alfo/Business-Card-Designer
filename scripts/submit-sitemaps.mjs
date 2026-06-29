@@ -1,56 +1,85 @@
-// scripts/submit-sitemaps.js
-// Submits sitemaps to Google Search Console via API post-deployment.
+import https from 'https';
 
-import { google } from 'googleapis';
+const DOMAIN = 'brandcard.alfo.online';
+const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573'; // Example key, ideally from env
 
-async function submitSitemaps() {
-  console.log('Initiating Google Search Console sitemap submission...');
+const sitemaps = [
+  `https://${DOMAIN}/sitemap/core.xml`,
+];
 
-  // Ensure environment variables are set
-  if (!process.env.GSC_SERVICE_ACCOUNT_EMAIL || !process.env.GSC_PRIVATE_KEY || !process.env.SITE_URL) {
-    console.warn('Missing GSC environment variables. Skipping sitemap submission.');
-    return;
-  }
+const newUrls = [
+  `https://${DOMAIN}/blog/digital-business-card-guide`,
+  `https://${DOMAIN}/professions/founder-digital-business-card`,
+  `https://${DOMAIN}/professions/freelancer-digital-business-card`,
+  `https://${DOMAIN}/professions/real-estate-agent-digital-card`,
+  `https://${DOMAIN}/professions/consultant-digital-business-card`,
+  `https://${DOMAIN}/use-cases/networking-event-digital-card`,
+  `https://${DOMAIN}/use-cases/conference-digital-business-card`,
+  `https://${DOMAIN}/templates/minimalist-digital-business-card`,
+  `https://${DOMAIN}/templates/creative-digital-business-card`
+];
 
-  const siteUrl = process.env.SITE_URL; // e.g. https://alfo.online
-
-  // List of sitemaps to submit (based on generateSitemaps architecture)
-  const sitemaps = [
-    `${siteUrl}/sitemap.xml`,
-    `${siteUrl}/sitemap/core.xml`,
-    `${siteUrl}/sitemap/pdf-tools.xml`,
-    `${siteUrl}/sitemap/color-tools.xml`,
-    `${siteUrl}/sitemap/resume-tools.xml`,
-    `${siteUrl}/sitemap/calculator-tools.xml`
-  ];
-
-  try {
-    const auth = new google.auth.JWT(
-      process.env.GSC_SERVICE_ACCOUNT_EMAIL,
-      null,
-      process.env.GSC_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      ['https://www.googleapis.com/auth/webmasters']
-    );
-
-    const webmasters = google.webmasters({ version: 'v3', auth });
-
-    for (const feedpath of sitemaps) {
-      try {
-        console.log(`Submitting sitemap: ${feedpath}`);
-        await webmasters.sitemaps.submit({
-          siteUrl: siteUrl,
-          feedpath: feedpath,
-        });
-        console.log(`✅ Successfully submitted: ${feedpath}`);
-      } catch (err) {
-        console.error(`❌ Failed to submit ${feedpath}:`, err.message);
-      }
-    }
-
-    console.log('Sitemap submission process complete.');
-  } catch (error) {
-    console.error('Fatal error during sitemap submission:', error);
-  }
+async function pingSitemap(sitemapUrl) {
+  const url = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
+  return new Promise((resolve) => {
+    https.get(url, (res) => {
+      console.log(`Pinging Google Sitemap: ${sitemapUrl} -> Status: ${res.statusCode}`);
+      resolve(res.statusCode);
+    }).on('error', (e) => {
+      console.error(`Error pinging sitemap ${sitemapUrl}: ${e.message}`);
+      resolve(null);
+    });
+  });
 }
 
-submitSitemaps();
+async function triggerIndexNow() {
+  const payload = JSON.stringify({
+    host: DOMAIN,
+    key: INDEXNOW_KEY,
+    keyLocation: `https://${DOMAIN}/${INDEXNOW_KEY}.txt`,
+    urlList: newUrls
+  });
+
+  const options = {
+    hostname: 'api.indexnow.org',
+    port: 443,
+    path: '/indexnow',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': payload.length
+    }
+  };
+
+  return new Promise((resolve) => {
+    const req = https.request(options, (res) => {
+      console.log(`IndexNow Ping -> Status: ${res.statusCode}`);
+      res.on('data', (d) => process.stdout.write(d));
+      resolve(res.statusCode);
+    });
+
+    req.on('error', (e) => {
+      console.error(`Error triggering IndexNow: ${e.message}`);
+      resolve(null);
+    });
+
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function main() {
+  console.log('--- Starting SEO Ping Script ---');
+
+  // 1. Ping Google Sitemaps
+  for (const sitemap of sitemaps) {
+    await pingSitemap(sitemap);
+  }
+
+  // 2. Trigger IndexNow API
+  await triggerIndexNow();
+
+  console.log('\n--- SEO Ping Script Complete ---');
+}
+
+main();

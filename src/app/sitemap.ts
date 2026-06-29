@@ -72,6 +72,60 @@ export default async function sitemap({
         changeFrequency: 'weekly',
         priority: 0.7,
       },
+      {
+        url: `${baseUrl}/blog/digital-business-card-guide`,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/professions/founder-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/professions/freelancer-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/professions/real-estate-agent-digital-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/professions/consultant-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/use-cases/networking-event-digital-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/use-cases/conference-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/templates/minimalist-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/templates/creative-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
     ];
   }
 
