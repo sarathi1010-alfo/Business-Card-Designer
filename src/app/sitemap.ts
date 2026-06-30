@@ -1,17 +1,30 @@
 import { MetadataRoute } from 'next';
-import { siteConfig } from '@/config/site';
+import { generateCanonicalUrl } from '@/lib/seo/urls';
 
-// In Next.js App Router, returning an array of objects with an `id` from `generateSitemaps`
-// allows generating multiple sitemaps, which is ideal for breaking them up by cluster.
+// Valid use cases mapping
+const VALID_USE_CASES = [
+  "brand-card-for-developers",
+  "digital-business-card",
+  "portfolio-card",
+  "personal-brand-card",
+  "linkedin-brand-card",
+  "resume-card",
+  "startup-founder-profile",
+];
+
+// Mock templates mapping to represent dynamic DB entries
+const TEMPLATE_CATEGORIES = [
+  "minimalist",
+  "modern",
+  "creative",
+  "corporate",
+];
+
 export async function generateSitemaps() {
-  // In a real application, you would fetch these from your CMS or database
-  // For now, we mock the known clusters
   return [
     { id: 'core' },
-    { id: 'pdf-tools' },
-    { id: 'color-tools' },
-    { id: 'resume-tools' },
-    { id: 'calculator-tools' }
+    { id: 'use-cases' },
+    { id: 'templates' },
   ];
 }
 
@@ -20,66 +33,49 @@ export default async function sitemap({
 }: {
   id: string;
 }): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url;
+  const sitemapData: MetadataRoute.Sitemap = [];
 
   if (id === 'core') {
-    return [
-      {
-        url: baseUrl,
+    const staticRoutes = [
+      { path: '/', priority: 1.0, changeFrequency: 'weekly' },
+      { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
+      { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
+      { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
+      { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
+      { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+    ] as const;
+
+    staticRoutes.forEach(route => {
+      sitemapData.push({
+        url: generateCanonicalUrl(route.path),
         lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 1,
-      },
-      {
-        url: `${baseUrl}/templates`,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+      });
+    });
+  }
+
+  if (id === 'use-cases') {
+    VALID_USE_CASES.forEach(useCase => {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/business-card/${useCase}`),
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/about`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      },
-      {
-        url: `${baseUrl}/contact`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      },
-      {
-        url: `${baseUrl}/privacy-policy`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly',
-        priority: 0.3,
-      },
-      {
-        url: `${baseUrl}/terms-of-service`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly',
-        priority: 0.3,
-      },
-    ];
+      });
+    });
   }
 
-  // Handle cluster-specific sitemaps (dynamically fetching tools per cluster)
-  // Mock data for example purposes
-  const mockTools = [
-    { slug: 'merge-pdf', priority: 0.8 },
-    { slug: 'split-pdf', priority: 0.8 },
-    { slug: 'compress-pdf', priority: 0.8 }
-  ];
-
-  if (id === 'pdf-tools') {
-     return mockTools.map((tool) => ({
-      url: `${baseUrl}/tools/${id}/${tool.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: tool.priority,
-    }));
+  if (id === 'templates') {
+    TEMPLATE_CATEGORIES.forEach(category => {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/templates/${category}`),
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
   }
 
-  // Fallback for unknown IDs (though generateSitemaps restricts what's called)
-  return [];
+  return sitemapData;
 }

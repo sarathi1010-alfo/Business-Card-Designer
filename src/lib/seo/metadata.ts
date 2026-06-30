@@ -1,4 +1,6 @@
-import { siteConfig } from "@/config/site";
+import type { Metadata } from "next";
+import { seoConfig } from "@/config/seo.config";
+import { generateCanonicalUrl } from "./urls";
 
 export interface ToolContext {
   tool_name: string;
@@ -16,10 +18,78 @@ export interface GeneratedMetadata {
   ogDescription: string;
 }
 
+interface ConstructMetadataProps {
+  title?: string;
+  description?: string;
+  image?: string;
+  path: string;
+  noIndex?: boolean;
+}
+
+/**
+ * Constructs a standardized Metadata object for Next.js App Router.
+ * Enforces character length constraints and auto-generates canonical URLs.
+ */
+export function constructMetadata({
+  title,
+  description,
+  image,
+  path,
+  noIndex = false,
+}: ConstructMetadataProps): Metadata {
+  const canonicalUrl = generateCanonicalUrl(path);
+
+  const finalTitle = title || seoConfig.global.defaultTitle;
+  const finalDescription = description || seoConfig.global.defaultDescription;
+  const finalImage = image || seoConfig.social.ogImage;
+
+  // Note: We don't strictly slice the title/description here because it's better
+  // to have the author fix it, but the validation script will catch violations.
+  // We just ensure we return a fully formed Metadata object.
+
+  return {
+    title: finalTitle,
+    description: finalDescription,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: finalTitle,
+      description: finalDescription,
+      url: canonicalUrl,
+      siteName: seoConfig.global.siteName,
+      images: [
+        {
+          url: finalImage,
+          width: 1200,
+          height: 630,
+          alt: finalTitle,
+        },
+      ],
+      locale: seoConfig.global.locale,
+      type: seoConfig.global.type as any,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: finalTitle,
+      description: finalDescription,
+      images: [finalImage],
+      creator: seoConfig.social.twitterHandle,
+    },
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
+  };
+}
+
 /**
  * Automatically generates unique, compelling titles and descriptions based on tool context.
+ * Used for dynamic programmatic SEO pages.
  */
-export function generateMetadata(context: ToolContext): GeneratedMetadata {
+export function generateToolMetadata(context: ToolContext, path: string): Metadata {
   const { tool_name, primary_action, input_type, output_type, key_benefit } = context;
 
   // Title variations (max 60 chars recommended)
@@ -30,30 +100,29 @@ export function generateMetadata(context: ToolContext): GeneratedMetadata {
   ];
 
   // Select the shortest title that fits well, or default to the first
-  const title = titles.reduce((prev, curr) => (curr.length <= 60 && curr.length > prev.length ? curr : prev), titles[0]);
+  const title = titles.reduce((prev, curr) => (curr.length <= seoConfig.constraints.title.max && curr.length > prev.length ? curr : prev), titles[0]);
 
-  // Description variations (max 155 chars recommended)
+  // Description variations (max 160 chars recommended)
   const descriptions = [
     `Use our free ${tool_name} to easily ${primary_action.toLowerCase()} your ${input_type.toLowerCase()}. ${key_benefit}. No signup required.`,
     `Looking to ${primary_action.toLowerCase()} ${input_type.toLowerCase()} to ${output_type.toLowerCase()}? Try our fast and free ${tool_name}. ${key_benefit}.`,
     `The best online ${tool_name}. Securely ${primary_action.toLowerCase()} ${input_type.toLowerCase()} instantly. ${key_benefit}.`
   ];
 
-  // Select the longest description under 155 chars
-  const description = descriptions.reduce((prev, curr) => (curr.length <= 155 && curr.length > prev.length ? curr : prev), descriptions[0]);
+  // Select the longest description under max chars
+  const description = descriptions.reduce((prev, curr) => (curr.length <= seoConfig.constraints.description.max && curr.length > prev.length ? curr : prev), descriptions[0]);
 
-  return {
+  return constructMetadata({
     title,
     description,
-    ogTitle: title, // OG tags can be slightly longer, but keeping them synced is generally fine
-    ogDescription: description
-  };
+    path,
+  });
 }
 
 /**
  * Generates JSON-LD SoftwareApplication schema for a tool page
  */
-export function generateToolSchema(context: ToolContext, toolSlug: string) {
+export function generateToolSchema(context: ToolContext, path: string) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -66,6 +135,6 @@ export function generateToolSchema(context: ToolContext, toolSlug: string) {
       "price": "0",
       "priceCurrency": "USD"
     },
-    "url": `${siteConfig.url}/tools/${context.cluster}/${toolSlug}`
+    "url": generateCanonicalUrl(path)
   };
 }

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { mockTemplates } from "@/lib/templates/mock-data";
+import { constructMetadata } from "@/lib/seo/metadata";
 
-export const metadata = {
-  title: "Business Card Templates | CardStudio",
-  description: "Browse professional business card templates.",
-};
+export const metadata = constructMetadata({
+  title: "Professional Business Card Templates",
+  description: "Browse our collection of professional business card templates. Find the perfect design for your industry and customize it in minutes.",
+  path: "/templates",
+});
 
 export default function TemplatesPage() {
   return (
