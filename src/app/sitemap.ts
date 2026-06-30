@@ -1,197 +1,81 @@
 import { MetadataRoute } from 'next';
-import { siteConfig } from '@/config/site';
+import { generateCanonicalUrl } from '@/lib/seo/urls';
 
-// In Next.js App Router, returning an array of objects with an `id` from `generateSitemaps`
-// allows generating multiple sitemaps, which is ideal for breaking them up by cluster.
+// Valid use cases mapping
+const VALID_USE_CASES = [
+  "brand-card-for-developers",
+  "digital-business-card",
+  "portfolio-card",
+  "personal-brand-card",
+  "linkedin-brand-card",
+  "resume-card",
+  "startup-founder-profile",
+];
+
+// Mock templates mapping to represent dynamic DB entries
+const TEMPLATE_CATEGORIES = [
+  "minimalist",
+  "modern",
+  "creative",
+  "corporate",
+];
+
 export async function generateSitemaps() {
   return [
     { id: 'core' },
-    { id: 'articles' },
-    { id: 'products' },
-    { id: 'pdf-tools' },
-    { id: 'color-tools' },
-    { id: 'resume-tools' },
-    { id: 'calculator-tools' }
+    { id: 'use-cases' },
+    { id: 'templates' },
   ];
 }
 
-export default async function sitemap(
-  props: { id: string }
-): Promise<MetadataRoute.Sitemap> {
-  // In Next.js 15+, dynamic params and sitemap IDs are Promises and must be awaited
-  const resolvedProps = await (props as unknown as Promise<{ id: string }>);
-  const id = resolvedProps.id;
-  const baseUrl = siteConfig.url;
+export default async function sitemap({
+  id,
+}: {
+  id: string;
+}): Promise<MetadataRoute.Sitemap> {
+  const sitemapData: MetadataRoute.Sitemap = [];
 
   if (id === 'core') {
-    return [
-      {
-        url: baseUrl,
+    const staticRoutes = [
+      { path: '/', priority: 1.0, changeFrequency: 'weekly' },
+      { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
+      { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
+      { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
+      { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
+      { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+    ] as const;
+
+    staticRoutes.forEach(route => {
+      sitemapData.push({
+        url: generateCanonicalUrl(route.path),
         lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 1,
-      },
-      {
-        url: `${baseUrl}/about`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      },
-      {
-        url: `${baseUrl}/contact`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      },
-      {
-        url: `${baseUrl}/privacy-policy`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly',
-        priority: 0.3,
-      },
-      {
-        url: `${baseUrl}/terms-of-service`,
-        lastModified: new Date(),
-        changeFrequency: 'yearly',
-        priority: 0.3,
-      },
-    ];
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+      });
+    });
   }
 
-  if (id === 'articles') {
-    return [
-      {
-        url: `${baseUrl}/blog`,
-        lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.9,
-      },
-      {
-        url: `${baseUrl}/faq`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/blog/digital-business-card-guide`,
-        lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.9,
-      },
-      {
-        url: `${baseUrl}/professions/founder-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/professions/freelancer-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/professions/real-estate-agent-digital-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/professions/consultant-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/use-cases/networking-event-digital-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/use-cases/conference-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-    ];
-  }
-
-  if (id === 'products') {
-    return [
-      {
-        url: `${baseUrl}/templates`,
+  if (id === 'use-cases') {
+    VALID_USE_CASES.forEach(useCase => {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/business-card/${useCase}`),
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
-      },
-      {
-        url: `${baseUrl}/templates/minimalist-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/templates/creative-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/professions/doctor-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/professions/lawyer-digital-business-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/use-cases/job-application-digital-card`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      },
-      {
-        url: `${baseUrl}/vs/haystack-alternative`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.6,
-      },
-      {
-        url: `${baseUrl}/vs/popl-alternative`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.6,
-      },
-      {
-        url: `${baseUrl}/vs/dot-card-alternative`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.6,
-      },
-    ];
+      });
+    });
   }
 
-  // Handle cluster-specific sitemaps (dynamically fetching tools per cluster)
-  const mockTools = [
-    { slug: 'merge-pdf', priority: 0.8 },
-    { slug: 'split-pdf', priority: 0.8 },
-    { slug: 'compress-pdf', priority: 0.8 }
-  ];
-
-  if (id === 'pdf-tools') {
-     return mockTools.map((tool) => ({
-      url: `${baseUrl}/tools/${id}/${tool.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: tool.priority,
-    }));
+  if (id === 'templates') {
+    TEMPLATE_CATEGORIES.forEach(category => {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/templates/${category}`),
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
   }
 
-  // Fallback for other clusters
-  return [];
+  return sitemapData;
 }
