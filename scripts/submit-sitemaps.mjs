@@ -4,7 +4,9 @@ const DOMAIN = 'brandcard.alfo.online';
 const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573'; // Example key, ideally from env
 
 const sitemaps = [
-  `https://${DOMAIN}/sitemap/core.xml`,
+  `https://${DOMAIN}/sitemap.xml`,
+  `https://${DOMAIN}/sitemap-articles.xml`,
+  `https://${DOMAIN}/sitemap-products.xml`,
 ];
 
 const newUrls = [

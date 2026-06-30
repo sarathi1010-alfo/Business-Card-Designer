@@ -4,10 +4,10 @@ import { siteConfig } from '@/config/site';
 // In Next.js App Router, returning an array of objects with an `id` from `generateSitemaps`
 // allows generating multiple sitemaps, which is ideal for breaking them up by cluster.
 export async function generateSitemaps() {
-  // In a real application, you would fetch these from your CMS or database
-  // For now, we mock the known clusters
   return [
     { id: 'core' },
+    { id: 'articles' },
+    { id: 'products' },
     { id: 'pdf-tools' },
     { id: 'color-tools' },
     { id: 'resume-tools' },
@@ -30,12 +30,6 @@ export default async function sitemap(
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 1,
-      },
-      {
-        url: `${baseUrl}/templates`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
       },
       {
         url: `${baseUrl}/about`,
@@ -61,6 +55,11 @@ export default async function sitemap(
         changeFrequency: 'yearly',
         priority: 0.3,
       },
+    ];
+  }
+
+  if (id === 'articles') {
+    return [
       {
         url: `${baseUrl}/blog`,
         lastModified: new Date(),
@@ -115,6 +114,17 @@ export default async function sitemap(
         changeFrequency: 'weekly',
         priority: 0.7,
       },
+    ];
+  }
+
+  if (id === 'products') {
+    return [
+      {
+        url: `${baseUrl}/templates`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      },
       {
         url: `${baseUrl}/templates/minimalist-digital-business-card`,
         lastModified: new Date(),
@@ -167,7 +177,6 @@ export default async function sitemap(
   }
 
   // Handle cluster-specific sitemaps (dynamically fetching tools per cluster)
-  // Mock data for example purposes
   const mockTools = [
     { slug: 'merge-pdf', priority: 0.8 },
     { slug: 'split-pdf', priority: 0.8 },
@@ -183,6 +192,6 @@ export default async function sitemap(
     }));
   }
 
-  // Fallback for unknown IDs (though generateSitemaps restricts what's called)
+  // Fallback for other clusters
   return [];
 }
