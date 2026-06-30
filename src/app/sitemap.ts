@@ -15,11 +15,12 @@ export async function generateSitemaps() {
   ];
 }
 
-export default async function sitemap({
-  id,
-}: {
-  id: string;
-}): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap(
+  props: { id: string }
+): Promise<MetadataRoute.Sitemap> {
+  // In Next.js 15+, dynamic params and sitemap IDs are Promises and must be awaited
+  const resolvedProps = await (props as unknown as Promise<{ id: string }>);
+  const id = resolvedProps.id;
   const baseUrl = siteConfig.url;
 
   if (id === 'core') {
@@ -125,6 +126,42 @@ export default async function sitemap({
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/professions/doctor-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/professions/lawyer-digital-business-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/use-cases/job-application-digital-card`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      },
+      {
+        url: `${baseUrl}/vs/haystack-alternative`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/vs/popl-alternative`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/vs/dot-card-alternative`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.6,
       },
     ];
   }
