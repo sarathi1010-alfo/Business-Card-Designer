@@ -29,8 +29,35 @@ export default async function CategoryPage({ params }: PageProps) {
   const categoryTemplates = mockTemplates.filter(t => t.category.toLowerCase() === titleCase.toLowerCase());
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `What are ${titleCase} business card templates?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+        }
+      }
+    ]
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
         <p className="text-xl text-muted-foreground">
