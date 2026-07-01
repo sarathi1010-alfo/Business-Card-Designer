@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { UserPlus, ShieldCheck, LineChart } from "lucide-react";
+import Link from "next/link";
 
 const benefits = [
   {
@@ -54,6 +55,15 @@ export function BenefitsSection() {
             A true <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">conversion engine.</span> <br className="hidden md:block" />
             <span className="text-muted-foreground">Not just a profile page.</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4"
+          >
+            Built on proven strategies from our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">digital business card conversion guide</Link>.
+          </motion.p>
         </div>
 
         <motion.div

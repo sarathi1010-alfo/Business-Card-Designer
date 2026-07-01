@@ -8,7 +8,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const category = resolvedParams.category.replace(/-/g, ' ');
+  const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
+  const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
@@ -22,11 +23,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const category = resolvedParams.category.replace(/-/g, ' ');
+  const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
+  const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
 
   // Filter templates (in a real app, this would be a DB query)
-  const categoryTemplates = mockTemplates.filter(t => t.category.toLowerCase() === titleCase.toLowerCase());
+  // We match against "Minimal", "Corporate", "Creative" etc.
+  const categoryTemplates = mockTemplates.filter(t =>
+    t.category.toLowerCase() === titleCase.toLowerCase() ||
+    titleCase.toLowerCase().includes(t.category.toLowerCase())
+  );
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
   const jsonLd = {
