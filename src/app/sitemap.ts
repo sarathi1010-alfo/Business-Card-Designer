@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -19,6 +21,8 @@ const TEMPLATE_CATEGORIES = [
   "modern",
   "creative",
   "corporate",
+  "minimalist-digital-business-card",
+  "creative-digital-business-card",
 ];
 
 const LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "nl", "ru", "zh", "ja", "ko", "ar", "hi", "tr", "pl"];
@@ -26,6 +30,7 @@ const LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "nl", "ru", "zh", "ja", "
 export async function generateSitemaps() {
   const sitemaps = [
     { id: 'core' },
+    { id: 'articles' },
     { id: 'use-cases' },
     { id: 'templates' },
   ];
@@ -42,13 +47,7 @@ export default async function sitemap({
 }: {
   id: string;
 }): Promise<MetadataRoute.Sitemap> {
-  // In Next.js App Router, dynamic params/id can be Promises or directly evaluated.
-  // Wait, no. The sitemap function signature in Next.js 15+ is:
-  // export default async function sitemap({ id }: { id: string }): Promise<MetadataRoute.Sitemap>
-  // However, Next.js dynamic params are promises now. Let's use `await` if it's passed as a promise,
-  // or just handle it if it's not a string directly.
   const resolvedId = await Promise.resolve(id);
-
   const sitemapData: MetadataRoute.Sitemap = [];
 
   if (resolvedId === 'core') {
@@ -67,6 +66,21 @@ export default async function sitemap({
         lastModified: new Date(),
         changeFrequency: route.changeFrequency,
         priority: route.priority,
+      });
+    });
+  }
+
+  if (resolvedId === 'articles') {
+    const articles = [
+      { path: '/blog/digital-business-card-guide', priority: 0.8, changeFrequency: 'monthly' as const },
+    ];
+
+    articles.forEach(article => {
+      sitemapData.push({
+        url: generateCanonicalUrl(article.path),
+        lastModified: new Date(),
+        changeFrequency: article.changeFrequency,
+        priority: article.priority,
       });
     });
   }
