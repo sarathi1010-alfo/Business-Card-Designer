@@ -7,7 +7,7 @@ export function Navbar() {
       <div className="container flex h-14 items-center justify-between px-4 sm:px-8">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl tracking-tight">CardStudio</span>
+            <span className="font-bold text-xl tracking-tight">BrandCard</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link href="/templates" className="transition-colors hover:text-foreground/80 text-foreground/60">
