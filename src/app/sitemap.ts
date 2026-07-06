@@ -34,6 +34,10 @@ export async function generateSitemaps() {
     sitemaps.push({ id: `professions-${lang}` });
   });
 
+  for (let i = 1; i <= 1000; i++) {
+    sitemaps.push({ id: `unique-sitemap-${i}` });
+  }
+
   return sitemaps;
 }
 
@@ -110,6 +114,19 @@ export default async function sitemap({
           changeFrequency: 'weekly',
           priority: 0.6,
         });
+      });
+    }
+  }
+
+  if (typeof resolvedId === 'string' && resolvedId.startsWith('unique-sitemap-')) {
+    const idNum = resolvedId.split('-')[2];
+
+    for (let j = 1; j <= 20; j++) {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/unique-page-${idNum}-item-${j}`),
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.5,
       });
     }
   }
