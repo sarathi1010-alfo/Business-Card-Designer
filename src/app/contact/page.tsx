@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
@@ -9,6 +10,12 @@ export default function ContactPage() {
       <p className="text-muted-foreground text-center mb-8">
         Have a question or feedback? We&apos;d love to hear from you.
       </p>
+
+      <div className="mb-12 p-6 bg-muted/30 rounded-xl text-center border">
+        <p className="text-sm font-medium">
+          Looking for networking tips? Check out our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline">Complete Conversion Guide</Link>.
+        </p>
+      </div>
 
       <form className="space-y-6" action="https://formspree.io/f/placeholder" method="POST">
         <div className="space-y-2">
