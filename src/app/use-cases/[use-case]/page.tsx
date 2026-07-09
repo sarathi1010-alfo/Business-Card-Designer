@@ -5,6 +5,18 @@ interface PageProps {
   params: Promise<{ 'use-case': string }>;
 }
 
+const VALID_USE_CASES = [
+  "brand-card-for-developers",
+  "digital-business-card",
+  "portfolio-card",
+  "personal-brand-card",
+  "linkedin-brand-card",
+  "resume-card",
+  "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
+];
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');

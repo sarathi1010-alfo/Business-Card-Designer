@@ -77,6 +77,12 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
+
+      <div className="mt-16 text-center">
+        <p className="text-sm text-muted-foreground">
+          Updated on May 20, 2024. Check out our <Link href="/blog/digital-business-card-guide" className="underline hover:text-primary">latest authority guide</Link>.
+        </p>
+      </div>
     </div>
   );
 }
