@@ -35,7 +35,7 @@ export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: st
     a2: "Zu den Schlüsselelementen gehören ein professionelles Porträtfoto, klare Kontaktdaten, direkte Links zu aktuellen Arbeiten oder Projekten, soziale Profile und ein Formular zur Lead-Erfassung."
   },
   it: {
-    faqHeader: "Domande Frequenti",
+    faqHeader: "Domande Frecuente",
     q1: "Perché un {profession} ha bisogno di un biglietto da visita digitale?",
     a1: "Un {profession} ha bisogno di un biglietto da visita digitale per condividere istantaneamente il proprio portfolio, le informazioni di contatto e le credenziali professionali con clienti e colleghi senza i limiti dei tradizionali biglietti cartacei.",
     q2: "Cosa dovrebbe includere un {profession} nel suo biglietto da visita digitale?",
@@ -126,7 +126,7 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   ja: { title: "デジタル名刺", desc: "あなたのキャリアのためのプロフェッショナルなデジタル名刺を作成します", snapshot: "デジタル名刺を使用すると、シンプルなQRコードやリンクを通じて、プロフェッショナルなプロフィール、連絡先、ポートフォリオを即座に共有でき、物理的な紙が不要になります。" },
   ko: { title: "디지털 명함", desc: "당신의 경력을 위한 전문적인 디지털 명함을 만드세요", snapshot: "디지털 명함을 사용하면 간단한 QR 코드나 링크를 통해 전문 프로필, 연락처 정보, 포트폴리오를 즉시 공유할 수 있어 물리적인 종이가 필요 없습니다." },
   ar: { title: "بطاقة عمل رقمية لـ", desc: "أنشئ بطاقة عمل رقمية احترافية لمسيرتك في", snapshot: "تتيح لك بطاقة العمل الرقمية مشاركة ملفك المهني وتفاصيل الاتصال ومحفظة أعمالك على الفور عبر رمز QR أو رابط بسيط، مما يلغي الحاجة إلى الورق المادي." },
-  hi: { title: "डिजिटल बिजनेस कार्ड", desc: "अपने करियर के लिए एक पेशेवर डिजिटल बिजनेस कार्ड बनाएं", snapshot: "एक डिजिटल बिजनेस कार्ड आपको एक साधारण क्यूआर कोड या लिंक के माध्यम से अपने पेशेवर प्रोफ़ाइल, संपर्क विवरण और पोर्टफोलियो को तुरंत साझा करने की अनुमति देता है, जिससे भौतिक कागज की आवश्यकता समाप्त हो जाती है।" },
+  hi: { title: "डिजिटल बिजनेस कार्ड", desc: "अपने करियर के लिए एक पेशेवर digital business card बनाएं", snapshot: "एक digital business card आपको एक साधारण क्यूआर कोड या लिंक के माध्यम से अपने पेशेवर प्रोफ़ाइल, संपर्क विवरण और पोर्टफोलियो को तुरंत साझा करने की अनुमति देता है, जिससे भौतिक कागज की आवश्यकता समाप्त हो जाती है।" },
   tr: { title: "Dijital Kartvizit", desc: "Kariyeriniz için profesyonel bir dijital kartvizit oluşturun", snapshot: "Dijital bir kartvizit, profesyonel profilinizi, iletişim bilgilerinizi ve portföyünüzü basit bir QR kodu veya bağlantı yoluyla anında paylaşmanıza olanak tanır ve fiziksel kağıt ihtiyacını ortadan kaldırır." },
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
@@ -145,7 +145,7 @@ function extractLanguageAndProfession(slug: string) {
     rawProfession = parts.join('-');
   }
 
-  // Remove digital business card suffixes
+  // Remove digital business card suffixes cleanly
   rawProfession = rawProfession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const profession = rawProfession.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -172,10 +172,10 @@ export default async function ProfessionPage({ params }: PageProps) {
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const q1 = faqData.q1.replace(/{profession}/g, professionTitle);
+  const a1 = faqData.a1.replace(/{profession}/g, professionTitle);
+  const q2 = faqData.q2.replace(/{profession}/g, professionTitle);
+  const a2 = faqData.a2.replace(/{profession}/g, professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
