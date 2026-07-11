@@ -7,6 +7,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const lastModified = "February 24, 2025";
+
   return (
     <div className="container mx-auto py-12 px-4 sm:px-8">
       <div className="max-w-3xl mx-auto mb-12 text-center">
@@ -15,6 +17,9 @@ export default function BlogPage() {
         </h1>
         <p className="text-xl text-muted-foreground">
           Discover everything you need to know about professional networking, brand identity, and how to get the most out of your digital business cards.
+        </p>
+        <p className="text-sm text-muted-foreground mt-4 italic">
+          Last updated: {lastModified}
         </p>
       </div>
 
