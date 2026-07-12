@@ -1,5 +1,18 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+const VALID_USE_CASES = [
+  "brand-card-for-developers",
+  "digital-business-card",
+  "portfolio-card",
+  "personal-brand-card",
+  "linkedin-brand-card",
+  "resume-card",
+  "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
+];
 
 interface PageProps {
   params: Promise<{ 'use-case': string }>;
@@ -21,7 +34,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
-  const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const useCaseSlug = resolvedParams['use-case'];
+
+  if (!VALID_USE_CASES.includes(useCaseSlug)) {
+    notFound();
+  }
+
+  const rawUseCase = useCaseSlug.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
   const jsonLd = {
