@@ -7,7 +7,7 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-16 max-w-2xl">
       <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
       <p className="text-muted-foreground text-center mb-8">
-        Have a question or feedback? We&apos;d love to hear from you.
+        Have a question or feedback? We&apos;d love to hear from you. For quick tips on optimization, check out our <a href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">digital business card guide</a>.
       </p>
 
       <form className="space-y-6" action="https://formspree.io/f/placeholder" method="POST">

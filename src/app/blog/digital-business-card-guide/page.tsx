@@ -28,7 +28,7 @@ export default function DigitalBusinessCardGuide() {
       }
     },
     "datePublished": "2024-05-20T08:00:00Z",
-    "dateModified": new Date().toISOString(),
+    "dateModified": "2024-05-21T10:00:00Z",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://brandcard.alfo.online/blog/digital-business-card-guide"
