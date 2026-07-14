@@ -11,13 +11,15 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
 const TEMPLATE_CATEGORIES = [
-  "minimalist",
+  "minimalist-digital-business-card",
   "modern",
-  "creative",
+  "creative-digital-business-card",
   "corporate",
 ];
 
@@ -74,7 +76,7 @@ export default async function sitemap({
   if (resolvedId === 'use-cases') {
     VALID_USE_CASES.forEach(useCase => {
       sitemapData.push({
-        url: generateCanonicalUrl(`/business-card/${useCase}`),
+        url: generateCanonicalUrl(`/use-cases/${useCase}`),
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
