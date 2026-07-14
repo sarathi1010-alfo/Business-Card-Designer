@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  // Last modified: 2024-05-20
   return (
     <div className="container mx-auto py-12 px-4 sm:px-8">
       <div className="max-w-3xl mx-auto mb-12 text-center">
