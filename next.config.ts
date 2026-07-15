@@ -13,6 +13,25 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/business-card/:path*',
+        destination: '/use-cases/:path*',
+        permanent: true,
+      },
+      {
+        source: '/v1/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/card/:path*',
+        destination: '/use-cases/digital-business-card',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
