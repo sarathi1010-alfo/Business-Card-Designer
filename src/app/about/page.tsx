@@ -1,4 +1,7 @@
+import Link from 'next/link';
+
 export default function AboutPage() {
+  // Last Modified: 2024-05-21
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-8">About alfo.online</h1>
@@ -15,7 +18,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>
         <p className="mb-6">
-          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below.
+          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. We even provide expert advice on <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline">how to create a digital business card that converts</Link>. Check out our growing suite of utilities below.
         </p>
       </div>
     </div>
