@@ -5,12 +5,12 @@ export default function AboutPage() {
 
       <div className="prose dark:prose-invert max-w-none text-lg">
         <p className="mb-6">
-          Welcome to the <strong>alfo.online</strong> ecosystem. We build fast, free, and intuitive internet infrastructure to help you work better.
+          Welcome to the <strong>alfo.online</strong> ecosystem. We build fast, free, and intuitive internet infrastructure to help you work better. To learn about the reasoning behind our design choices, read our guide on <a href="/blog/design-psychology-business-cards" className="text-primary hover:underline">The Design Psychology of Digital Business Cards</a>.
         </p>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">Our Mission</h2>
         <p className="mb-6">
-          We believe high-quality tools shouldn&apos;t be locked behind expensive subscriptions or bloated interfaces. That&apos;s why we&apos;re building a network of interconnected utilities designed to solve specific problems efficiently.
+          We believe high-quality tools shouldn&apos;t be locked behind expensive subscriptions or bloated interfaces. That&apos;s why we&apos;re building a network of interconnected utilities designed to solve specific problems efficiently. (Last updated: {new Date().toLocaleDateString()})
         </p>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>
