@@ -23,6 +23,20 @@ export default function BlogPage() {
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/design-psychology-business-cards" className="hover:underline text-primary">
+                The Design Psychology of Digital Business Cards
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how the design psychology of digital business cards influences networking, featuring insights on color theory, cognitive load, and visual hierarchy for conversions.
+            </p>
+            <Link href="/blog/design-psychology-business-cards" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
               <Link href="/blog/digital-business-card-guide" className="hover:underline text-primary">
                 How to Create a Digital Business Card That Converts
               </Link>
