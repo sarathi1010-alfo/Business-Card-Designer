@@ -34,6 +34,21 @@ export default function BlogPage() {
           </div>
         </div>
 
+        {/* Added second pillar post */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/design-psychology-digital-business-cards" className="hover:underline text-primary">
+                The Design Psychology Behind High-Converting Digital Business Cards
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn the psychological principles and design strategies that turn digital business cards into high-converting networking tools.
+            </p>
+            <Link href="/blog/design-psychology-digital-business-cards" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Placeholder for future blog posts */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
