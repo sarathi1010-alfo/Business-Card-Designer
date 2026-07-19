@@ -1,6 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  trailingSlash: false,
+  async redirects() {
+    return [
+      {
+        source: '/v1/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/card/:path*',
+        destination: '/use-cases/digital-business-card',
+        permanent: true,
+      },
+      {
+        source: '/business-card/:path*',
+        destination: '/use-cases/:path*',
+        permanent: true,
+      }
+    ];
+  },
   async rewrites() {
     return [
       {
