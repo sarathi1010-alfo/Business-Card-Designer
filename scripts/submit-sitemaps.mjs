@@ -18,7 +18,16 @@ const newUrls = [
   `https://${DOMAIN}/use-cases/networking-event-digital-card`,
   `https://${DOMAIN}/use-cases/conference-digital-business-card`,
   `https://${DOMAIN}/templates/minimalist-digital-business-card`,
-  `https://${DOMAIN}/templates/creative-digital-business-card`
+  `https://${DOMAIN}/templates/creative-digital-business-card`,
+  `https://${DOMAIN}/blog/design-psychology-guide`,
+  `https://${DOMAIN}/professions/designer-digital-business-card`,
+  `https://${DOMAIN}/professions/architect-digital-business-card`,
+  `https://${DOMAIN}/professions/psychologist-digital-business-card`,
+  `https://${DOMAIN}/professions/therapist-digital-business-card`,
+  `https://${DOMAIN}/use-cases/creative-agency-digital-card`,
+  `https://${DOMAIN}/use-cases/client-meeting-digital-card`,
+  `https://${DOMAIN}/templates/dark-mode-digital-business-card`,
+  `https://${DOMAIN}/templates/colorful-digital-business-card`
 ];
 
 async function pingSitemap(sitemapUrl) {
