@@ -38,14 +38,14 @@ export default function BlogPage() {
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
-                What is a Digital Business Card? — Complete Guide
+              <Link href="/blog/industry-specific-networking-guide" className="hover:underline text-primary">
+                Industry-Specific Networking Guide 2026
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
-              Learn the fundamentals of digital business cards, how they compare to physical cards, and why you need one in 2026.
+              Learn how to tailor your digital business card for real estate, design, tech, and other industries to maximize your networking success.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/industry-specific-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
           </div>
         </div>
 
