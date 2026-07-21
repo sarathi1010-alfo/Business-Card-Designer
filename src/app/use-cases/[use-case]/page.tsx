@@ -70,7 +70,20 @@ export default async function UseCasePage({ params }: PageProps) {
         </p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Why Digital Wins at {useCaseTitle}</h3>
-        <ul className="list-disc pl-6 space-y-2 mb-6">
+        <p>
+          In traditional networking settings, exchanging information often means fumbling for physical cards that are easily misplaced or discarded. For a {useCaseTitle.toLowerCase()}, where you might interact with dozens or hundreds of individuals, this inefficiency can result in lost opportunities. A digital approach transforms this dynamic entirely, ensuring that every connection you make is immediately actionable and securely stored.
+        </p>
+        <p>
+          By leveraging a dynamic digital profile, you are not just sharing your contact details; you are providing a comprehensive, interactive snapshot of your professional brand. This is especially critical for a {useCaseTitle.toLowerCase()}, where providing immediate context—such as recent projects, portfolio links, or company presentations—can be the deciding factor in securing a crucial follow-up meeting.
+        </p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Essential Features for Your {useCaseTitle}</h3>
+        <p>
+          To truly stand out, your digital presence must be optimized for the specific demands of a {useCaseTitle.toLowerCase()}. Consider integrating a prominent call-to-action (CTA) that aligns with your primary goal for the event, such as scheduling a demo or booking a consultation call directly through your calendar link.
+        </p>
+        <p>
+          Additionally, utilizing our platform’s real-time analytics allows you to track exactly which connections engaged with your card after the event. This data empowers you to prioritize your follow-up strategy, focusing on the warmest leads who demonstrated genuine interest in your profile.
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-6 mt-6">
           <li><strong>Speed:</strong> One scan of your QR code and your details are saved.</li>
           <li><strong>Lead Capture:</strong> Use our built-in forms to easily collect details from the people you meet.</li>
           <li><strong>Follow-up Context:</strong> See exactly who clicked what after the event to personalize your follow-ups.</li>
