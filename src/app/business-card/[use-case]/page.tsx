@@ -12,6 +12,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "psychology-conference-digital-card",
+  "design-agency-digital-card",
 ];
 
 interface UseCasePageProps {
