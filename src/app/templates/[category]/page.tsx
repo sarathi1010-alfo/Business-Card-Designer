@@ -35,6 +35,17 @@ export default async function CategoryPage({ params }: PageProps) {
   );
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
+  let titleOverride = `${titleCase} Business Card Templates`;
+  let subtitleOverride = `Start with a professionally designed ${category} template and customize it for your brand.`;
+
+  if (titleCase === 'Startup') {
+    titleOverride = 'Startup & Founder Business Card Templates';
+    subtitleOverride = 'Disrupt your industry networking with bold, innovative digital card designs perfect for pitching investors and acquiring early users.';
+  } else if (titleCase === 'Freelance') {
+    titleOverride = 'Freelance Digital Business Card Templates';
+    subtitleOverride = 'Showcase your portfolio, highlight your best services, and make it easy for clients to book you instantly.';
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -65,9 +76,9 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">{titleOverride}</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {subtitleOverride}
         </p>
       </div>
 

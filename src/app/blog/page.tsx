@@ -19,6 +19,22 @@ export default function BlogPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {/* Added Industry Specific Networking Post */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/industry-specific-networking-guide" className="hover:underline text-primary">
+                Industry-Specific Networking: Tailor Your Digital Card
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how to customize your digital business card for your specific industry to maximize lead generation and professional networking.
+            </p>
+            <Link href="/blog/industry-specific-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Added actual first pillar post */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">

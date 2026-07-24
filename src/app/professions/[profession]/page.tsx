@@ -177,6 +177,25 @@ export default async function ProfessionPage({ params }: PageProps) {
   const q2 = faqData.q2.replace('{profession}', professionTitle);
   const a2 = faqData.a2.replace('{profession}', professionTitle);
 
+  let h1Override = `${localeData.title} ${professionTitle}s`;
+  let snapshotOverride = localeData.snapshot;
+
+  if (lang === 'en') {
+    if (professionTitle === 'Lawyer') {
+      h1Override = 'Digital Business Cards for Lawyers & Attorneys';
+      snapshotOverride = 'Lawyers benefit from secure, minimalist digital cards that highlight credentials, practice areas, and direct secure contact methods, building immediate trust with prospective clients.';
+    } else if (professionTitle === 'Photographer') {
+      h1Override = 'Digital Business Cards for Professional Photographers';
+      snapshotOverride = 'Photographers can use digital business cards as a micro-portfolio, featuring high-resolution background imagery and prominent links to galleries and booking calendars.';
+    } else if (professionTitle === 'Architect') {
+      h1Override = 'Digital Business Cards for Architects & Firms';
+      snapshotOverride = 'Architects can showcase their firm\'s portfolio, attach case studies, and provide a seamless way for developers and clients to contact them directly from their phone.';
+    } else if (professionTitle === 'Event Planner') {
+      h1Override = 'Digital Business Cards for Event Planners';
+      snapshotOverride = 'Event planners operate in high-speed environments. A digital card ensures lightning-fast contact sharing and can temporarily link to active event details or vendor forms.';
+    }
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -209,7 +228,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {h1Override}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -220,7 +239,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {snapshotOverride}
           </p>
         </div>
         <p>
