@@ -24,6 +24,27 @@ export default async function UseCasePage({ params }: PageProps) {
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
+  // Specific content overrides
+  let titleOverride = `Digital Business Cards for ${useCaseTitle}`;
+  let subtitleOverride = `Maximize your connections at your next ${useCaseTitle.toLowerCase()} with a smart, trackable digital business card.`;
+  let h2Override = `Master Your ${useCaseTitle} Networking`;
+  let p1Override = `Networking environments like a ${useCaseTitle.toLowerCase()} move fast. You have seconds to make an impression and exchange contact information. A dynamic digital business card streamlines this process and ensures you are remembered.`;
+  let h3Override = `Why Digital Wins at ${useCaseTitle}`;
+
+  if (useCaseTitle === 'Trade Show') {
+    titleOverride = 'Digital Business Cards for Trade Shows & Expos';
+    subtitleOverride = 'Capture leads instantly on the crowded convention floor with a fast-scanning QR digital card.';
+    h2Override = 'Dominate the Trade Show Floor';
+    p1Override = 'Trade shows are chaotic, high-volume environments where traditional paper cards get lost or thrown away. A digital business card designed specifically for trade show exhibitors and attendees allows you to capture prospect information securely and directly into your CRM, bypassing manual data entry and ensuring you never miss a follow-up opportunity.';
+    h3Override = 'Why Exhibitors Need Digital Cards';
+  } else if (useCaseTitle === 'Sales Pitch') {
+    titleOverride = 'Digital Business Cards for Sales Professionals';
+    subtitleOverride = 'Close more deals by leaving a professional, trackable digital footprint after every pitch.';
+    h2Override = 'Elevate Your Sales Pitch Experience';
+    p1Override = 'A successful sales pitch does not end when you leave the room; it ends when the deal is signed. Handing over a static paper card is a missed opportunity. A digital business card allows you to embed your calendar link, attach relevant product sheets, and most importantly, track exactly when your prospect views your information post-meeting.';
+    h3Override = 'The Sales Advantage of Digital Cards';
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -56,20 +77,20 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {titleOverride}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
+          {subtitleOverride}
         </p>
       </header>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
-        <h2 className="text-3xl font-semibold mt-12 mb-6">Master Your {useCaseTitle} Networking</h2>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{h2Override}</h2>
         <p>
-          Networking environments like a {useCaseTitle.toLowerCase()} move fast. You have seconds to make an impression and exchange contact information. A dynamic digital business card streamlines this process and ensures you are remembered.
+          {p1Override}
         </p>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-4">Why Digital Wins at {useCaseTitle}</h3>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">{h3Override}</h3>
         <ul className="list-disc pl-6 space-y-2 mb-6">
           <li><strong>Speed:</strong> One scan of your QR code and your details are saved.</li>
           <li><strong>Lead Capture:</strong> Use our built-in forms to easily collect details from the people you meet.</li>

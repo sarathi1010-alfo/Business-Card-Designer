@@ -9,6 +9,7 @@ const sitemaps = [
   `https://${DOMAIN}/sitemap-products.xml`,
 ];
 
+
 const newUrls = [
   `https://${DOMAIN}/blog/digital-business-card-guide`,
   `https://${DOMAIN}/professions/founder-digital-business-card`,
@@ -18,8 +19,18 @@ const newUrls = [
   `https://${DOMAIN}/use-cases/networking-event-digital-card`,
   `https://${DOMAIN}/use-cases/conference-digital-business-card`,
   `https://${DOMAIN}/templates/minimalist-digital-business-card`,
-  `https://${DOMAIN}/templates/creative-digital-business-card`
+  `https://${DOMAIN}/templates/creative-digital-business-card`,
+  `https://${DOMAIN}/blog/industry-specific-networking-guide`,
+  `https://${DOMAIN}/professions/lawyer-digital-business-card`,
+  `https://${DOMAIN}/professions/photographer-digital-business-card`,
+  `https://${DOMAIN}/professions/architect-digital-business-card`,
+  `https://${DOMAIN}/professions/event-planner-digital-business-card`,
+  `https://${DOMAIN}/use-cases/trade-show-digital-card`,
+  `https://${DOMAIN}/use-cases/sales-pitch-digital-business-card`,
+  `https://${DOMAIN}/templates/startup-digital-business-card`,
+  `https://${DOMAIN}/templates/freelance-digital-business-card`
 ];
+
 
 async function pingSitemap(sitemapUrl) {
   const url = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;

@@ -4,6 +4,7 @@ import puppeteer from 'puppeteer';
   const PORT = 3000;
   const baseUrl = `http://localhost:${PORT}`;
 
+
   const urlsToTest = [
     '/blog/digital-business-card-guide',
     '/professions/founder-digital-business-card',
@@ -13,8 +14,18 @@ import puppeteer from 'puppeteer';
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/blog/industry-specific-networking-guide',
+    '/professions/lawyer-digital-business-card',
+    '/professions/photographer-digital-business-card',
+    '/professions/architect-digital-business-card',
+    '/professions/event-planner-digital-business-card',
+    '/use-cases/trade-show-digital-card',
+    '/use-cases/sales-pitch-digital-business-card',
+    '/templates/startup-digital-business-card',
+    '/templates/freelance-digital-business-card'
   ];
+
 
   console.log('Starting headless browser tests...');
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
