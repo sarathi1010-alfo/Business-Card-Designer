@@ -170,3 +170,81 @@ export const mockTemplates: Template[] = [
     ]
   }
 ];
+
+export const extraMockTemplates: Template[] = [
+  {
+    id: 'corporate-dark',
+    name: 'Corporate Dark',
+    category: 'Corporate',
+    preview: '/templates/corporate-dark.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111827',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'JAMES WILSON',
+        fontSize: 56,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'MANAGING PARTNER',
+        fontSize: 20,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#9ca3af',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'elegant-minimal',
+    name: 'Elegant Minimal',
+    category: 'Elegant',
+    preview: '/templates/elegant-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfbf7',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 525,
+        y: 250,
+        width: 850,
+        text: 'EVELYN ROSE',
+        fontSize: 56,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#3f3f46',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 525,
+        y: 330,
+        width: 850,
+        text: 'Art Director',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#71717a',
+        textAlign: 'center'
+      }
+    ]
+  }
+];
+
+// Add extra templates to the original mockTemplates array
+mockTemplates.push(...extraMockTemplates);

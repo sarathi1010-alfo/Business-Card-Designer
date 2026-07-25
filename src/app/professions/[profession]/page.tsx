@@ -5,6 +5,41 @@ interface PageProps {
   params: Promise<{ profession: string }>;
 }
 
+const professionOverrides: Record<string, { customH2: string, customContent: string, q1: string, a1: string, q2: string, a2: string }> = {
+  "Lawyer": {
+    customH2: "Maintaining Corporate Competence and Security",
+    customContent: "For a Lawyer, a digital business card must project competence, reliability, and security. Utilizing clean lines, muted color palettes, and highly legible typography ensures your digital presence matches your firm's professional standards. Ensure that any vCard downloads or lead capture forms comply with data protection regulations, which serves as a subtle trust signal during high-stakes networking. Highlighting your firm, direct line, and areas of practice instantly qualifies you to potential clients.",
+    q1: "Why does a Lawyer need a secure digital business card?",
+    a1: "Lawyers handle sensitive information and need to project utmost professionalism. A secure digital business card ensures client data and contact exchange comply with privacy standards while offering a frictionless way to share credentials.",
+    q2: "What information should a Lawyer include on their digital card?",
+    a2: "A Lawyer should include their name, title, law firm name, direct phone line, professional email, and links to their state bar profile or firm biography to immediately establish credibility."
+  },
+  "Doctor": {
+    customH2: "Front and Center Medical Credentials",
+    customContent: "Trust is the primary currency in the medical realm. For a Doctor or healthcare professional, networking requires a delicate balance of approachability and strict professionalism. Your medical qualifications, board certifications, and institutional affiliations must be immediately visible. A digital card allows you to link directly to verification boards or detailed profiles on hospital directories, providing instant reassurance to patients and peers. Including direct links to secure patient portals or appointment scheduling transforms your card into a functional utility.",
+    q1: "How can a Doctor use a digital business card for patients?",
+    a1: "A Doctor can use a digital business card to seamlessly provide patients with clinic contact details, links to patient portals, and direct paths to schedule appointments, improving the overall patient experience.",
+    q2: "Should a Doctor include their board certifications on their digital card?",
+    a2: "Yes, highlighting medical qualifications and board certifications is crucial for Doctors as it immediately establishes authority and builds trust with both patients and colleagues."
+  },
+  "Photographer": {
+    customH2: "A Visual-First Digital Portfolio",
+    customContent: "For a Photographer, the medium is as important as the message. Your contact information is secondary to your portfolio. A traditional card restricts you to a logo, whereas a digital solution transforms into a micro-website showcasing your best work. Your card must immediately communicate your aesthetic sensibilities. Integrating platforms like Instagram, Behance, or a custom gallery link directly into your card reduces the friction for potential clients to view your work, dramatically increasing conversion rates at networking events.",
+    q1: "Why is a digital business card better than a printed one for a Photographer?",
+    a1: "Printed cards limit a Photographer to a single image or logo. A digital business card acts as an interactive portfolio, allowing potential clients to immediately view galleries and social media integrations.",
+    q2: "What integrations are essential for a Photographer's digital card?",
+    a2: "Essential integrations include direct links to Instagram, online portfolios (like Behance or SmugMug), and booking calendars to seamlessly convert interactions into client sessions."
+  },
+  "Architect": {
+    customH2: "Showcasing Structural Vision and Design",
+    customContent: "As an Architect, your digital presence should reflect your design philosophy. Your card should breathe with whitespace, crisp typography, and an overarching sense of structure. Beyond contact details, a digital business card allows you to link to 3D renderings, past project portfolios, and firm profiles. Whether you're at an industry expo or a client meeting, the ability to instantly share your body of work alongside your contact information proves your technical competence and design vision.",
+    q1: "How does a digital business card help an Architect showcase their work?",
+    a1: "It allows an Architect to link directly to project portfolios, 3D renderings, and firm websites, providing a comprehensive view of their design capabilities instantly during a networking event.",
+    q2: "What design elements should an Architect prioritize on their card?",
+    a2: "An Architect should prioritize clean layouts, professional typography, and a visual hierarchy that highlights their most impressive structural projects before their standard contact details."
+  }
+};
+
 export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: string, faqHeader: string }> = {
   en: {
     faqHeader: "Frequently Asked Questions",
@@ -177,24 +212,31 @@ export default async function ProfessionPage({ params }: PageProps) {
   const q2 = faqData.q2.replace('{profession}', professionTitle);
   const a2 = faqData.a2.replace('{profession}', professionTitle);
 
+  const override = professionOverrides[professionTitle];
+  const finalQ1 = override ? override.q1 : q1;
+  const finalA1 = override ? override.a1 : a1;
+  const finalQ2 = override ? override.q2 : q2;
+  const finalA2 = override ? override.a2 : a2;
+  const finalContent = override ? override.customContent : `As a ${professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
       {
         "@type": "Question",
-        "name": q1,
+        "name": finalQ1,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": a1
+          "text": finalA1
         }
       },
       {
         "@type": "Question",
-        "name": q2,
+        "name": finalQ2,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": a2
+          "text": finalA2
         }
       }
     ]
@@ -223,9 +265,8 @@ export default async function ProfessionPage({ params }: PageProps) {
             <strong>AI Snapshot:</strong> {localeData.snapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
+        {override && <h3 className="text-2xl font-semibold mt-10 mb-4">{override.customH2}</h3>}
+        <p>{finalContent}</p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
         <ul className="list-disc pl-6 space-y-2 mb-6">
@@ -236,11 +277,11 @@ export default async function ProfessionPage({ params }: PageProps) {
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
-        <p>{a1}</p>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{finalQ1}</h3>
+        <p>{finalA1}</p>
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
-        <p>{a2}</p>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{finalQ2}</h3>
+        <p>{finalA2}</p>
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Ready to create your card?</h2>
