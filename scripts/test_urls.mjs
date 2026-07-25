@@ -13,7 +13,14 @@ import puppeteer from 'puppeteer';
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/blog/what-is-a-digital-business-card',
+    '/blog/digital-vs-physical-business-cards',
+    '/blog/how-to-design-a-digital-business-card',
+    '/blog/ultimate-guide-to-digital-business-cards',
+    '/blog/how-digital-business-cards-work',
+    '/blog/why-you-need-a-digital-business-card',
+    '/blog/what-is-a-qr-code-business-card'
   ];
 
   console.log('Starting headless browser tests...');
