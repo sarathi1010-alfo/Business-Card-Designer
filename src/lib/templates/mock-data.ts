@@ -168,5 +168,86 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'dark-mode-elegant',
+    name: 'Dark Mode Elegant',
+    category: 'Dark Mode',
+    preview: '/templates/dark-mode.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111111',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'ELIAS VANCE',
+        fontSize: 60,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'UX DESIGNER',
+        fontSize: 22,
+        fontFamily: 'sans-serif',
+        fill: '#cccccc',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'glassmorphism-clean',
+    name: 'Glassmorphism Clean',
+    category: 'Glassmorphism',
+    preview: '/templates/glassmorphism.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#e0e5ec',
+    elements: [
+      {
+        id: 'glass-pane',
+        type: 'rect',
+        x: 50,
+        y: 50,
+        width: 950,
+        height: 500,
+        fill: 'rgba(255, 255, 255, 0.4)'
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'LUCY CHEN',
+        fontSize: 64,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#333333',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'ART DIRECTOR',
+        fontSize: 24,
+        fontFamily: 'sans-serif',
+        fill: '#555555',
+        textAlign: 'center'
+      }
+    ]
   }
 ];

@@ -21,11 +21,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const templateOverrides: Record<string, { aiSnapshot: string }> = {
+  "Dark Mode": {
+    aiSnapshot: "Dark mode templates offer a sleek, high-contrast aesthetic that reduces eye strain and instantly communicates a modern, premium brand identity."
+  },
+  "Glassmorphism": {
+    aiSnapshot: "Glassmorphism templates utilize frosted glass effects and subtle blurring to create a layered, highly contemporary look that stands out on modern devices."
+  }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const snapshotContent = templateOverrides[titleCase]?.aiSnapshot || `Start with a professionally designed ${category} template and customize it for your brand.`;
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
@@ -66,6 +77,11 @@ export default async function CategoryPage({ params }: PageProps) {
       />
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
+          <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
+            <strong>AI Snapshot:</strong> {snapshotContent}
+          </p>
+        </div>
         <p className="text-xl text-muted-foreground">
           Start with a professionally designed {category} template and customize it for your brand.
         </p>
