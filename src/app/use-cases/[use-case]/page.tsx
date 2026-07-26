@@ -19,10 +19,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const useCaseOverrides: Record<string, { aiSnapshot: string }> = {
+  "Design Conference": {
+    aiSnapshot: "At a design conference, standing out is mandatory. Use a visually striking digital business card to instantly share your portfolio, collect feedback, and connect with other creative professionals."
+  },
+  "Creative Meetup": {
+    aiSnapshot: "Creative meetups thrive on collaboration. A digital business card allows you to seamlessly share your social links, latest projects, and contact info without breaking the conversational flow."
+  }
+};
+
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const snapshotContent = useCaseOverrides[useCaseTitle]?.aiSnapshot || `Optimize your networking at your next ${useCaseTitle.toLowerCase()} with a customized digital business card. Share details instantly and capture leads.`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,6 +76,11 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
         <h2 className="text-3xl font-semibold mt-12 mb-6">Master Your {useCaseTitle} Networking</h2>
+        <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
+          <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
+            <strong>AI Snapshot:</strong> {snapshotContent}
+          </p>
+        </div>
         <p>
           Networking environments like a {useCaseTitle.toLowerCase()} move fast. You have seconds to make an impression and exchange contact information. A dynamic digital business card streamlines this process and ensures you are remembered.
         </p>

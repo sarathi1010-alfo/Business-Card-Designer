@@ -131,6 +131,15 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+const professionOverrides: Record<string, { snapshot: string }> = {
+  "Graphic Designer": {
+    snapshot: "For a graphic designer, a digital business card serves as an immediate visual portfolio. By integrating your best work directly into the card design, you create an instant impression that paper cards cannot match."
+  },
+  "UX Designer": {
+    snapshot: "A UX designer's digital business card should embody their philosophy: seamless, intuitive, and frictionless. It demonstrates your expertise in user experience from the very first scan."
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -177,6 +186,8 @@ export default async function ProfessionPage({ params }: PageProps) {
   const q2 = faqData.q2.replace('{profession}', professionTitle);
   const a2 = faqData.a2.replace('{profession}', professionTitle);
 
+  const snapshotContent = professionOverrides[professionTitle]?.snapshot || localeData.snapshot;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -220,7 +231,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {snapshotContent}
           </p>
         </div>
         <p>
