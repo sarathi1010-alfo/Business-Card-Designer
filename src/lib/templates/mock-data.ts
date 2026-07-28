@@ -168,5 +168,53 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'dark-mode-premium',
+    name: 'Dark Mode Premium',
+    category: 'Dark Mode',
+    preview: '/templates/dark-mode.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0a0a0a',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'NIGHT OWL',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'glass-morphism',
+    name: 'Glass Morphism',
+    category: 'Glassmorphism',
+    preview: '/templates/glassmorphism.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#e5e7eb',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'CLEAR VISION',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#1f2937',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
