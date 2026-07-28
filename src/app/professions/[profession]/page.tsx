@@ -152,14 +152,60 @@ function extractLanguageAndProfession(slug: string) {
   return { lang, profession };
 }
 
+
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string }> = {
+  "designer": {
+    title: "Creative Digital Business Card for Designers",
+    desc: "Showcase your portfolio and aesthetic directly from your digital business card. Built for creatives.",
+    snapshot: "Designers use digital business cards to seamlessly link to their Dribbble or personal portfolios, making it easier to share work visually on the go.",
+    q1: "How can a designer use a digital business card?",
+    a1: "Designers can embed links to their latest case studies, Behance, or personal websites right on their digital card.",
+    q2: "Is a digital card better for creatives?",
+    a2: "Yes, it allows you to dynamically update your featured projects without reprinting paper cards."
+  },
+  "architect": {
+    title: "Digital Business Card for Architects",
+    desc: "Present your blueprints and firm portfolio with a sleek digital business card.",
+    snapshot: "Architects leverage digital cards to share 3D renderings and firm websites instantly via QR codes at networking events.",
+    q1: "What should an architect include on their digital card?",
+    a1: "Include your firm name, contact details, and a primary link to your architectural portfolio.",
+    q2: "Can I share 3D models via a digital card?",
+    a2: "Yes, you can link directly to interactive 3D model viewers or video walkthroughs of your projects."
+  },
+  "psychologist": {
+    title: "Digital Business Card for Psychologists",
+    desc: "A secure, professional digital business card for psychologists and therapists.",
+    snapshot: "Psychologists use digital cards to securely share their clinic details, booking portals, and professional credentials with new clients.",
+    q1: "Is a digital business card professional enough for a psychologist?",
+    a1: "Absolutely. A clean, minimal digital card projects competence and modernizes your practice's onboarding.",
+    q2: "Can I link to my secure booking portal?",
+    a2: "Yes, you can make your primary CTA a direct link to your compliant scheduling system."
+  },
+  "marketer": {
+    title: "Digital Business Card for Marketers",
+    desc: "Track your networking ROI with a digital business card built for marketers.",
+    snapshot: "Marketers love digital business cards because they offer QR scan analytics, proving the ROI of in-person networking events.",
+    q1: "Why do marketers need digital business cards?",
+    a1: "To practice what they preach: tracking analytics, optimizing CTAs, and capturing leads directly into their CRM.",
+    q2: "Can I track how many people scan my card?",
+    a2: "Yes, BrandCard provides detailed scan analytics and link-click data."
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
+
   const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
+  const overrideKey = profession.toLowerCase();
+  const override = professionOverrides[overrideKey];
   const localeData = langMap[lang] || langMap.en;
 
+  const finalTitle = override ? override.title : `${localeData.title} ${profession}`;
+  const finalDesc = override ? override.desc : `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`;
+
   return {
-    title: `${localeData.title} ${profession}`,
-    description: `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
+    title: finalTitle,
+    description: finalDesc,
     alternates: {
       canonical: `/professions/${resolvedParams.profession}`,
     }
@@ -168,14 +214,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
+
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+  const overrideKey = professionTitle.toLowerCase();
+  const override = professionOverrides[overrideKey];
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const finalTitle = override ? override.title : `${localeData.title} ${professionTitle}s`;
+  const finalDesc = override ? override.desc : `Stand out in your industry with a premium, interactive digital business card designed specifically for ${professionTitle.toLowerCase()} professionals.`;
+  const finalSnapshot = override ? override.snapshot : localeData.snapshot;
+
+  const q1 = override ? override.q1 : faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override ? override.a1 : faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override ? override.q2 : faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override ? override.a2 : faqData.a2.replace('{profession}', professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,10 +262,10 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {finalTitle}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
+          {finalDesc}
         </p>
       </header>
 
@@ -220,7 +273,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {finalSnapshot}
           </p>
         </div>
         <p>

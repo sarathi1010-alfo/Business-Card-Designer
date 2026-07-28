@@ -5,14 +5,36 @@ interface PageProps {
   params: Promise<{ 'use-case': string }>;
 }
 
+
+const useCaseOverrides: Record<string, { title: string, desc: string, q1: string, a1: string, q2: string, a2: string }> = {
+  "agency pitch": {
+    title: "Digital Cards for Agency Pitches",
+    desc: "Leave a lasting impression after your agency pitch with a dynamic digital business card containing your deck.",
+    q1: "How to use a digital card in an agency pitch?",
+    a1: "Put your QR code on the final slide of your deck. When clients scan it, they get your contact info and a direct link to download the presentation.",
+    q2: "Does it help win clients?",
+    a2: "Yes, providing a seamless digital handover projects a forward-thinking, tech-savvy agency image."
+  },
+  "portfolio review": {
+    title: "Digital Cards for Portfolio Reviews",
+    desc: "Streamline your portfolio review process. Let reviewers scan your card and instantly access your work.",
+    q1: "Why use a digital card for a portfolio review?",
+    a1: "It eliminates the friction of typing URLs. Reviewers scan your code and are instantly viewing your Behance or personal site.",
+    q2: "Can I update my link later?",
+    a2: "Yes, dynamic QR codes mean you can change your portfolio link anytime without changing the QR code."
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCase = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const overrideKey = rawUseCase.replace(/-/g, ' ').toLowerCase();
+  const override = useCaseOverrides[overrideKey];
 
   return {
-    title: `Digital Business Card for ${useCase} - BrandCard`,
-    description: `Optimize your networking at your next ${useCase.toLowerCase()} with a customized digital business card. Share details instantly and capture leads.`,
+    title: override ? override.title : `Digital Business Card for ${useCase} - BrandCard`,
+    description: override ? override.desc : `Optimize your networking at your next ${useCase.toLowerCase()} with a customized digital business card. Share details instantly and capture leads.`,
     alternates: {
       canonical: `/use-cases/${resolvedParams['use-case']}`,
     }
@@ -21,8 +43,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
-  const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const overrideKey = rawUseCase.replace(/-/g, ' ').toLowerCase();
+  const override = useCaseOverrides[overrideKey];
+
+  const finalTitle = override ? override.title : `Digital Business Cards for ${useCaseTitle}`;
+  const finalDesc = override ? override.desc : `Maximize your connections at your next ${useCaseTitle.toLowerCase()} with a smart, trackable digital business card.`;
+  const q1 = override ? override.q1 : `How to use a digital business card for a ${useCaseTitle}?`;
+  const a1 = override ? override.a1 : `For a ${useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.`;
+  const q2 = override ? override.q2 : `Is a digital business card better than a physical one for a ${useCaseTitle}?`;
+  const a2 = override ? override.a2 : `Yes. During a busy ${useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -30,18 +61,18 @@ export default async function UseCasePage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `How to use a digital business card for a ${useCaseTitle}?`,
+        "name": q1,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `For a ${useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.`
+          "text": a1
         }
       },
       {
         "@type": "Question",
-        "name": `Is a digital business card better than a physical one for a ${useCaseTitle}?`,
+        "name": q2,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes. During a busy ${useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.`
+          "text": a2
         }
       }
     ]
@@ -56,10 +87,10 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {finalTitle}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
+          {finalDesc}
         </p>
       </header>
 
@@ -78,11 +109,11 @@ export default async function UseCasePage({ params }: PageProps) {
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">Frequently Asked Questions</h2>
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">How to use a digital business card for a {useCaseTitle}?</h3>
-        <p>For a {useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.</p>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
+        <p>{a1}</p>
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">Is a digital business card better than a physical one for a {useCaseTitle}?</h3>
-        <p>Yes. During a busy {useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.</p>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
+        <p>{a2}</p>
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Prepare for your next {useCaseTitle.toLowerCase()}</h2>
