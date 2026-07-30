@@ -21,11 +21,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const templateOverrides: Record<string, { title: string, desc: string, q1: string, a1: string, q2: string, a2: string }> = {
+  "bold": {
+    title: "Bold Digital Business Card Templates",
+    desc: "Make an unforgettable first impression with our striking, high-contrast bold digital business card templates.",
+    q1: "Who should use a bold digital business card?",
+    a1: "Bold templates are perfect for creatives, sales professionals, and entrepreneurs who want to stand out and make a memorable impact instantly.",
+    q2: "Can I tone down a bold template if needed?",
+    a2: "Absolutely. You can easily adjust the colors and typography in our editor to find the perfect balance between striking and professional."
+  },
+  "elegant": {
+    title: "Elegant Digital Business Card Templates",
+    desc: "Exude sophistication and trust with our collection of elegant, refined digital business card templates.",
+    q1: "What makes a digital business card elegant?",
+    a1: "Elegant templates typically utilize serif fonts, ample whitespace, and subtle, muted color palettes to convey professionalism and class.",
+    q2: "Are elegant templates suited for corporate roles?",
+    a2: "Yes, elegant designs are highly popular among lawyers, executives, and luxury real estate agents who need to project authority and refinement."
+  }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const customData = templateOverrides[rawCategory];
+  const displayTitle = customData?.title || `${titleCase} Business Card Templates`;
+  const displayDesc = customData?.desc || `Start with a professionally designed ${category} template and customize it for your brand.`;
+  const q1 = customData?.q1 || `What are ${titleCase} business card templates?`;
+  const a1 = customData?.a1 || `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`;
+  const q2 = customData?.q2 || `Can I customize the ${titleCase} digital business card templates?`;
+  const a2 = customData?.a2 || `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`;
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
@@ -41,18 +68,18 @@ export default async function CategoryPage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `What are ${titleCase} business card templates?`,
+        "name": q1,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+          "text": a1
         }
       },
       {
         "@type": "Question",
-        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "name": q2,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+          "text": a2
         }
       }
     ]
@@ -65,9 +92,9 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">{displayTitle}</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {displayDesc}
         </p>
       </div>
 

@@ -50,7 +50,7 @@ export function FeaturesSection() {
             transition={{ delay: 0.1 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            A carefully crafted suite of tools designed to elevate your professional digital presence. Check out our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">guide on creating high-converting digital cards</Link>.
+            A carefully crafted suite of tools designed to elevate your professional digital presence. Check out our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">guide on creating high-converting digital cards</Link> or our <Link href="/blog/industry-specific-networking-guide" className="text-primary hover:underline font-medium">guide on industry-specific digital business cards</Link>.
           </motion.p>
         </div>
 
