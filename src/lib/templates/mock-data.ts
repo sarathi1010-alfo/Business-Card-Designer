@@ -168,5 +168,78 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'bold-impact',
+    name: 'Bold Impact',
+    category: 'Bold',
+    preview: '/templates/bold-impact.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ff0000',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 200,
+        width: 950,
+        text: 'MAX POWER',
+        fontSize: 84,
+        fontFamily: 'Impact, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 300,
+        width: 950,
+        text: 'STUNT COORDINATOR',
+        fontSize: 36,
+        fontFamily: 'sans-serif',
+        fill: '#000000',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'elegant-serif',
+    name: 'Elegant Serif',
+    category: 'Elegant',
+    preview: '/templates/elegant-serif.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfbf7',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'Eleanor Vance',
+        fontSize: 60,
+        fontFamily: 'Georgia, serif',
+        fontWeight: 'normal',
+        fill: '#2c3e50',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'Interior Designer',
+        fontSize: 24,
+        fontFamily: 'Georgia, serif',
+        fontStyle: 'italic',
+        fill: '#7f8c8d',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
