@@ -15,7 +15,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>
         <p className="mb-6">
-          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below.
+          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our latest guide on <a href="/blog/industry-specific-networking" className="text-primary hover:underline font-medium">Industry-Specific Networking & Design Psychology</a>. Check out our growing suite of utilities below.
         </p>
       </div>
     </div>

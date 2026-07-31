@@ -6,11 +6,33 @@ interface PageProps {
   params: Promise<{ category: string }>;
 }
 
+
+const templateOverrides: Record<string, { title: string, subtitle: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'elegant': {
+    title: 'Elegant',
+    subtitle: 'Sophisticated and refined designs for high-end professionals.',
+    q1: 'What defines an elegant digital business card?',
+    a1: 'Elegant templates feature minimalist layouts, premium typography, and subtle color palettes designed to convey luxury and professionalism.',
+    q2: 'Who should use an elegant template?',
+    a2: 'They are perfect for executives, luxury real estate agents, and high-end consultants looking to make a polished impression.'
+  },
+  'bold': {
+    title: 'Bold',
+    subtitle: 'Stand out with striking designs and vibrant colors.',
+    q1: 'How do bold templates help me stand out?',
+    a1: 'Bold templates utilize high contrast, large typography, and vibrant colors to ensure your digital card grabs attention instantly.',
+    q2: 'Can I customize a bold template?',
+    a2: 'Yes, while they start with striking defaults, you can easily adjust the colors and fonts to match your specific brand identity.'
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const override = templateOverrides[rawCategory];
+  const subtitle = override ? override.subtitle : `Start with a professionally designed ${category} template and customize it for your brand.`;
 
   return {
     title: `${titleCase} Business Card Templates Free`,
@@ -26,6 +48,8 @@ export default async function CategoryPage({ params }: PageProps) {
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const override = templateOverrides[rawCategory];
+  const subtitle = override ? override.subtitle : `Start with a professionally designed ${category} template and customize it for your brand.`;
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
@@ -41,18 +65,18 @@ export default async function CategoryPage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `What are ${titleCase} business card templates?`,
+        "name": `${override ? override.q1 : `What are ${titleCase} business card templates?`}`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+          "text": `${override ? override.a1 : `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`}`
         }
       },
       {
         "@type": "Question",
-        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "name": `${override ? override.q2 : `Can I customize the ${titleCase} digital business card templates?`}`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+          "text": `${override ? override.a2 : `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`}`
         }
       }
     ]
@@ -67,7 +91,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {subtitle}
         </p>
       </div>
 

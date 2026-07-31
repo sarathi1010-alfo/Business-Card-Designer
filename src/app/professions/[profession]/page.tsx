@@ -131,6 +131,46 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'designer': {
+    title: 'Digital Portfolio Card for',
+    desc: 'Showcase your creative work instantly with a professional digital card for your',
+    snapshot: 'A designer digital business card acts as a mini-portfolio, allowing you to share your best work, behance links, and contact info instantly via QR code.',
+    q1: 'Why do designers need a digital card?',
+    a1: 'Designers rely on visual impact. A digital card lets you embed high-quality images and direct links to your full portfolio, making it easier to convert prospects on the spot.',
+    q2: 'What should a designer include on their card?',
+    a2: 'Include a bold personal logo, your top 3 project highlights, social links (especially Instagram or Dribbble), and an easy contact form.'
+  },
+  'marketer': {
+    title: 'Lead Gen Card for',
+    desc: 'Capture more leads at events with a smart digital card for your',
+    snapshot: 'Marketers can leverage digital business cards to track engagement, test different CTAs, and integrate directly with CRMs to automate follow-ups.',
+    q1: 'How does a digital card help a marketer?',
+    a1: 'It turns networking into measurable data. With trackable QR codes and analytics, you can see exactly who engaged with your profile.',
+    q2: 'Can I integrate lead capture?',
+    a2: 'Yes, our platform allows marketers to embed forms directly on their digital cards, streamlining the lead generation process.'
+  },
+  'sales-manager': {
+    title: 'Sales Exec Card for',
+    desc: 'Close deals faster by sharing a comprehensive digital profile for your',
+    snapshot: 'Sales managers use digital business cards to quickly share product sheets, book meetings instantly via calendar links, and leave a professional, tech-savvy impression.',
+    q1: 'How do digital cards improve sales networking?',
+    a1: 'They eliminate the friction of data entry. A prospect scans your card and instantly has your contact info, calendar link, and company deck saved to their phone.',
+    q2: 'Is it suitable for enterprise sales?',
+    a2: 'Absolutely. A customized digital card reflects modern enterprise standards and ensures your brand is represented professionally.'
+  },
+  'photographer': {
+    title: 'Visual Business Card for',
+    desc: 'Let your photos speak for themselves with a stunning digital card for your',
+    snapshot: 'Photographers can embed galleries and direct booking links into their digital business cards, turning every networking interaction into a potential client booking.',
+    q1: 'Can I show my photos on the card?',
+    a1: 'Yes, our templates support image galleries, allowing you to feature your best shots right on your digital business card.',
+    q2: 'How can clients book me through the card?',
+    a2: 'You can easily add a prominent CTA linking directly to your booking software or contact form.'
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -156,10 +196,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const resolvedParams = await params;
   const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
   const localeData = langMap[lang] || langMap.en;
+  const override = professionOverrides[profession.toLowerCase().replace(/ /g, '-')] || professionOverrides[profession.toLowerCase()];
 
   return {
-    title: `${localeData.title} ${profession}`,
-    description: `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
+    title: override ? `${override.title} ${profession}` : `${localeData.title} ${profession}`,
+    description: override ? `${override.desc} ${profession.toLowerCase()} career.` : `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
     alternates: {
       canonical: `/professions/${resolvedParams.profession}`,
     }
@@ -169,13 +210,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+  const override = professionOverrides[professionTitle.toLowerCase().replace(/ /g, '-')] || professionOverrides[professionTitle.toLowerCase()];
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const q1 = override ? override.q1 : faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override ? override.a1 : faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override ? override.q2 : faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override ? override.a2 : faqData.a2.replace('{profession}', professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +251,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {override ? `${override.title} ${professionTitle}s` : `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -220,7 +262,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {override ? override.snapshot : localeData.snapshot}
           </p>
         </div>
         <p>
