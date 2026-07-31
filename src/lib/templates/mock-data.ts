@@ -8,6 +8,80 @@ export const CARD_HEIGHT = 600;
 
 export const mockTemplates: Template[] = [
   {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#1a1a1a',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'EMMA WATSON',
+        fontSize: 56,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#d4af37', // gold
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'LUXURY REAL ESTATE',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#ffffff',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'bold-impact',
+    name: 'Bold Impact',
+    category: 'Bold',
+    preview: '/templates/bold-impact.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ff3366',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 200,
+        width: 900,
+        text: 'JAKE BOLD',
+        fontSize: 80,
+        fontFamily: 'sans-serif',
+        fontWeight: '900',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 300,
+        width: 900,
+        text: 'MARKETING DIRECTOR',
+        fontSize: 30,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#000000',
+        textAlign: 'left'
+      }
+    ]
+  }
+,
+  {
     id: 'modern-minimal',
     name: 'Modern Minimal',
     category: 'Minimal',
