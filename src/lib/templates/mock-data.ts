@@ -169,4 +169,62 @@ export const mockTemplates: Template[] = [
       }
     ]
   }
+,
+
+  {
+    id: 'modern-bold',
+    name: 'Modern Bold',
+    category: 'Modern',
+    preview: '/templates/modern-bold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'bg-rect-2',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
+        fill: '#fafafa',
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 100,
+        width: 800,
+        text: 'MARK SPENCER',
+        fontSize: 72,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#111111',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111111',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'EMMA WATSON',
+        fontSize: 56,
+        fontFamily: 'serif',
+        fill: '#d4af37',
+        textAlign: 'center'
+      }
+    ]
+  },
 ];
