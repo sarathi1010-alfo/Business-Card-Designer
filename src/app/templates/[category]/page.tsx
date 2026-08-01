@@ -2,6 +2,27 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { mockTemplates } from '@/lib/templates/mock-data';
 
+
+const templateOverrides: Record<string, { title: string, desc: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'modern': {
+    title: 'Modern Business Card Templates',
+    desc: 'Browse our collection of free modern business card templates. Stand out with contemporary designs.',
+    q1: 'What makes a business card template modern?',
+    a1: 'Modern business card templates typically feature clean lines, ample white space, bold typography, and often integrate dynamic elements like QR codes for seamless digital networking.',
+    q2: 'Are modern templates suitable for all industries?',
+    a2: 'Yes, modern templates are highly versatile and can be customized to suit almost any industry, from tech startups to real estate and creative agencies.'
+  },
+  'elegant': {
+    title: 'Elegant Business Card Templates',
+    desc: 'Browse our collection of free elegant business card templates. Impress clients with sophisticated designs.',
+    q1: 'When should I use an elegant business card template?',
+    a1: 'Elegant templates are ideal for high-end services, luxury real estate, law firms, and consulting, where conveying sophistication and trust is paramount.',
+    q2: 'How do I customize an elegant template?',
+    a2: 'You can customize an elegant template by utilizing classic typography, refined color palettes (like deep blues, golds, or monochrome), and keeping the layout uncluttered.'
+  }
+};
+
+
 interface PageProps {
   params: Promise<{ category: string }>;
 }
@@ -12,9 +33,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
 
+
+  const overrideKey = rawCategory;
+  const overrideData = templateOverrides[overrideKey];
   return {
-    title: `${titleCase} Business Card Templates Free`,
-    description: `Browse our collection of free ${category} business card templates. Customize and download instantly.`,
+    title: overrideData ? overrideData.title : `${titleCase} Business Card Templates Free`,
+    description: overrideData ? overrideData.desc : `Browse our collection of free ${category} business card templates. Customize and download instantly.`,
     alternates: {
       canonical: `/templates/${resolvedParams.category}`,
     }
@@ -29,6 +53,9 @@ export default async function CategoryPage({ params }: PageProps) {
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
+  const overrideKey = rawCategory;
+  const overrideData = templateOverrides[overrideKey];
+
   const categoryTemplates = mockTemplates.filter(t =>
     t.category.toLowerCase() === titleCase.toLowerCase() ||
     titleCase.toLowerCase().includes(t.category.toLowerCase())
@@ -41,18 +68,18 @@ export default async function CategoryPage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `What are ${titleCase} business card templates?`,
+        "name": overrideData ? overrideData.q1 : `What are ${titleCase} business card templates?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+          "text": overrideData ? overrideData.a1 : `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
         }
       },
       {
         "@type": "Question",
-        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "name": overrideData ? overrideData.q2 : `Can I customize the ${titleCase} digital business card templates?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+          "text": overrideData ? overrideData.a2 : `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
         }
       }
     ]
@@ -65,7 +92,7 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">{overrideData ? overrideData.title : `${titleCase} Business Card Templates`}</h1>
         <p className="text-xl text-muted-foreground">
           Start with a professionally designed {category} template and customize it for your brand.
         </p>

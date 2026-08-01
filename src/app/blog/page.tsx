@@ -23,7 +23,21 @@ export default function BlogPage() {
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="/blog/digital-business-card-guide" className="hover:underline text-primary">
+              <Link href="/blog/industry-specific-networking" className="hover:underline text-primary">
+                Industry-Specific Networking in 2026: The Digital Edge
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how to master industry-specific networking using customized digital business cards. Maximize your professional connections with tailored strategies.
+            </p>
+            <Link href="/blog/industry-specific-networking" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/digital-business-card-guide" className="hover:underline">
                 How to Create a Digital Business Card That Converts
               </Link>
             </h2>

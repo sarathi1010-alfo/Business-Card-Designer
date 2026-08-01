@@ -131,6 +131,46 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'architect': {
+    title: 'Digital Business Card for Architects',
+    desc: 'Showcase your portfolio, designs, and contact information instantly.',
+    snapshot: 'Architects need to share visual portfolios quickly. A digital business card allows you to link directly to your best projects, CAD files, and contact details in a single scan.',
+    q1: 'Why do architects need a digital business card?',
+    a1: 'Architects need a digital business card to seamlessly bridge the gap between in-person networking and their digital portfolio, allowing potential clients to view their work instantly.',
+    q2: 'What should an architect include on their digital card?',
+    a2: 'An architect should include links to their portfolio, past project galleries, firm website, and professional contact information.'
+  },
+  'photographer': {
+    title: 'Digital Business Card for Photographers',
+    desc: 'Share your photography portfolio and booking links effortlessly.',
+    snapshot: 'For photographers, visual impact is everything. A digital business card acts as a mini-portfolio that you can carry in your pocket and share via QR code instantly.',
+    q1: 'How can a photographer use a digital business card?',
+    a1: 'Photographers can use a digital business card to share their best shots, link to their booking calendar, and provide contact details immediately after a shoot or networking event.',
+    q2: 'Is a digital card better for photographers than paper?',
+    a2: 'Yes, because a digital card allows prospects to immediately click through to your high-resolution portfolio, which is impossible with a physical paper card.'
+  },
+  'lawyer': {
+    title: 'Digital Business Card for Lawyers',
+    desc: 'Build trust and share your credentials securely with a digital business card.',
+    snapshot: 'Lawyers must project professionalism and trustworthiness. A digital business card ensures your contact details are saved securely and allows you to link to your firm\'s credentials.',
+    q1: 'Why should lawyers switch to digital business cards?',
+    a1: 'Lawyers should switch because it ensures their contact information is saved directly to a client\'s phone without errors, which is crucial for urgent legal consultations.',
+    q2: 'What is essential on a lawyer\'s digital business card?',
+    a2: 'Essential elements include your V-Card, areas of practice, firm website, and direct contact numbers (office and mobile if appropriate).'
+  },
+  'designer': {
+    title: 'Digital Business Card for Designers',
+    desc: 'Express your creativity and share your design portfolio with a custom digital card.',
+    snapshot: 'Designers can showcase their aesthetic sensibilities through a customized digital business card that links directly to their Dribbble, Behance, or personal portfolio site.',
+    q1: 'How does a digital business card benefit a designer?',
+    a1: 'It benefits a designer by acting as a first impression of their design skills. The layout of the card itself, plus immediate links to their portfolio, proves their capabilities instantly.',
+    q2: 'What should designers link to on their digital card?',
+    a2: 'Designers should link to their main portfolio, relevant social media like Instagram or Pinterest, and a direct email or contact form.'
+  }
+};
+
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -155,11 +195,15 @@ function extractLanguageAndProfession(slug: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
+
+  const overrideKey = profession.toLowerCase().replace(/\s+/g, '-');
+  const overrideData = professionOverrides[overrideKey];
+  const localeData = overrideData || langMap[lang] || langMap.en;
+
 
   return {
     title: `${localeData.title} ${profession}`,
-    description: `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
+    description: overrideData ? overrideData.desc : `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
     alternates: {
       canonical: `/professions/${resolvedParams.profession}`,
     }
@@ -169,13 +213,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const overrideKey = professionTitle.toLowerCase().replace(/\s+/g, '-');
+  const overrideData = professionOverrides[overrideKey];
+  const localeData = overrideData || langMap[lang] || langMap.en;
+  const faqData = overrideData ? { ...overrideData, faqHeader: faqMap[lang]?.faqHeader || faqMap.en.faqHeader } : (faqMap[lang] || faqMap.en);
+
+
+
+  const q1 = faqData.q1.includes('{profession}') ? faqData.q1.replace('{profession}', professionTitle) : faqData.q1;
+  const a1 = faqData.a1.includes('{profession}') ? faqData.a1.replace('{profession}', professionTitle) : faqData.a1;
+  const q2 = faqData.q2.includes('{profession}') ? faqData.q2.replace('{profession}', professionTitle) : faqData.q2;
+  const a2 = faqData.a2.includes('{profession}') ? faqData.a2.replace('{profession}', professionTitle) : faqData.a2;
+
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +259,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {overrideData ? localeData.title : `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.

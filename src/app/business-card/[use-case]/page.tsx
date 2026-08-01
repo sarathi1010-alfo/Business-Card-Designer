@@ -5,6 +5,8 @@ import { ShowcaseGallery } from "@/components/home/ShowcaseGallery";
 import { RelatedTools } from "@/components/widgets/RelatedTools";
 
 const VALID_USE_CASES = [
+  "trade-show-digital-card",
+  "corporate-event-digital-business-card",
   "brand-card-for-developers",
   "digital-business-card",
   "portfolio-card",
