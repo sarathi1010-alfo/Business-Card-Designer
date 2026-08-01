@@ -50,7 +50,7 @@ export function FeaturesSection() {
             transition={{ delay: 0.1 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            A carefully crafted suite of tools designed to elevate your professional digital presence. Check out our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">guide on creating high-converting digital cards</Link>.
+            A carefully crafted suite of tools designed to elevate your professional digital presence. Check out our <Link href="/blog/how-to-design-a-digital-business-card" className="text-primary hover:underline font-medium">guide on designing high-converting digital cards</Link> and learn more about <Link href="/blog/what-is-a-qr-code-business-card" className="text-primary hover:underline font-medium">how QR code cards work</Link>.
           </motion.p>
         </div>
 
