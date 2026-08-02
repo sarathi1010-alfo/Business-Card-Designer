@@ -113,6 +113,45 @@ export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: st
   }
 };
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'software-engineer': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your software engineering career. Showcase your GitHub, projects, and tech stack instantly.",
+    snapshot: "A digital business card allows you to instantly share your tech stack, GitHub repository, and contact details via a simple QR code, proving your technical edge.",
+    q1: "Why does a Software Engineer need a digital business card?",
+    a1: "A Software Engineer needs a digital business card to instantly share their technical portfolio, GitHub link, and contact information with recruiters and peers without relying on outdated paper cards.",
+    q2: "What should a Software Engineer include on their digital business card?",
+    a2: "Key elements include links to your GitHub or GitLab, a link to your live portfolio, a clear list of your core programming languages, and direct contact details for recruiters."
+  },
+  'doctor': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your medical career. Impress patients and colleagues instantly while maintaining secure contact.",
+    snapshot: "A digital business card allows you to instantly share your clinic details, professional medical credentials, and secure contact info via a simple QR code.",
+    q1: "Why does a Doctor need a digital business card?",
+    a1: "A Doctor needs a digital business card to seamlessly share clinic information, appointment scheduling links, and medical credentials with patients and colleagues in a hygienic, touch-free manner.",
+    q2: "What should a Doctor include on their digital business card?",
+    a2: "Key elements include your medical credentials, clinic address, direct phone numbers, an appointment booking link, and links to your professional profiles or published research."
+  },
+  'nurse': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your nursing career. Network efficiently with healthcare professionals.",
+    snapshot: "A digital business card allows you to instantly share your professional nursing credentials, contact details, and department info via a simple QR code.",
+    q1: "Why does a Nurse need a digital business card?",
+    a1: "A Nurse needs a digital business card to easily network with other healthcare professionals, share contact information for shifts, and present their certifications efficiently.",
+    q2: "What should a Nurse include on their digital business card?",
+    a2: "Key elements include your nursing credentials (RN, BSN, etc.), current department or hospital affiliation, and professional contact information."
+  },
+  'dentist': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your dental practice. Impress patients and share your clinic details instantly.",
+    snapshot: "A digital business card allows you to instantly share your dental clinic location, booking links, and professional profile via a simple QR code, eliminating paper waste.",
+    q1: "Why does a Dentist need a digital business card?",
+    a1: "A Dentist needs a digital business card to instantly provide patients with clinic directions, emergency contact numbers, and easy appointment booking links without the hassle of paper cards.",
+    q2: "What should a Dentist include on their digital business card?",
+    a2: "Key elements include your clinic address, a link to book an appointment, emergency contact info, and links to patient reviews or your practice's website."
+  }
+};
+
 const langMap: Record<string, { title: string, desc: string, snapshot: string }> = {
   en: { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card allows you to instantly share your professional profile, contact details, and portfolio via a simple QR code or link, eliminating the need for physical paper." },
   es: { title: "Tarjeta de Presentación Digital para", desc: "Crea una tarjeta de presentación digital profesional para tu", snapshot: "Una tarjeta de presentación digital le permite compartir instantáneamente su perfil profesional, datos de contacto y cartera a través de un simple código QR o enlace, eliminando la necesidad de papel físico." },
@@ -147,19 +186,20 @@ function extractLanguageAndProfession(slug: string) {
 
   // Remove digital business card suffixes
   rawProfession = rawProfession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
-  const profession = rawProfession.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const professionTitle = rawProfession.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  return { lang, profession };
+  return { lang, professionTitle, rawProfession };
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
+  const { lang, professionTitle, rawProfession } = extractLanguageAndProfession(resolvedParams.profession);
+  const override = professionOverrides[rawProfession];
   const localeData = langMap[lang] || langMap.en;
 
   return {
-    title: `${localeData.title} ${profession}`,
-    description: `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
+    title: override ? `${override.title} ${professionTitle}` : `${localeData.title} ${professionTitle}`,
+    description: override ? override.desc : `${localeData.desc} ${professionTitle.toLowerCase()} career. Impress clients and capture leads instantly.`,
     alternates: {
       canonical: `/professions/${resolvedParams.profession}`,
     }
@@ -168,14 +208,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+  const { lang, professionTitle, rawProfession } = extractLanguageAndProfession(resolvedParams.profession);
+  const override = professionOverrides[rawProfession];
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const title = override ? `${override.title} ${professionTitle}` : `${localeData.title} ${professionTitle}s`;
+  const snapshot = override ? override.snapshot : localeData.snapshot;
+
+  const q1 = override ? override.q1 : faqData.q1.replace(/\{profession\}/g, professionTitle);
+  const a1 = override ? override.a1 : faqData.a1.replace(/\{profession\}/g, professionTitle);
+  const q2 = override ? override.q2 : faqData.q2.replace(/\{profession\}/g, professionTitle);
+  const a2 = override ? override.a2 : faqData.a2.replace(/\{profession\}/g, professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +253,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {title}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -220,7 +264,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {snapshot}
           </p>
         </div>
         <p>
