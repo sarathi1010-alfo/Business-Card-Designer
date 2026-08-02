@@ -168,5 +168,119 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'tech-startup-dark',
+    name: 'Tech Startup Dark',
+    category: 'Tech Startup',
+    preview: '/templates/tech-startup-dark.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0f172a', // slate-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'ELON TURING',
+        fontSize: 64,
+        fontFamily: 'monospace',
+        fontWeight: 'bold',
+        fill: '#10b981', // emerald-500
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'LEAD ENGINEER // CTO',
+        fontSize: 24,
+        fontFamily: 'monospace',
+        fill: '#cbd5e1', // slate-300
+        textAlign: 'left'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 100,
+        y: 340,
+        width: 850,
+        height: 4,
+        fill: '#10b981', // emerald-500
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 100,
+        y: 400,
+        width: 850,
+        text: 'github.com/eturing | dev.to/eturing',
+        fontSize: 20,
+        fontFamily: 'monospace',
+        fill: '#94a3b8', // slate-400
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'medical-clean',
+    name: 'Medical Clean',
+    category: 'Medical Professional',
+    preview: '/templates/medical-clean.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'bg-stripe',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: CARD_WIDTH,
+        height: 100,
+        fill: '#0284c7', // sky-600
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'DR. ALICE CHEN, MD',
+        fontSize: 56,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#0f172a', // slate-900
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'CARDIOTHORACIC SURGEON',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#0284c7', // sky-600
+        textAlign: 'center'
+      },
+      {
+        id: 'clinic',
+        type: 'text',
+        x: 100,
+        y: 450,
+        width: 850,
+        text: 'City General Hospital | Department of Surgery',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#64748b', // slate-500
+        textAlign: 'center'
+      }
+    ]
   }
 ];
