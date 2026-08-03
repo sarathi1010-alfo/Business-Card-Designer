@@ -131,6 +131,25 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+const professionOverrides: Record<string, { overrideTitle?: string, overrideSnapshot?: string }> = {
+  "designer": {
+    overrideTitle: "The Ultimate Digital Business Card for Designers",
+    overrideSnapshot: "For designers, a digital business card is a pocket portfolio. Showcase your best work, link directly to your Behance or Dribbble, and instantly capture leads without ever printing a single paper card."
+  },
+  "developer": {
+    overrideTitle: "Digital Business Card for Developers: Ship Your Identity",
+    overrideSnapshot: "Developers need more than just an email. A digital card lets you instantly share your GitHub, live projects, and technical stack via a simple QR code, proving your skills on the spot."
+  },
+  "sales-manager": {
+    overrideTitle: "Digital Business Card for Sales Managers: Close More Deals",
+    overrideSnapshot: "Sales managers can leverage digital business cards to track prospect engagement. With built-in analytics and lead capture, you know exactly who viewed your profile and when to follow up."
+  },
+  "photographer": {
+    overrideTitle: "Digital Business Card for Photographers: Your Visual Brand",
+    overrideSnapshot: "Photographers can use digital cards as mini-galleries. A stunning visual interface paired with direct booking links turns casual encounters into paying clients instantly."
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -169,6 +188,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+  const rawProfessionKey = resolvedParams.profession.replace(/-digital-business-card(-[a-z]{2})?$/, '').replace(/-digital-card(-[a-z]{2})?$/, '');
+  const override = professionOverrides[rawProfessionKey] || {};
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
@@ -209,7 +230,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {override.overrideTitle || `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -220,7 +241,7 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {override.overrideSnapshot || localeData.snapshot}
           </p>
         </div>
         <p>

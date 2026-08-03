@@ -21,9 +21,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const templateOverrides: Record<string, { overrideTitle?: string, overrideDesc?: string }> = {
+  "dark-mode": {
+    overrideTitle: "Dark Mode Digital Business Card Templates",
+    overrideDesc: "Explore sleek, high-contrast dark mode templates. Perfect for designers, tech professionals, and executives wanting a premium, modern aesthetic."
+  },
+  "glassmorphism": {
+    overrideTitle: "Glassmorphism Digital Business Card Templates",
+    overrideDesc: "Embrace the latest UI trends with glassmorphism templates. Featuring frosted glass effects, vibrant gradients, and elegant typography for a cutting-edge look."
+  }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
+  const override = templateOverrides[rawCategory] || {};
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -65,9 +77,9 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">{override.overrideTitle || `${titleCase} Business Card Templates`}</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {override.overrideDesc || `Start with a professionally designed ${category} template and customize it for your brand.`}
         </p>
       </div>
 
