@@ -168,5 +168,74 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'dark-mode',
+    name: 'Dark Mode Elegance',
+    category: 'Dark Mode',
+    preview: '/templates/dark-mode.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111827',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 525,
+        y: 250,
+        width: 1050,
+        text: 'JOHN DOE',
+        fontSize: 56,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#f3f4f6',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 525,
+        y: 330,
+        width: 1050,
+        text: 'Software Engineer',
+        fontSize: 20,
+        fontFamily: 'Inter, sans-serif',
+        fill: '#9ca3af',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'glassmorphism',
+    name: 'Glassmorphism Style',
+    category: 'Glassmorphism',
+    preview: '/templates/glassmorphism.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#4ade80', // green as background base
+    elements: [
+      {
+        id: 'glass-panel',
+        type: 'rect',
+        x: 100,
+        y: 100,
+        width: 850,
+        height: 400,
+        fill: 'rgba(255, 255, 255, 0.2)', // simulated glass
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 525,
+        y: 250,
+        width: 850,
+        text: 'SARAH JENKINS',
+        fontSize: 56,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'center'
+      }
+    ]
   }
 ];

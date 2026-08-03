@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "trade-show-digital-card",
+  "job-interview-digital-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -19,6 +21,8 @@ const TEMPLATE_CATEGORIES = [
   "modern",
   "creative",
   "corporate",
+  "dark-mode",
+  "glassmorphism",
 ];
 
 const LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "nl", "ru", "zh", "ja", "ko", "ar", "hi", "tr", "pl"];
@@ -59,6 +63,8 @@ export default async function sitemap({
       { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
       { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
       { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+      { path: '/blog/digital-business-card-guide', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/design-psychology-digital-business-cards', priority: 0.8, changeFrequency: 'monthly' },
     ] as const;
 
     staticRoutes.forEach(route => {

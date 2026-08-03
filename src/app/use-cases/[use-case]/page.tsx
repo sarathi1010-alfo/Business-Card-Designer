@@ -19,9 +19,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const useCaseOverrides: Record<string, { overrideTitle?: string, overrideSnapshot?: string }> = {
+  "trade-show": {
+    overrideTitle: "Digital Business Cards for Trade Shows: Stand Out",
+    overrideSnapshot: "At a busy trade show, physical cards get lost in the shuffle. A digital business card allows you to instantly capture leads, share your digital brochure, and stand out from the competition with a simple QR scan."
+  },
+  "job-interview": {
+    overrideTitle: "Digital Cards for Job Interviews: Leave a Lasting Impression",
+    overrideSnapshot: "Show up to your next job interview with a modern digital business card. Instantly share your portfolio, GitHub, and resume with the hiring manager, demonstrating that you are forward-thinking and tech-savvy."
+  }
+};
+
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const override = useCaseOverrides[rawUseCase] || {};
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
   const jsonLd = {
@@ -56,7 +68,7 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {override.overrideTitle || `Digital Business Cards for ${useCaseTitle}`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
@@ -64,6 +76,13 @@ export default async function UseCasePage({ params }: PageProps) {
       </header>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
+        {override.overrideSnapshot && (
+          <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
+            <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
+              <strong>AI Snapshot:</strong> {override.overrideSnapshot}
+            </p>
+          </div>
+        )}
         <h2 className="text-3xl font-semibold mt-12 mb-6">Master Your {useCaseTitle} Networking</h2>
         <p>
           Networking environments like a {useCaseTitle.toLowerCase()} move fast. You have seconds to make an impression and exchange contact information. A dynamic digital business card streamlines this process and ensures you are remembered.
