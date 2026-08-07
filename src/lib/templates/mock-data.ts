@@ -168,5 +168,77 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'executive-pro',
+    name: 'Executive Pro',
+    category: 'Professional',
+    preview: '/templates/professional-executive.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'JAMES WILSON',
+        fontSize: 52,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#111827',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'Senior Partner',
+        fontSize: 24,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#4b5563',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#1c1917', // stone-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 0,
+        y: 250,
+        width: CARD_WIDTH,
+        text: 'ELEANOR RIGBY',
+        fontSize: 64,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#fbbf24', // amber-400
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 0,
+        y: 340,
+        width: CARD_WIDTH,
+        text: 'Luxury Estate Agent',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#e5e7eb', // gray-200
+        textAlign: 'center'
+      }
+    ]
   }
 ];
