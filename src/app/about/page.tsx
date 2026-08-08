@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">
@@ -15,7 +16,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>
         <p className="mb-6">
-          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below.
+          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below. Want to learn more? Check out our latest guide on <Link href="/blog/digital-business-card-converts-guide" className="text-primary hover:underline font-medium">How to Create a Digital Business Card That Converts</Link>.
         </p>
       </div>
     </div>

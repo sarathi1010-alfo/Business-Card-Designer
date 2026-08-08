@@ -4,6 +4,8 @@ import professionsData from '@/data/professions.json';
 
 // Valid use cases mapping
 const VALID_USE_CASES = [
+  "conference-digital-business-card",
+  "networking-event-digital-card",
   "brand-card-for-developers",
   "digital-business-card",
   "portfolio-card",
@@ -15,6 +17,8 @@ const VALID_USE_CASES = [
 
 // Mock templates mapping to represent dynamic DB entries
 const TEMPLATE_CATEGORIES = [
+  "creative-digital-business-card",
+  "minimalist-digital-business-card",
   "minimalist",
   "modern",
   "creative",
