@@ -5,6 +5,7 @@ import puppeteer from 'puppeteer';
   const baseUrl = `http://localhost:${PORT}`;
 
   const urlsToTest = [
+    '/blog/digital-business-card-converts-guide',
     '/blog/digital-business-card-guide',
     '/professions/founder-digital-business-card',
     '/professions/freelancer-digital-business-card',
