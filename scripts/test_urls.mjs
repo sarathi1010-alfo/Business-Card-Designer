@@ -13,7 +13,16 @@ import puppeteer from 'puppeteer';
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/blog/industry-specific-networking-guide',
+    '/professions/lawyer-digital-business-card',
+    '/professions/dentist-digital-business-card',
+    '/professions/architect-digital-business-card',
+    '/professions/chef-digital-business-card',
+    '/use-cases/trade-show-digital-card',
+    '/use-cases/job-fair-digital-card',
+    '/templates/elegant-templates',
+    '/templates/bold-templates'
   ];
 
   console.log('Starting headless browser tests...');

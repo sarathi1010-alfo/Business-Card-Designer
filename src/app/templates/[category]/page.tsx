@@ -6,15 +6,36 @@ interface PageProps {
   params: Promise<{ category: string }>;
 }
 
+
+const templateOverrides: Record<string, { title: string, desc: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'elegant': {
+    title: "Elegant Business Card Templates Free",
+    desc: "Browse our collection of free elegant business card templates. Sophisticated designs for premium brands.",
+    q1: "What makes an elegant business card template?",
+    a1: "Elegant business card templates feature minimalist layouts, ample white space, refined typography (often serif fonts), and subtle color palettes that convey luxury and professionalism.",
+    q2: "Can I customize these elegant templates?",
+    a2: "Yes, our elegant templates are fully customizable. You can adjust the colors to match your brand guidelines, change fonts, and add your own high-quality logo."
+  },
+  'bold': {
+    title: "Bold Business Card Templates Free",
+    desc: "Browse our collection of free bold business card templates. Stand out with high-contrast, striking designs.",
+    q1: "When should I use a bold business card template?",
+    a1: "Bold business card templates are perfect for creative industries, modern startups, or any professional who wants to make a strong, memorable visual statement.",
+    q2: "Are bold templates still professional?",
+    a2: "Absolutely. When designed well with a clean layout and balanced contrast, bold templates are highly professional while ensuring you are remembered."
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const override = templateOverrides[rawCategory];
 
   return {
-    title: `${titleCase} Business Card Templates Free`,
-    description: `Browse our collection of free ${category} business card templates. Customize and download instantly.`,
+    title: override ? override.title : `${titleCase} Business Card Templates Free`,
+    description: override ? override.desc : `Browse our collection of free ${category} business card templates. Customize and download instantly.`,
     alternates: {
       canonical: `/templates/${resolvedParams.category}`,
     }
@@ -26,6 +47,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const override = templateOverrides[rawCategory];
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
@@ -35,24 +57,29 @@ export default async function CategoryPage({ params }: PageProps) {
   );
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
+  const q1 = override ? override.q1 : `What are ${titleCase} business card templates?`;
+  const a1 = override ? override.a1 : `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`;
+  const q2 = override ? override.q2 : `Can I customize the ${titleCase} digital business card templates?`;
+  const a2 = override ? override.a2 : `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `What are ${titleCase} business card templates?`,
+        "name": q1,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+          "text": a1
         }
       },
       {
         "@type": "Question",
-        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "name": q2,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+          "text": a2
         }
       }
     ]

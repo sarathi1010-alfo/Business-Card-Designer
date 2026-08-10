@@ -131,6 +131,47 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+
+// Unique content overrides for specific professions
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string }> = {
+  'lawyer': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your legal career. Impress clients and capture leads instantly.",
+    snapshot: "A digital business card allows lawyers to instantly share their firm details, practice areas, and consultation links securely.",
+    q1: "Why does a Lawyer need a digital business card?",
+    a1: "A Lawyer needs a digital business card to seamlessly share contact information, link to case studies or firm websites, and allow potential clients to book consultations directly.",
+    q2: "What should a Lawyer include on their digital business card?",
+    a2: "Key elements include a professional headshot, direct contact details, links to practice areas, bar association credentials, and a secure lead capture form."
+  },
+  'dentist': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your dental practice. Impress patients and capture leads instantly.",
+    snapshot: "A digital business card allows dentists to share clinic details, appointment booking links, and patient reviews instantly via a QR code.",
+    q1: "Why does a Dentist need a digital business card?",
+    a1: "A Dentist needs a digital business card to provide patients with an easy way to save clinic contact info, access emergency numbers, and book appointments online.",
+    q2: "What should a Dentist include on their digital business card?",
+    a2: "Key elements include a welcoming photo, clinic address and hours, direct links to booking platforms, and links to patient testimonials."
+  },
+  'architect': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your architectural career. Showcase your portfolio and capture leads instantly.",
+    snapshot: "A digital business card allows architects to instantly share their design portfolio, firm details, and project galleries.",
+    q1: "Why does an Architect need a digital business card?",
+    a1: "An Architect needs a digital business card to visually showcase past projects, share 3D rendering links, and provide contact details to potential clients on the go.",
+    q2: "What should an Architect include on their digital business card?",
+    a2: "Key elements include a striking cover image, links to a digital portfolio or Behance, contact details, and a form for project inquiries."
+  },
+  'chef': {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your culinary career. Impress diners and capture leads instantly.",
+    snapshot: "A digital business card allows chefs to share their menus, restaurant booking links, and culinary portfolios with a quick scan.",
+    q1: "Why does a Chef need a digital business card?",
+    a1: "A Chef needs a digital business card to easily share restaurant locations, link to signature dish galleries, and provide catering inquiry forms.",
+    q2: "What should a Chef include on their digital business card?",
+    a2: "Key elements include a professional photo, links to current menus, reservation platforms, social media (like Instagram for food photos), and contact info for private events."
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -155,7 +196,9 @@ function extractLanguageAndProfession(slug: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
+  const rawSlug = resolvedParams.profession.toLowerCase().replace(/-digital-business-card(-[a-z]{2})?$/, '').replace(/-digital-card(-[a-z]{2})?$/, '');
+  const baseData = langMap[lang] || langMap.en;
+  const localeData = professionOverrides[rawSlug] || baseData;
 
   return {
     title: `${localeData.title} ${profession}`,
@@ -169,13 +212,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+  const rawSlug = resolvedParams.profession.toLowerCase().replace(/-digital-business-card(-[a-z]{2})?$/, '').replace(/-digital-card(-[a-z]{2})?$/, '');
+  const baseLocaleData = langMap[lang] || langMap.en;
+  const baseFaqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  let localeData = baseLocaleData;
+  let q1 = baseFaqData.q1.replace('{profession}', professionTitle);
+  let a1 = baseFaqData.a1.replace('{profession}', professionTitle);
+  let q2 = baseFaqData.q2.replace('{profession}', professionTitle);
+  let a2 = baseFaqData.a2.replace('{profession}', professionTitle);
+
+  if (professionOverrides[rawSlug]) {
+    localeData = {
+      title: professionOverrides[rawSlug].title,
+      desc: professionOverrides[rawSlug].desc,
+      snapshot: professionOverrides[rawSlug].snapshot
+    };
+    q1 = professionOverrides[rawSlug].q1;
+    a1 = professionOverrides[rawSlug].a1;
+    q2 = professionOverrides[rawSlug].q2;
+    a2 = professionOverrides[rawSlug].a2;
+  }
+
+
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -234,7 +293,7 @@ export default async function ProfessionPage({ params }: PageProps) {
           <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
         </ul>
 
-        <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{baseFaqData.faqHeader}</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
         <p>{a1}</p>
