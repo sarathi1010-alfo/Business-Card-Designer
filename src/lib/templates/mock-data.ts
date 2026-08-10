@@ -168,5 +168,89 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'elegant-serif',
+    name: 'Elegant Serif',
+    category: 'Elegant',
+    preview: '/templates/elegant-serif.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfbf7', // warm off-white
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 525,
+        y: 200,
+        width: 800,
+        text: 'EMILIA CLARKE',
+        fontSize: 54,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#27272a',
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 425,
+        y: 270,
+        width: 200,
+        height: 1,
+        fill: '#d4d4d8',
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 525,
+        y: 310,
+        width: 800,
+        text: 'Art Director',
+        fontSize: 22,
+        fontFamily: 'serif',
+        fontStyle: 'italic',
+        fill: '#71717a',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'bold-impact',
+    name: 'Bold Impact',
+    category: 'Bold',
+    preview: '/templates/bold-impact.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ff3366', // vibrant pink/red
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 150,
+        width: 900,
+        text: 'MARCUS\nWRIGHT',
+        fontSize: 120,
+        fontFamily: 'sans-serif',
+        fontWeight: '900',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 450,
+        width: 900,
+        text: 'BRAND STRATEGIST',
+        fontSize: 32,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#000000',
+        textAlign: 'left'
+      }
+    ]
   }
+
 ];
