@@ -149,8 +149,59 @@ function extractLanguageAndProfession(slug: string) {
   rawProfession = rawProfession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const profession = rawProfession.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  return { lang, profession };
+  return { lang, profession, rawProfession };
 }
+
+export const professionOverrides: Record<string, { h1?: string, h2?: string, content?: React.ReactNode, q1?: string, a1?: string, q2?: string, a2?: string, faqHeader?: string }> = {
+  'architect': {
+    h1: 'The Ultimate Digital Business Card for Architects',
+    h2: 'Showcase Your Spatial Vision',
+    content: (
+      <>
+        <p>As an architect, your work is highly visual and conceptual. A standard paper card cannot convey the depth of your portfolio or the elegance of your designs. A digital business card allows you to instantly share high-resolution project images, CAD certifications, and your unique design philosophy with potential clients or firm partners.</p>
+        <p>With BrandCard, you can select minimalist templates that reflect your aesthetic, ensuring your first impression is as impactful as your buildings.</p>
+      </>
+    ),
+    q1: 'How can an architect use a digital business card effectively?',
+    a1: 'An architect can use a digital business card to provide a direct link to their online portfolio, showcase their firm\'s contact details, and highlight their specific architectural certifications, making it easy for prospects to review their work instantly.'
+  },
+  'actor': {
+    h1: 'Digital Business Cards for Actors: Share Your Reel Instantly',
+    h2: 'Stand Out at Auditions',
+    content: (
+      <>
+        <p>In the entertainment industry, timing is everything. When you meet a casting director or producer, you need a way to instantly share your headshot, resume, and demo reel. A digital business card consolidates all your essential marketing materials into one easily shareable link.</p>
+        <p>Instead of hoping they remember your printed resume, a quick scan of your BrandCard QR code ensures they have your reel saved directly on their phone.</p>
+      </>
+    ),
+    q1: 'Should actors use digital business cards?',
+    a1: 'Yes, actors should use digital business cards because it allows them to immediately share dynamic media like demo reels and voiceover samples, which cannot be done with traditional paper cards.'
+  },
+  'accountant': {
+    h1: 'Professional Digital Business Cards for Accountants',
+    h2: 'Build Financial Trust from Day One',
+    content: (
+      <>
+        <p>For accountants and CPAs, establishing trust and demonstrating professionalism is paramount. A digital business card projects a modern, secure, and organized image to your clients.</p>
+        <p>You can use your digital card to provide direct links to secure client portals, tax resources, or a calendar booking link for consultations, streamlining your client onboarding process.</p>
+      </>
+    ),
+    q1: 'What information should an accountant include on a digital card?',
+    a1: 'An accountant should include their professional credentials (like CPA), office contact information, a link to their firm\'s secure document portal, and a booking link for tax or financial consultations.'
+  },
+  'agent': {
+    h1: 'High-Converting Digital Business Cards for Agents',
+    h2: 'Close More Deals with Instant Connections',
+    content: (
+      <>
+        <p>Whether you are a real estate agent, talent agent, or insurance broker, your network is your most valuable asset. A digital business card ensures you never miss a connection at a networking event, open house, or industry mixer.</p>
+        <p>With features like lead capture forms and one-tap contact saving, you can instantly turn a brief introduction into a saved contact in your CRM.</p>
+      </>
+    ),
+    q1: 'How does a digital business card help agents generate leads?',
+    a1: 'A digital business card helps agents generate leads by utilizing built-in lead capture forms. When someone scans the card, they can input their details, which are automatically saved and organized for the agent to follow up.'
+  }
+};
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
@@ -168,14 +219,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+  const { lang, profession: professionTitle, rawProfession } = extractLanguageAndProfession(resolvedParams.profession);
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const override = professionOverrides[rawProfession] || {};
+
+  const q1 = override.q1 || faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override.a1 || faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override.q2 || faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override.a2 || faqData.a2.replace('{profession}', professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +262,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {override.h1 || `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -217,15 +270,20 @@ export default async function ProfessionPage({ params }: PageProps) {
       </header>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
-        <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{override.h2 || 'Why upgrade your professional networking?'}</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
             <strong>AI Snapshot:</strong> {localeData.snapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
+
+        {override.content ? (
+          override.content
+        ) : (
+          <p>
+            As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+          </p>
+        )}
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
         <ul className="list-disc pl-6 space-y-2 mb-6">
@@ -234,7 +292,7 @@ export default async function ProfessionPage({ params }: PageProps) {
           <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
         </ul>
 
-        <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{override.faqHeader || faqData.faqHeader}</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
         <p>{a1}</p>
