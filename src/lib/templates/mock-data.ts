@@ -168,5 +168,86 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'bg-rect',
+        type: 'rect',
+        x: 20,
+        y: 20,
+        width: CARD_WIDTH - 40,
+        height: CARD_HEIGHT - 40,
+        fill: 'transparent',
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 0,
+        y: 250,
+        width: CARD_WIDTH,
+        text: 'EMILIA CLARK',
+        fontSize: 52,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#d4af37', // gold
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 0,
+        y: 320,
+        width: CARD_WIDTH,
+        text: 'Event Specialist',
+        fontSize: 22,
+        fontFamily: 'sans-serif',
+        fill: '#666666',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'tech-neon',
+    name: 'Tech Neon',
+    category: 'Tech',
+    preview: '/templates/tech-neon.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0f172a', // slate-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 200,
+        width: 600,
+        text: 'JAXON CODE',
+        fontSize: 60,
+        fontFamily: 'monospace',
+        fontWeight: 'bold',
+        fill: '#22c55e', // green-500
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 280,
+        width: 600,
+        text: '> Full Stack Developer_',
+        fontSize: 24,
+        fontFamily: 'monospace',
+        fill: '#94a3b8',
+        textAlign: 'left'
+      }
+    ]
   }
 ];
