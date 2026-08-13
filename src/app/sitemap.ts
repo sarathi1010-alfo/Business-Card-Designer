@@ -11,6 +11,12 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
+  "healthcare-networking-card",
+  "legal-digital-business-card",
+  "tech-digital-card",
+  "finance-digital-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -19,6 +25,10 @@ const TEMPLATE_CATEGORIES = [
   "modern",
   "creative",
   "corporate",
+  "healthcare",
+  "legal",
+  "tech",
+  "finance",
 ];
 
 const LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "nl", "ru", "zh", "ja", "ko", "ar", "hi", "tr", "pl"];

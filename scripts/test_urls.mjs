@@ -5,15 +5,15 @@ import puppeteer from 'puppeteer';
   const baseUrl = `http://localhost:${PORT}`;
 
   const urlsToTest = [
-    '/blog/digital-business-card-guide',
-    '/professions/founder-digital-business-card',
-    '/professions/freelancer-digital-business-card',
-    '/professions/real-estate-agent-digital-card',
-    '/professions/consultant-digital-business-card',
-    '/use-cases/networking-event-digital-card',
-    '/use-cases/conference-digital-business-card',
-    '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/blog/industry-specific-networking-guide',
+    '/use-cases/healthcare-networking-card',
+    '/use-cases/legal-digital-business-card',
+    '/use-cases/tech-digital-card',
+    '/use-cases/finance-digital-card',
+    '/templates/healthcare-digital-business-card',
+    '/templates/legal-digital-business-card',
+    '/templates/tech-digital-business-card',
+    '/templates/finance-digital-business-card'
   ];
 
   console.log('Starting headless browser tests...');

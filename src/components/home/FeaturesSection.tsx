@@ -7,7 +7,7 @@ import Link from "next/link";
 const features = [
   {
     title: "Clean Premium UI",
-    description: "Glassmorphism, fluid animations, and perfect typography tailored for modern professionals.",
+    description: <>Glassmorphism, fluid animations, and perfect typography tailored for modern professionals. Read our guide on industry-specific networking <a href='/blog/industry-specific-networking-guide' className='text-primary hover:underline font-medium'>here</a>.</>,
     icon: <LayoutTemplate className="w-6 h-6 text-primary" />,
   },
   {
