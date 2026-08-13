@@ -168,5 +168,216 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'healthcare-clean',
+    name: 'Healthcare Clean',
+    category: 'Healthcare',
+    preview: '/templates/healthcare-clean.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#f0fdf4', // green-50
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'DR. EMILY CHEN',
+        fontSize: 56,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#166534', // green-800
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'CARDIOLOGIST',
+        fontSize: 24,
+        fontFamily: 'sans-serif',
+        fill: '#15803d', // green-700
+        textAlign: 'left'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 100,
+        y: 400,
+        width: 850,
+        text: 'Appointments: 555-0192\nemily.chen@hospital.org\nwww.hospital.org/echen',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#14532d', // green-900
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'legal-classic',
+    name: 'Legal Classic',
+    category: 'Legal',
+    preview: '/templates/legal-classic.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#f8fafc', // slate-50
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'MICHAEL T. ROSS',
+        fontSize: 56,
+        fontFamily: 'serif',
+        fontWeight: 'bold',
+        fill: '#0f172a', // slate-900
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'MANAGING PARTNER',
+        fontSize: 20,
+        fontFamily: 'serif',
+        fill: '#334155', // slate-700
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 425,
+        y: 380,
+        width: 200,
+        height: 2,
+        fill: '#94a3b8', // slate-400
+      },
+      {
+        id: 'firm',
+        type: 'text',
+        x: 100,
+        y: 100,
+        width: 850,
+        text: 'ROSS & ASSOCIATES',
+        fontSize: 32,
+        fontFamily: 'serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'tech-modern',
+    name: 'Tech Modern',
+    category: 'Tech',
+    preview: '/templates/tech-modern.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0f172a', // slate-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'DAVID SMITH',
+        fontSize: 56,
+        fontFamily: 'monospace',
+        fontWeight: 'bold',
+        fill: '#38bdf8', // sky-400
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'FULL STACK DEVELOPER',
+        fontSize: 24,
+        fontFamily: 'monospace',
+        fill: '#94a3b8', // slate-400
+        textAlign: 'left'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 100,
+        y: 400,
+        width: 850,
+        text: 'github.com/davidsmith\ndavid@smith.dev\n+1 555-2934',
+        fontSize: 20,
+        fontFamily: 'monospace',
+        fill: '#f8fafc', // slate-50
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'finance-corporate',
+    name: 'Finance Corporate',
+    category: 'Finance',
+    preview: '/templates/finance-corporate.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#1e293b', // slate-800
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'AMANDA REED',
+        fontSize: 56,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#f1f5f9', // slate-100
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'FINANCIAL ADVISOR',
+        fontSize: 24,
+        fontFamily: 'sans-serif',
+        fill: '#cbd5e1', // slate-300
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 425,
+        y: 350,
+        width: 200,
+        height: 2,
+        fill: '#fbbf24', // amber-400
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 100,
+        y: 400,
+        width: 850,
+        text: 'wealthmanagement.com/areed\namanda@wealthmanagement.com',
+        fontSize: 20,
+        fontFamily: 'sans-serif',
+        fill: '#94a3b8', // slate-400
+        textAlign: 'center'
+      }
+    ]
   }
 ];
