@@ -168,5 +168,88 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#1c1917', // stone-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 0,
+        y: 250,
+        width: CARD_WIDTH,
+        text: 'VICTORIA STERLING',
+        fontSize: 48,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#fbbf24', // amber-400
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 0,
+        y: 320,
+        width: CARD_WIDTH,
+        text: 'EXECUTIVE PARTNER',
+        fontSize: 18,
+        fontFamily: 'sans-serif',
+        fontWeight: '300',
+        fill: '#d6d3d1', // stone-300
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'tech-startup-neon',
+    name: 'Tech Startup Neon',
+    category: 'Tech Startup',
+    preview: '/templates/tech-startup-neon.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#020617', // slate-950
+    elements: [
+      {
+        id: 'bg-accent',
+        type: 'rect',
+        x: 50,
+        y: 0,
+        width: 10,
+        height: CARD_HEIGHT,
+        fill: '#10b981', // emerald-500
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 800,
+        text: 'JAXON REED',
+        fontSize: 60,
+        fontFamily: 'monospace',
+        fontWeight: 'bold',
+        fill: '#f8fafc', // slate-50
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 340,
+        width: 800,
+        text: 'FOUNDER & CEO // NEXTGEN',
+        fontSize: 24,
+        fontFamily: 'monospace',
+        fontWeight: 'normal',
+        fill: '#38bdf8', // sky-400
+        textAlign: 'left'
+      }
+    ]
   }
 ];
