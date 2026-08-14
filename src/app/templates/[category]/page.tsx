@@ -21,11 +21,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+type OverrideData = {
+  heroText?: string;
+  q1?: string;
+  a1?: string;
+  q2?: string;
+  a2?: string;
+};
+
+const templateOverrides: Record<string, OverrideData> = {
+  "elegant": {
+    heroText: "Impress high-end clients with our premium elegant digital business card templates, designed for executives and luxury brands.",
+    q1: "What makes an elegant digital business card template different?",
+    a1: "Elegant templates focus on sophisticated typography, muted or luxurious color palettes (like gold, charcoal, and marble), and minimalist layouts that project authority and exclusivity.",
+    q2: "Can I use an elegant template for a standard business?",
+    a2: "Yes, an elegant template is perfect for anyone wanting to elevate their professional image, such as lawyers, financial advisors, or real estate brokers."
+  },
+  "tech-startup": {
+    heroText: "Showcase your innovation with tech startup digital business card templates featuring bold colors, dark mode, and modern typography.",
+    q1: "Why use a tech startup specific template?",
+    a1: "Tech startup templates are designed to look modern and disruptive, often utilizing dark themes, neon accents, and monospace fonts that resonate with developers and investors.",
+    q2: "Can I add my startup's pitch deck to these templates?",
+    a2: "Absolutely. BrandCard allows you to link directly to your hosted pitch deck, making it easily accessible to any investor who scans your card."
+  }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
   const titleCase = category.replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const override = templateOverrides[rawCategory.toLowerCase()];
 
   // Filter templates (in a real app, this would be a DB query)
   // We match against "Minimal", "Corporate", "Creative" etc.
@@ -41,18 +68,18 @@ export default async function CategoryPage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `What are ${titleCase} business card templates?`,
+        "name": override?.q1 || `What are ${titleCase} business card templates?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
+          "text": override?.a1 || `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`
         }
       },
       {
         "@type": "Question",
-        "name": `Can I customize the ${titleCase} digital business card templates?`,
+        "name": override?.q2 || `Can I customize the ${titleCase} digital business card templates?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
+          "text": override?.a2 || `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`
         }
       }
     ]
@@ -67,7 +94,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {override?.heroText || `Start with a professionally designed ${category} template and customize it for your brand.`}
         </p>
       </div>
 

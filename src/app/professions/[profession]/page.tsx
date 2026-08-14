@@ -166,16 +166,108 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+type OverrideData = {
+  titlePrefix?: string;
+  heroText?: string;
+  introText?: string;
+  benefits?: string[];
+  q1?: string;
+  a1?: string;
+  q2?: string;
+  a2?: string;
+};
+
+const professionOverrides: Record<string, OverrideData> = {
+  "designer": {
+    titlePrefix: "Creative Digital Business Card for",
+    heroText: "Showcase your portfolio and creative vision instantly with a custom digital business card built for designers.",
+    introText: "As a Designer, your aesthetic is your brand. A generic paper card doesn't convey your design skills. A digital card lets you embed your Behance, Dribbble, or personal portfolio link directly into the card, allowing clients to experience your work the moment they scan your QR code. It's the ultimate tool for a creative professional to capture leads at industry mixers or client meetings.",
+    benefits: [
+      "Embed Portfolio Links: Direct clients to your latest design work.",
+      "Custom Design Choices: Show off your typography and color theory.",
+      "Lead Capture: Automatically save client contact details for project follow-ups."
+    ],
+    q1: "How can a Designer use a digital business card to get more clients?",
+    a1: "By linking directly to a high-converting portfolio page or a Calendly booking link, a designer reduces the friction for a potential client to view their work and schedule a consultation.",
+    q2: "What is the best digital card template for a Designer?",
+    a2: "Designers usually prefer minimalist or creative templates that allow their own work and branding colors to take center stage without clutter."
+  },
+  "photographer": {
+    titlePrefix: "Interactive Digital Business Card for",
+    heroText: "Let your photos do the talking. Share your galleries instantly with a digital business card for photographers.",
+    introText: "For a Photographer, visual impact is everything. A digital business card allows you to attach high-resolution galleries, booking forms for shoots, and Instagram profiles all in one place. Whether you are at a wedding expo or networking with agencies, your digital card ensures potential clients can see your photography style and book you instantly.",
+    benefits: [
+      "Gallery Integration: Link directly to your best shots.",
+      "Instant Booking: Allow clients to book a shoot on the spot.",
+      "Social Growth: Drive traffic directly to your photography Instagram."
+    ],
+    q1: "Why should a photographer switch to a digital business card?",
+    a1: "Paper cards can't show a portfolio. A digital card lets a photographer showcase their best work immediately upon scanning, which is crucial for visual industries.",
+    q2: "Can I use my own photos on my digital business card?",
+    a2: "Yes, you can customize the background and avatar of your BrandCard to feature your own photography, making it a mini-portfolio."
+  },
+  "architect": {
+    titlePrefix: "Professional Digital Business Card for",
+    heroText: "Construct a stronger network with a sleek digital business card designed for architects.",
+    introText: "An Architect needs to project structural elegance and professionalism. A digital business card allows you to share your contact details securely alongside links to your completed projects or architectural firm's website. It is the modern way to network at real estate events, construction expos, and client pitches, ensuring you leave a lasting, modern impression.",
+    benefits: [
+      "Project Showcase: Link to 3D renderings or project galleries.",
+      "Firm Details: Share your firm's contact info seamlessly.",
+      "vCard Download: Ensure your details are saved correctly in clients' phones."
+    ],
+    q1: "What information should an architect include on a digital card?",
+    a1: "An architect should include their name, firm, contact details, a link to their project portfolio, and any relevant architectural licenses or certifications.",
+    q2: "Is a digital business card professional enough for corporate clients?",
+    a2: "Absolutely. With a clean, modern design, a digital business card projects tech-savviness and professionalism, which corporate clients appreciate."
+  },
+  "artist": {
+    titlePrefix: "Expressive Digital Business Card for",
+    heroText: "Turn your networking into an art form with a digital business card for artists.",
+    introText: "As an Artist, your business card should be an extension of your canvas. A digital business card allows you to link directly to your online store, upcoming gallery exhibitions, or Patreon. Stop handing out boring paper cards and start sharing a dynamic, interactive experience that captures the essence of your art and helps you sell more pieces.",
+    benefits: [
+      "Link to Store: Drive sales by linking directly to your art shop.",
+      "Promote Exhibitions: Share links to your upcoming gallery shows.",
+      "Grow Audience: Connect your social media platforms instantly."
+    ],
+    q1: "How does a digital business card help an artist sell more?",
+    a1: "By removing the steps between meeting someone and them viewing your art. A scan of a QR code takes them directly to your digital storefront where they can purchase immediately.",
+    q2: "Can I customize the colors to match my artistic style?",
+    a2: "Yes, BrandCard offers deep customization so your digital card can perfectly reflect the color palette and vibe of your artwork."
+  }
+};
+
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
+
+  // Extract the raw slug key (e.g., "designer") to look for overrides
+  const rawKey = resolvedParams.profession
+    .replace(/-digital-business-card/g, '')
+    .replace(/-digital-card/g, '')
+    .replace(new RegExp(`-${lang}$`), '') // remove lang suffix if present
+    .toLowerCase();
+
+  const override = professionOverrides[rawKey];
+
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const displayTitle = override?.titlePrefix
+    ? `${override.titlePrefix} ${professionTitle}s`
+    : `${localeData.title} ${professionTitle}s`;
+
+  const heroDesc = override?.heroText || `Stand out in your industry with a premium, interactive digital business card designed specifically for ${professionTitle.toLowerCase()} professionals.`;
+  const introText = override?.introText || `As a ${professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.`;
+  const benefitsList = override?.benefits || [
+    "Instant Sharing: Share via QR code, text, or email in seconds.",
+    "Analytics & Tracking: See exactly when someone views your profile and what they click on.",
+    "Eco-friendly: Never print (or run out of) paper cards again."
+  ];
+
+  const q1 = override?.q1 || faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override?.a1 || faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override?.q2 || faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override?.a2 || faqData.a2.replace('{profession}', professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,10 +301,10 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {displayTitle}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
+          {heroDesc}
         </p>
       </header>
 
@@ -224,14 +316,14 @@ export default async function ProfessionPage({ params }: PageProps) {
           </p>
         </div>
         <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+          {introText}
         </p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
         <ul className="list-disc pl-6 space-y-2 mb-6">
-          <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
-          <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
-          <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
+          {benefitsList.map((benefit, idx) => (
+            <li key={idx}><strong>{benefit.split(':')[0]}:</strong> {benefit.split(':')[1] || benefit.split(':')[0]}</li>
+          ))}
         </ul>
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
