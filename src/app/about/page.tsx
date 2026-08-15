@@ -17,6 +17,16 @@ export default function AboutPage() {
         <p className="mb-6">
           From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below.
         </p>
+
+        <h2 className="text-2xl font-semibold mt-10 mb-4">Insights and Guides</h2>
+        <p className="mb-6">
+          To help you get the most out of your digital presence, we regularly publish guides and articles. Check out some of our recent posts:
+        </p>
+        <ul className="list-disc pl-6 mb-6 space-y-2">
+          <li><a href="/blog/what-is-a-digital-business-card" className="text-primary hover:underline">What is a Digital Business Card? (Complete Guide)</a></li>
+          <li><a href="/blog/digital-vs-physical-business-cards" className="text-primary hover:underline">Digital vs Physical Business Cards: Which is Better?</a></li>
+          <li><a href="/blog/how-to-design-digital-business-card" className="text-primary hover:underline">How to Design a Digital Business Card That Converts</a></li>
+        </ul>
       </div>
     </div>
   );

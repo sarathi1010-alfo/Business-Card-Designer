@@ -5,7 +5,14 @@ import puppeteer from 'puppeteer';
   const baseUrl = `http://localhost:${PORT}`;
 
   const urlsToTest = [
+    '/blog/ultimate-guide-digital-business-cards-2026',
+    '/blog/how-digital-business-cards-work',
+    '/blog/why-do-i-need-digital-business-card',
+    '/blog/what-is-qr-code-business-card',
     '/blog/digital-business-card-guide',
+    '/blog/what-is-a-digital-business-card',
+    '/blog/digital-vs-physical-business-cards',
+    '/blog/how-to-design-digital-business-card',
     '/professions/founder-digital-business-card',
     '/professions/freelancer-digital-business-card',
     '/professions/real-estate-agent-digital-card',
