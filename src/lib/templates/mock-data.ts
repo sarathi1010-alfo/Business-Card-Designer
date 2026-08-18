@@ -168,5 +168,53 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'minimalist',
+    name: 'Minimalist',
+    category: 'Minimalist',
+    preview: '/templates/minimalist.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 350,
+        y: 200,
+        width: 600,
+        text: 'JOHN DOE',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#09090b',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'creative',
+    name: 'Creative',
+    category: 'Creative',
+    preview: '/templates/creative.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#000000',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 300,
+        width: 600,
+        text: 'ALEX RIVERA',
+        fontSize: 72,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'left'
+      }
+    ]
   }
 ];

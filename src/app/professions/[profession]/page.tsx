@@ -131,6 +131,14 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+
+const professionOverrides: Record<string, { h1: string, title: string }> = {
+  "founder": { h1: "The Ultimate Digital Business Card for Startup Founders", title: "Founder" },
+  "freelancer": { h1: "Digital Business Card for Freelancers: Win More Clients", title: "Freelancer" },
+  "real-estate-agent": { h1: "Digital Business Card for Real Estate Agents (Open House Ready)", title: "Real Estate Agent" },
+  "consultant": { h1: "Digital Business Card for Consultants: Build Trust Instantly", title: "Consultant" }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -172,7 +180,7 @@ export default async function ProfessionPage({ params }: PageProps) {
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
+  const q1 = `What is a ${professionTitle.toLowerCase()} digital card?`; // faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
   const q2 = faqData.q2.replace('{profession}', professionTitle);
   const a2 = faqData.a2.replace('{profession}', professionTitle);
@@ -209,7 +217,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {professionOverrides[resolvedParams.profession.replace(/-digital-business-card.*/, '').replace(/-digital-card.*/, '')]?.h1 || `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -224,7 +232,10 @@ export default async function ProfessionPage({ params }: PageProps) {
           </p>
         </div>
         <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+          As a {professionTitle}, your network is absolutely crucial to your net worth and professional growth. Whether you are meeting new clients, attending large industry events, or pitching high-stakes projects, the way you present yourself can make or break an opportunity. A digital business card ensures you leave a memorable, modern, and highly professional first impression. Gone are the days of fumbling for a wrinkled paper card or hoping the other person doesn't lose your contact details. With a digital business card, your professional identity is instantly transferable, ensuring that your contact information, portfolio, and key links are saved directly to your prospect's phone. This modern approach not only demonstrates that you are tech-savvy and forward-thinking, but it also removes friction from the follow-up process, significantly increasing your chances of turning a brief introduction into a lasting, profitable relationship.
+        </p>
+        <p>
+          Furthermore, for a {professionTitle}, standing out in a crowded market is a constant challenge. A well-designed digital business card acts as a micro-website, giving you the real estate to showcase your best work, highlight client testimonials, and clearly articulate your unique value proposition. It's not just a digital rolodex entry; it's a powerful marketing tool that works for you 24/7. By leveraging rich media integrations, you can include introductory videos, links to your latest publications, or direct booking calendars, transforming a simple networking interaction into a comprehensive brand experience.
         </p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
@@ -237,10 +248,10 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
-        <p>{a1}</p>
+        <p>{a1} In today's fast-paced business environment, relying on physical cards often results in lost opportunities, as they are easily misplaced or forgotten. A digital card provides a seamless, eco-friendly solution that ensures your details are accurately captured and easily accessible whenever your clients need them.</p>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
-        <p>{a2}</p>
+        <p>{a2} Beyond the basics, consider adding rich media such as an introductory video, a downloadable resume or media kit, and a direct link to your calendar for easy scheduling. The goal is to provide a comprehensive snapshot of your professional value in one easily digestible format.</p>
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Ready to create your card?</h2>
