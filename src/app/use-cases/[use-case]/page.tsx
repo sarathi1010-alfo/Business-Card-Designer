@@ -19,6 +19,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+
+const useCaseOverrides: Record<string, { h1: string }> = {
+  "networking-event": { h1: "Digital Cards for Networking Events: Never Lose a Contact" },
+  "conference": { h1: "Conference Digital Business Cards: Stand Out at Exhibitions" }
+};
+
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
@@ -56,7 +62,7 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {useCaseOverrides[rawUseCase]?.h1 || `Digital Business Cards for ${useCaseTitle}`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
@@ -66,7 +72,10 @@ export default async function UseCasePage({ params }: PageProps) {
       <div className="prose prose-lg dark:prose-invert max-w-none">
         <h2 className="text-3xl font-semibold mt-12 mb-6">Master Your {useCaseTitle} Networking</h2>
         <p>
-          Networking environments like a {useCaseTitle.toLowerCase()} move fast. You have seconds to make an impression and exchange contact information. A dynamic digital business card streamlines this process and ensures you are remembered.
+          Networking environments like a {useCaseTitle.toLowerCase()} move incredibly fast. You often have only a few seconds to make a lasting impression and successfully exchange contact information before the conversation naturally moves on or you are interrupted. A dynamic digital business card streamlines this critical process and ensures you are remembered long after the event has concluded. When you use a digital card at a {useCaseTitle.toLowerCase()}, you eliminate the awkwardness of running out of paper cards or fumbling to find a pen. Instead, you present a sleek, instantly scannable QR code that transfers your comprehensive professional profile directly into the other person's smartphone contacts.
+        </p>
+        <p>
+          Moreover, preparing for a {useCaseTitle.toLowerCase()} requires strategic foresight. By utilizing a digital business card, you can tailor your shared links and featured content specifically to the audience you expect to meet. For instance, you can highlight a specific project, link to a presentation you are delivering, or include a tailored lead capture form. This level of customization ensures that every interaction is highly relevant and maximizes your return on investment for attending the event. Don't leave your networking success to chance or rely on outdated analog tools; embrace digital solutions to network smarter and build stronger connections.
         </p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Why Digital Wins at {useCaseTitle}</h3>
@@ -79,10 +88,10 @@ export default async function UseCasePage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Frequently Asked Questions</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">How to use a digital business card for a {useCaseTitle}?</h3>
-        <p>For a {useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.</p>
+        <p>For a {useCaseTitle}, prepare your digital business card ahead of time by adding highly relevant links—such as a copy of your presentation, an event-specific landing page, or a special promotional offer. Practice quickly accessing your card on your phone, perhaps by saving it to your digital wallet or setting it as a widget, so you can easily share your unique QR code without interrupting the flow of conversation.</p>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">Is a digital business card better than a physical one for a {useCaseTitle}?</h3>
-        <p>Yes. During a busy {useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.</p>
+        <p>Absolutely. During a busy {useCaseTitle}, physical cards are frequently lost, damaged, or simply thrown away. A digital card ensures your contact info goes straight into their phone's address book immediately. Furthermore, it allows you to track analytics, seeing exactly who viewed your profile and which links they clicked, enabling highly targeted and effective post-event follow-ups.</p>
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Prepare for your next {useCaseTitle.toLowerCase()}</h2>

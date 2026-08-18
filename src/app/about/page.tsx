@@ -10,7 +10,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">Our Mission</h2>
         <p className="mb-6">
-          We believe high-quality tools shouldn&apos;t be locked behind expensive subscriptions or bloated interfaces. That&apos;s why we&apos;re building a network of interconnected utilities designed to solve specific problems efficiently.
+          We believe high-quality tools shouldn&apos;t be locked behind expensive subscriptions or bloated interfaces. That&apos;s why we&apos;re building a network of interconnected utilities designed to solve specific problems efficiently. For a complete walkthrough on building a high-converting card, read our <a href="/blog/digital-business-card-converts-guide" className="text-primary hover:underline font-medium">How to Create a Digital Business Card That Converts guide</a>.
         </p>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>

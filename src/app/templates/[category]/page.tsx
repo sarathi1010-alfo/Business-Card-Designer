@@ -21,6 +21,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+
+const templateOverrides: Record<string, { h1: string }> = {
+  "minimalist": { h1: "Minimalist Digital Business Card Templates (Clean & Professional)" },
+  "creative": { h1: "Creative Digital Business Card Templates for Artists & Designers" }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
@@ -65,10 +71,16 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">
+          {templateOverrides[rawCategory]?.h1 || `${titleCase} Business Card Templates`}
+        </h1>
         <p className="text-xl text-muted-foreground">
           Start with a professionally designed {category} template and customize it for your brand.
         </p>
+        <div className="mt-8 prose dark:prose-invert max-w-none">
+          <p>Choosing the right design for your digital business card is crucial for making a strong first impression. Our collection of {category} templates has been carefully crafted by expert designers to ensure that your professional identity is presented with elegance and clarity. Whether you are aiming for a highly corporate look or something more modern and artistic, these templates provide the perfect foundation. Each design is fully responsive, ensuring that your card looks flawless on any device, from large desktop monitors to the smallest smartphone screens. By utilizing a pre-designed template, you save valuable time while still achieving a bespoke, high-end aesthetic that perfectly aligns with your personal or corporate brand guidelines.</p>
+          <p>Beyond just aesthetics, our {category} templates are optimized for conversion. They strategically place your most important contact information and call-to-action buttons in highly visible areas, encouraging visitors to connect with you, view your portfolio, or schedule a meeting. You have complete creative control to adjust color palettes, typography, and layout structures to make the design truly your own. Stop settling for generic, uninspired digital presence; elevate your networking game with a premium template that commands attention and respect in your industry.</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
