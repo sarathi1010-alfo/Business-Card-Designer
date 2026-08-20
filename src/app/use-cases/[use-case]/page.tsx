@@ -19,12 +19,72 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+
+const useCaseOverrides: Record<string, { title: string, subtitle: string, faqMap: any }> = {
+  "medical-conference-digital-card": {
+    title: "Digital Business Cards for Medical Conferences",
+    subtitle: "Share your medical credentials, clinical research, and referral information instantly at your next medical symposium.",
+    faqMap: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How to use a digital business card at a medical conference?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a medical conference, include your hospital affiliations and links to published research. Share it easily by having your QR code open on your phone or printed on your badge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a digital card HIPAA compliant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Digital business cards are for sharing your own professional contact details and public information, which does not contain protected health information (PHI) of patients."
+          }
+        }
+      ]
+    }
+  },
+  "legal-summit-digital-card": {
+    title: "Digital Business Cards for Legal Summits",
+    subtitle: "Exchange contact information securely and highlight your practice areas at your next legal industry event.",
+    faqMap: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How to use a digital business card at a legal summit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prepare your card with links to your law firm, key practice areas, and bar admissions. Use the QR code to seamlessly transfer this information to colleagues and potential clients."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are digital business cards professional enough for lawyers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our premium templates ensure a highly professional appearance that reflects the prestige and trustworthiness expected in the legal profession."
+          }
+        }
+      ]
+    }
+  }
+};
+
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const jsonLd = {
+  const override = useCaseOverrides[resolvedParams['use-case']];
+  const pageTitle = override ? override.title : `Digital Business Cards for ${useCaseTitle}`;
+  const pageSubtitle = override ? override.subtitle : `Maximize your connections at your next ${useCaseTitle.toLowerCase()} with a smart, trackable digital business card.`;
+
+  const jsonLd = override ? override.faqMap : {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
@@ -56,10 +116,10 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {pageTitle}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
+          {pageSubtitle}
         </p>
       </header>
 

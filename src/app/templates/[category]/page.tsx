@@ -21,6 +21,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+
+const templateOverrides: Record<string, { title: string, description: string, q1: string, a1: string, q2: string, a2: string }> = {
+  "medical": {
+    title: "Medical Digital Business Card Templates",
+    description: "Start with a clean, accessible template designed for healthcare professionals. Highlight your medical specialty and affiliations.",
+    q1: "What makes a good medical business card template?",
+    a1: "A good medical template features a clean layout, clear typography for credentials, and a professional aesthetic that conveys trust and hygiene.",
+    q2: "Can I link to my clinic's patient portal?",
+    a2: "Yes, you can easily add custom links to patient portals, appointment scheduling systems, or published medical research."
+  },
+  "legal": {
+    title: "Legal Digital Business Card Templates",
+    description: "Choose a distinguished, professional template suitable for attorneys, paralegals, and law firms. Project authority and trust.",
+    q1: "What makes a good legal business card template?",
+    a1: "A legal template should utilize traditional, authoritative typography, conservative color palettes, and ample white space to project professionalism and discretion.",
+    q2: "Is my contact information secure?",
+    a2: "Absolutely. Our platform ensures that the contact information you choose to share is presented securely, and you can update it instantly at any time."
+  }
+};
+
 export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
@@ -35,7 +55,32 @@ export default async function CategoryPage({ params }: PageProps) {
   );
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
-  const jsonLd = {
+  const override = templateOverrides[rawCategory];
+  const pageTitle = override ? override.title : `${titleCase} Business Card Templates`;
+  const pageDescription = override ? override.description : `Start with a professionally designed ${category} template and customize it for your brand.`;
+
+  const jsonLd = override ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": override.q1,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": override.a1
+        }
+      },
+      {
+        "@type": "Question",
+        "name": override.q2,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": override.a2
+        }
+      }
+    ]
+  } : {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
@@ -65,9 +110,9 @@ export default async function CategoryPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <h1 className="text-4xl font-bold mb-4">{pageTitle}</h1>
         <p className="text-xl text-muted-foreground">
-          Start with a professionally designed {category} template and customize it for your brand.
+          {pageDescription}
         </p>
       </div>
 

@@ -126,6 +126,7 @@ export default function DigitalBusinessCardGuide() {
         </p>
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">Deep Dive: The Anatomy of a High-Converting Card</h2>
+        <p className="mb-4">For industry-tailored strategies, read our <Link href="/blog/industry-specific-networking-guide" className="text-primary hover:underline font-medium">Industry-Specific Networking with Digital Cards guide</Link>.</p>
         <p>
           To truly master the art of digital networking, you must understand the specific components that make a card effective. It&apos;s not just about having a digital presence; it&apos;s about having an optimized one.
         </p>

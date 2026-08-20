@@ -131,6 +131,50 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, faqHeader?: string, q1?: string, a1?: string, q2?: string, a2?: string }> = {
+  'lawyer': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your legal practice.',
+    snapshot: 'A digital business card allows you to instantly share your legal credentials, practice areas, and secure consultation links via a simple QR code.',
+    faqHeader: 'Legal Networking FAQs',
+    q1: 'Why does a lawyer need a digital business card?',
+    a1: 'A lawyer needs a digital business card to instantly share their bar admissions, practice areas, and secure contact forms with potential clients, without the limitations of traditional paper cards.',
+    q2: 'What should a lawyer include on their digital business card?',
+    a2: 'Key elements include a professional headshot, clear contact details, direct links to recent publications or case studies, and a secure lead capture form.'
+  },
+  'chef': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your culinary career.',
+    snapshot: 'A digital business card allows you to instantly share your culinary portfolio, seasonal menus, and reservation links via a simple QR code.',
+    faqHeader: 'Culinary Networking FAQs',
+    q1: 'Why does a chef need a digital business card?',
+    a1: 'A chef needs a digital business card to instantly share their visual portfolio of dishes, current menus, and catering options with food enthusiasts and potential clients.',
+    q2: 'What should a chef include on their digital business card?',
+    a2: 'Key elements include stunning high-resolution food imagery, clear contact details, direct links to current menus, and social media integrations.'
+  },
+  'architect': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your architectural firm.',
+    snapshot: 'A digital business card allows you to instantly share your design portfolio, project models, and firm philosophy via a simple QR code.',
+    faqHeader: 'Architectural Networking FAQs',
+    q1: 'Why does an architect need a digital business card?',
+    a1: 'An architect needs a digital business card to instantly share their visual portfolio, 3D models, and firm philosophy with potential clients and collaborators.',
+    q2: 'What should an architect include on their digital business card?',
+    a2: 'Key elements include a strong visual aesthetic, clear contact details, direct links to past projects, and an expression of their design principles.'
+  },
+  'doctor': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your medical practice.',
+    snapshot: 'A digital business card allows you to instantly share your medical credentials, hospital affiliations, and published research via a simple QR code.',
+    faqHeader: 'Medical Networking FAQs',
+    q1: 'Why does a doctor need a digital business card?',
+    a1: 'A doctor needs a digital business card to instantly share their medical specialties, hospital affiliations, and referral contact information with peers and patients.',
+    q2: 'What should a doctor include on their digital business card?',
+    a2: 'Key elements include clear medical credentials, clinic locations, direct links to published research, and secure contact options for patient inquiries.'
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -149,13 +193,14 @@ function extractLanguageAndProfession(slug: string) {
   rawProfession = rawProfession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const profession = rawProfession.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  return { lang, profession };
+  const professionKey = rawProfession;
+  return { lang, profession, professionKey };
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
+  const { lang, profession, professionKey } = extractLanguageAndProfession(resolvedParams.profession);
+  const localeData = professionOverrides[professionKey] || langMap[lang] || langMap.en;
 
   return {
     title: `${localeData.title} ${profession}`,
@@ -168,9 +213,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+  const { lang, profession: professionTitle, professionKey } = extractLanguageAndProfession(resolvedParams.profession);
+  const localeData = professionOverrides[professionKey] || langMap[lang] || langMap.en;
+  const baseFaq = faqMap[lang] || faqMap.en;
+  const faqData = professionOverrides[professionKey] ? {
+    faqHeader: professionOverrides[professionKey].faqHeader || baseFaq.faqHeader,
+    q1: professionOverrides[professionKey].q1 || baseFaq.q1,
+    a1: professionOverrides[professionKey].a1 || baseFaq.a1,
+    q2: professionOverrides[professionKey].q2 || baseFaq.q2,
+    a2: professionOverrides[professionKey].a2 || baseFaq.a2,
+  } : baseFaq;
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
