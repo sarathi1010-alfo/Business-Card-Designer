@@ -168,5 +168,95 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'medical-clean',
+    name: 'Medical Clean',
+    category: 'Medical',
+    preview: '/templates/medical-clean.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'bg-rect-1',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: CARD_WIDTH,
+        height: 100,
+        fill: '#0ea5e9', // sky-500
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'DR. JANE SMITH',
+        fontSize: 56,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'CARDIOLOGIST',
+        fontSize: 24,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#64748b',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'legal-classic',
+    name: 'Legal Classic',
+    category: 'Legal',
+    preview: '/templates/legal-classic.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#f8fafc', // slate-50
+    elements: [
+      {
+        id: 'bg-rect-1',
+        type: 'rect',
+        x: 50,
+        y: 50,
+        width: CARD_WIDTH - 100,
+        height: CARD_HEIGHT - 100,
+        fill: '#ffffff',
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'ROBERT CHEN, ESQ.',
+        fontSize: 48,
+        fontFamily: 'serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'PARTNER | CORPORATE LAW',
+        fontSize: 20,
+        fontFamily: 'serif',
+        fill: '#475569',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
