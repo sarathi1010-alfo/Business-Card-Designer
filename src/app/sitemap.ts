@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries

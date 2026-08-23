@@ -62,7 +62,7 @@ export function BenefitsSection() {
             transition={{ delay: 0.1 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4"
           >
-            Built on proven strategies from our <Link href="/blog/digital-business-card-guide" className="text-primary hover:underline font-medium">digital business card conversion guide</Link>.
+            Built on proven strategies from our <Link href="/blog/digital-business-card-converts-guide" className="text-primary hover:underline font-medium">digital business card conversion guide</Link>.
           </motion.p>
         </div>
 

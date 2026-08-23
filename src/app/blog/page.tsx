@@ -23,14 +23,14 @@ export default function BlogPage() {
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="/blog/digital-business-card-guide" className="hover:underline text-primary">
-                How to Create a Digital Business Card That Converts
+              <Link href="/blog/digital-business-card-converts-guide" className="hover:underline text-primary">
+                How to Create a Digital Business Card That Converts in 2026
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               The ultimate guide to transforming your professional networking with a high-converting digital presence. Learn about design, templates, QR codes, and analytics.
             </p>
-            <Link href="/blog/digital-business-card-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+            <Link href="/blog/digital-business-card-converts-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
           </div>
         </div>
 
