@@ -166,11 +166,72 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, q1: string, a1: string, q2: string, a2: string, faqHeader: string }> = {
+  lawyer: {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "For a lawyer, trust and immediate contact are essential. A digital business card lets you securely share your firm's details, consultation links, and credentials via QR code, projecting absolute professionalism while ensuring you capture potential client information seamlessly.",
+    faqHeader: "Frequently Asked Questions for Lawyers",
+    q1: "Why does a Lawyer need a digital business card?",
+    a1: "A Lawyer needs a digital business card to instantly share their firm's contact information and consultation scheduling links while maintaining a premium, trustworthy appearance that paper cards often fail to deliver.",
+    q2: "What should a Lawyer include on their digital business card?",
+    a2: "Key elements include your firm logo, clear contact details, a link to securely schedule a consultation, links to your practice areas, and a lead capture form for immediate client inquiries."
+  },
+  architect: {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "Architects rely on visual impact. A digital business card allows you to instantly share your portfolio of completed projects alongside your contact details, ensuring potential clients see your aesthetic vision the moment you connect.",
+    faqHeader: "Frequently Asked Questions for Architects",
+    q1: "Why does an Architect need a digital business card?",
+    a1: "An Architect needs a digital business card to move beyond text-heavy paper cards and instantly share high-quality images of their portfolio and firm credentials with potential clients and contractors.",
+    q2: "What should an Architect include on their digital business card?",
+    a2: "Key elements include a link to your digital portfolio, your firm's contact details, social profiles showcasing your work, and a lead capture form to follow up on project inquiries."
+  },
+  photographer: {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "As a photographer, your work speaks for itself. A digital business card lets you share your best shots, booking links, and social media profiles instantly, acting as a mini-portfolio that lives on your client's phone.",
+    faqHeader: "Frequently Asked Questions for Photographers",
+    q1: "Why does a Photographer need a digital business card?",
+    a1: "A Photographer needs a digital business card to instantly share their visual portfolio and booking links with potential clients, moving past the limitations of traditional paper cards.",
+    q2: "What should a Photographer include on their digital business card?",
+    a2: "Key elements include direct links to your portfolio galleries, your booking or contact form, your Instagram or social profiles, and clear contact details."
+  },
+  chef: {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "For chefs, a digital business card is a recipe for success. It allows you to instantly share your restaurant's menu, booking links, and culinary portfolio with food critics, investors, and diners, all via a quick QR scan.",
+    faqHeader: "Frequently Asked Questions for Chefs",
+    q1: "Why does a Chef need a digital business card?",
+    a1: "A Chef needs a digital business card to instantly share their restaurant's details, reservation links, and culinary portfolio with industry professionals and diners.",
+    q2: "What should a Chef include on their digital business card?",
+    a2: "Key elements include links to your restaurant's website, reservation platform, social media profiles showcasing your dishes, and your personal contact information."
+  }
+};
+
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+
+  const professionKey = professionTitle.toLowerCase().replace(/\s+/g, '-');
+  const override = professionOverrides[professionKey];
+
+  const baseLocaleData = langMap[lang] || langMap.en;
+  const baseFaqData = faqMap[lang] || faqMap.en;
+
+  const localeData = override ? {
+    title: override.title,
+    desc: override.desc,
+    snapshot: override.snapshot
+  } : baseLocaleData;
+
+  const faqData = override ? {
+    faqHeader: override.faqHeader,
+    q1: override.q1,
+    a1: override.a1,
+    q2: override.q2,
+    a2: override.a2
+  } : baseFaqData;
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
