@@ -6,14 +6,23 @@ import puppeteer from 'puppeteer';
 
   const urlsToTest = [
     '/blog/digital-business-card-guide',
+    '/blog/industry-specific-networking-guide',
     '/professions/founder-digital-business-card',
     '/professions/freelancer-digital-business-card',
     '/professions/real-estate-agent-digital-card',
     '/professions/consultant-digital-business-card',
+    '/professions/lawyer-digital-business-card',
+    '/professions/architect-digital-business-card',
+    '/professions/photographer-digital-business-card',
+    '/professions/chef-digital-business-card',
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
+    '/use-cases/trade-show',
+    '/use-cases/corporate-event',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/templates/law-firm',
+    '/templates/photography'
   ];
 
   console.log('Starting headless browser tests...');

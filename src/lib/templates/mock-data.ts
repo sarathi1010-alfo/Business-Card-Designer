@@ -170,3 +170,34 @@ export const mockTemplates: Template[] = [
     ]
   }
 ];
+
+
+
+mockTemplates.push(
+  {
+    id: 'law-firm-classic',
+    name: 'Law Firm Classic',
+    category: 'Law Firm',
+    preview: '/templates/modern-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111827',
+    elements: [
+      { id: 'bg', type: 'rect', x: 0, y: 0, width: CARD_WIDTH, height: CARD_HEIGHT, fill: '#111827' },
+      { id: 'name', type: 'text', x: 50, y: 50, width: 300, height: 50, text: 'Jane Doe, Esq.', fontSize: 40, fontFamily: 'serif', fill: '#ffffff', textAlign: 'left', fontWeight: 'bold' }
+    ]
+  },
+  {
+    id: 'photography-gallery',
+    name: 'Photography Gallery',
+    category: 'Photography',
+    preview: '/templates/creative-bold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#000000',
+    elements: [
+      { id: 'bg', type: 'rect', x: 0, y: 0, width: CARD_WIDTH, height: CARD_HEIGHT, fill: '#000000' },
+      { id: 'name', type: 'text', x: 50, y: 50, width: 300, height: 50, text: 'Lens & Light', fontSize: 45, fontFamily: 'sans-serif', fill: '#ffffff', textAlign: 'left', fontWeight: 'bold' }
+    ]
+  }
+);
