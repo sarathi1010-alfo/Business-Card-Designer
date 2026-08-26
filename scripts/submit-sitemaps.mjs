@@ -10,7 +10,7 @@ const sitemaps = [
 ];
 
 const newUrls = [
-  `https://${DOMAIN}/blog/digital-business-card-guide`,
+  `https://${DOMAIN}/blog/digital-business-card-converts-guide`,
   `https://${DOMAIN}/professions/founder-digital-business-card`,
   `https://${DOMAIN}/professions/freelancer-digital-business-card`,
   `https://${DOMAIN}/professions/real-estate-agent-digital-card`,
