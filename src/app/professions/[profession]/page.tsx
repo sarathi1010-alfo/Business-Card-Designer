@@ -166,11 +166,75 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, faqHeader: string, q1: string, a1: string, q2: string, a2: string, content: string }> = {
+  'architect': {
+    title: 'Architect',
+    desc: 'Showcase your best designs with a digital business card for',
+    snapshot: 'Architects need to display visual portfolios and precise contact details; a digital business card allows you to share high-resolution project images and instantly connect with potential clients.',
+    faqHeader: 'Architect FAQs',
+    q1: 'Why do architects need a digital business card?',
+    a1: 'Architects rely heavily on visual portfolios. A digital business card lets you link directly to your best architectural projects, 3D renderings, and firm website, ensuring clients see your capabilities instantly.',
+    q2: 'What should an architect include on their digital card?',
+    a2: 'Include your professional title, firm details, a link to your Behance or personal portfolio, contact information, and a professional headshot or a sleek architectural rendering as the background.',
+    content: '<p>For architects, aesthetics and precision are paramount. Traditional paper cards often fail to convey the depth and quality of your work. A digital business card provides a canvas to seamlessly integrate your portfolio with your contact details.</p><h3>Elevate Your Architectural Brand</h3><p>By using a customized digital card, you can ensure that every prospective client or partner immediately understands your design philosophy. Include links to your past projects and make it easy for them to contact your firm directly.</p>'
+  },
+  'chef': {
+    title: 'Chef',
+    desc: 'Share your culinary creations with a digital business card for',
+    snapshot: 'Chefs and culinary professionals can use a digital business card to share vibrant food photography, menus, and booking links directly with diners and event planners.',
+    faqHeader: 'Chef FAQs',
+    q1: 'How can a digital business card help a chef?',
+    a1: 'A digital card helps chefs by providing a visual platform to showcase their signature dishes, link to reservation systems, and share their culinary background with ease.',
+    q2: 'What should a chef’s digital card contain?',
+    a2: 'It should contain high-quality images of your dishes, links to your current menu or restaurant website, your contact details for catering inquiries, and links to your social media profiles.',
+    content: '<p>The culinary arts are highly visual and experiential. A digital business card allows chefs to bring their creations to life before a client even tastes the food.</p><h3>Whip Up More Business</h3><p>Whether you are a private chef, caterer, or executive chef, your digital card can act as a mini-website. Share your latest menu updates, showcase mouth-watering photos, and make it incredibly simple for clients to book your services.</p>'
+  },
+  'photographer': {
+    title: 'Photographer',
+    desc: 'Display your portfolio instantly with a digital business card for',
+    snapshot: 'For photographers, a digital business card is essential for instantly sharing your visual portfolio, client testimonials, and booking availability with potential clients.',
+    faqHeader: 'Photographer FAQs',
+    q1: 'Why is a digital business card vital for photographers?',
+    a1: 'Photographers need to show, not just tell. A digital card lets you embed your best shots or link directly to your galleries, providing immediate proof of your skills.',
+    q2: 'What are the key elements of a photographer’s digital card?',
+    a2: 'Include a stunning hero image from your portfolio, direct links to your online galleries, client reviews, and a scheduling link for booking sessions.',
+    content: '<p>As a photographer, your work speaks for itself. But you need an effective way to put that work in front of potential clients. A digital business card does exactly that.</p><h3>Capture More Clients</h3><p>Forget fumbling with paper cards. When you meet a prospective client, let them scan your QR code and instantly immerse themselves in your portfolio. Add a lead capture form to easily follow up and secure the booking.</p>'
+  },
+  'lawyer': {
+    title: 'Lawyer',
+    desc: 'Establish trust and authority with a digital business card for',
+    snapshot: 'Lawyers require professional, secure, and authoritative digital cards that clearly state their practice areas, credentials, and provide easy ways for clients to schedule consultations.',
+    faqHeader: 'Lawyer FAQs',
+    q1: 'Do lawyers benefit from using digital business cards?',
+    a1: 'Yes, significantly. Lawyers can use digital cards to convey professionalism, clearly list their legal specialties, and provide a secure, easy way for clients to save their contact info.',
+    q2: 'What should be on a lawyer’s digital business card?',
+    a2: 'Essential elements include your full name and credentials, firm name, practice areas, a professional headshot, and a direct link to schedule a consultation or visit the firm’s website.',
+    content: '<p>In the legal profession, first impressions are critical. Clients look for authority, professionalism, and trustworthiness. A well-designed digital business card delivers all three.</p><h3>Modernize Your Legal Practice</h3><p>A digital card allows you to easily share your vCard so clients have your details saved correctly in their phones. You can also include secure contact forms and links to your published legal articles to further establish your expertise.</p>'
+  }
+};
+
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
+
+  // Try to match exact raw slug with overrides
+  const rawSlug = resolvedParams.profession.replace(/-digital-business-card(-[a-z]{2})?/g, '').replace(/-digital-card(-[a-z]{2})?/g, '');
+  const override = professionOverrides[rawSlug];
+
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+
+  const localeData = override ? {
+    title: override.title,
+    desc: override.desc,
+    snapshot: override.snapshot
+  } : (langMap[lang] || langMap.en);
+
+  const faqData = override ? {
+    faqHeader: override.faqHeader,
+    q1: override.q1,
+    a1: override.a1,
+    q2: override.q2,
+    a2: override.a2
+  } : (faqMap[lang] || faqMap.en);
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
@@ -223,16 +287,23 @@ export default async function ProfessionPage({ params }: PageProps) {
             <strong>AI Snapshot:</strong> {localeData.snapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
-        <ul className="list-disc pl-6 space-y-2 mb-6">
-          <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
-          <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
-          <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
-        </ul>
+        {override ? (
+          <div dangerouslySetInnerHTML={{ __html: override.content }} />
+        ) : (
+          <>
+            <p>
+              As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+            </p>
+
+            <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
+            <ul className="list-disc pl-6 space-y-2 mb-6">
+              <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
+              <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
+              <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
+            </ul>
+          </>
+        )}
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 
