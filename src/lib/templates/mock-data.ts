@@ -168,5 +168,95 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'architectural-blueprint',
+    name: 'Architectural Blueprint',
+    category: 'Architectural',
+    preview: '/templates/architectural-blueprint.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'bg-rect-arch',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: 300,
+        height: CARD_HEIGHT,
+        fill: '#334155', // slate-700
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 350,
+        y: 200,
+        width: 600,
+        text: 'MARCUS RHEA',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#0f172a', // slate-900
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 350,
+        y: 280,
+        width: 600,
+        text: 'PRINCIPAL ARCHITECT',
+        fontSize: 24,
+        fontFamily: 'Inter, sans-serif',
+        fill: '#475569', // slate-600
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'legal-trust',
+    name: 'Legal Trust',
+    category: 'Legal',
+    preview: '/templates/legal-trust.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#111827', // gray-900
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'JESSICA HARDING',
+        fontSize: 56,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#f3f4f6', // gray-100
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'MANAGING PARTNER',
+        fontSize: 20,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#9ca3af', // gray-400
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 425,
+        y: 380,
+        width: 200,
+        height: 2,
+        fill: '#059669', // emerald-600
+      }
+    ]
   }
 ];
