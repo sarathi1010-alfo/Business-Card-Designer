@@ -152,8 +152,97 @@ function extractLanguageAndProfession(slug: string) {
   return { lang, profession };
 }
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, faqHeader: string, q1: string, a1: string, q2: string, a2: string, content: React.ReactNode }> = {
+  "founder": {
+    title: "The Ultimate Digital Business Card for Startup Founders",
+    desc: "Create a powerful digital presence to impress investors and network effectively.",
+    snapshot: "Startup founders need a digital business card to seamlessly share pitch decks, capture investor information, and track engagement through QR analytics during crucial networking events.",
+    faqHeader: "Founder Networking FAQ",
+    q1: "Why do startup founders need a digital business card?",
+    a1: "Founders are constantly pitching. A digital card allows you to attach your pitch deck, calendar link, and company updates, providing investors with immediate access to your entire ecosystem.",
+    q2: "Can I track if an investor views my card?",
+    a2: "Yes. BrandCard's analytics dashboard lets you see exactly when someone scans your QR code and which links they click, allowing for timely and contextual follow-ups.",
+    content: (
+      <>
+        <p>As a startup founder, your time is your most valuable asset, and every interaction is a potential turning point for your company. Whether you are at a seed-stage mixer or presenting at a major tech conference, you need a way to share your vision instantly. A digital business card is the modern founder's secret weapon, eliminating the friction of paper cards and ensuring you capture every lead.</p>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Optimizing Your Digital Presence</h2>
+        <p>Your digital card should be more than just contact info; it should be a micro-landing page. By embedding your latest pitch deck and a Calendly link directly onto your card, you reduce the steps an investor needs to take to book a meeting. Furthermore, utilizing dynamic QR codes allows you to update the links on the fly—perfect for when you pivot or launch a new feature.</p>
+        <p>The native lead capture form is critical here. When an investor scans your code, you can immediately prompt them to share their details in return, syncing directly to your CRM. This ensures you never lose a connection in the chaos of a busy networking event.</p>
+      </>
+    )
+  },
+  "freelancer": {
+    title: "Digital Business Card for Freelancers: Win More Clients",
+    desc: "Showcase your portfolio and capture new client leads instantly.",
+    snapshot: "Freelancers can use digital business cards to instantly showcase their portfolio, share client testimonials, and provide a direct booking link, converting casual meetings into paid projects.",
+    faqHeader: "Freelancer FAQ",
+    q1: "How does a digital card help me get freelance clients?",
+    a1: "It acts as a portable portfolio. Instead of just giving a phone number, you give potential clients immediate access to your best work and a way to contact you directly.",
+    q2: "Can I customize the design to match my brand?",
+    a2: "Absolutely. BrandCard offers fully customizable templates so your digital card reflects your unique creative identity and professional aesthetic.",
+    content: (
+      <>
+        <p>For freelancers, networking is the lifeblood of your business. Every conversation is a potential project. A digital business card allows you to strike while the iron is hot. Instead of promising to email a portfolio later, you can share it instantly with a quick QR scan. This immediate showcase of your capabilities significantly increases your chances of winning the client.</p>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Your Portable Portfolio</h2>
+        <p>Think of your digital card as a highly optimized snapshot of your freelance business. You can include links to your Behance, GitHub, or personal website, alongside a clear call-to-action like \"Hire Me.\" The ability to track which potential clients are actually clicking through to your portfolio provides invaluable data for your follow-up strategy.</p>
+        <p>Moreover, the sleek, modern design of a digital card signals to clients that you are a forward-thinking professional who values efficiency and design—qualities every client looks for in a freelancer.</p>
+      </>
+    )
+  },
+  "real-estate-agent": {
+    title: "Digital Business Card for Real Estate Agents (Open House Ready)",
+    desc: "Share property listings and capture buyer information effortlessly.",
+    snapshot: "Real estate agents use digital business cards at open houses to instantly share active listings, virtual tours, and contact information while simultaneously capturing lead data from potential buyers.",
+    faqHeader: "Real Estate Digital Card FAQ",
+    q1: "How can I use a digital card at an open house?",
+    a1: "Display your QR code on a stand. When buyers scan it, they get your contact info and links to the property's virtual tour, while you capture their details for your CRM.",
+    q2: "Can I update my card with new listings?",
+    a2: "Yes! Because the QR code is dynamic, you can update the links on your BrandCard profile anytime to feature your newest and most important property listings.",
+    content: (
+      <>
+        <p>Real estate is a relationship-driven industry, and speed is everything. When you are hosting an open house or meeting a prospective buyer, fumbling with paper cards is a missed opportunity. A digital business card allows you to instantly transfer your contact information and immediately showcase your active listings in one seamless interaction.</p>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Transforming Open Houses</h2>
+        <p>Imagine placing a sleek QR code display at the entrance of your open house. As buyers walk in, they scan the code to view the property's 3D tour and spec sheet. Simultaneously, your native lead capture form prompts them for their contact details. You have just automated your lead generation process while providing a superior buyer experience.</p>
+        <p>Furthermore, the analytics tracking lets you see which buyers are revisiting your card and clicking on your links days after the open house, signaling high intent and helping you prioritize your follow-up calls.</p>
+      </>
+    )
+  },
+  "consultant": {
+    title: "Digital Business Card for Consultants: Build Trust Instantly",
+    desc: "Establish authority and streamline client bookings with a digital card.",
+    snapshot: "Consultants leverage digital business cards to share case studies, thought leadership articles, and direct calendar booking links, instantly establishing authority and streamlining client acquisition.",
+    faqHeader: "Consultant Networking FAQ",
+    q1: "Why is a digital card better for consultants than a paper one?",
+    a1: "Consultants need to prove expertise. A digital card lets you link directly to your published articles, whitepapers, and case studies, offering immediate proof of your value.",
+    q2: "Can clients book a meeting directly from my card?",
+    a2: "Yes, you can easily embed your Calendly or booking link directly onto your BrandCard, allowing prospects to schedule a consultation with zero friction.",
+    content: (
+      <>
+        <p>As a consultant, you are selling your expertise and your time. Building trust quickly is paramount. A digital business card accelerates the trust-building process by allowing you to instantly share your thought leadership and track record. When you meet a potential client, you aren't just giving them a name; you are providing a gateway to your professional ecosystem.</p>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Streamlining Client Acquisition</h2>
+        <p>Your digital card should feature links to your most impressive case studies or a recent whitepaper you authored. This immediately positions you as an authority in your field. By combining this with a prominent \"Book a Consultation\" call-to-action, you create a frictionless path from introduction to scheduled meeting.</p>
+        <p>The ability to update your card dynamically ensures you are always presenting your most relevant and up-to-date accomplishments, while the integrated analytics help you understand which pieces of content are most effective at driving engagement.</p>
+      </>
+    )
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
+
+  const rawProfession = resolvedParams.profession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const override = professionOverrides[rawProfession];
+
+  if (override) {
+    return {
+      title: override.title,
+      description: override.desc,
+      alternates: {
+        canonical: `/professions/${resolvedParams.profession}`,
+      }
+    };
+  }
+
   const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
   const localeData = langMap[lang] || langMap.en;
 
@@ -168,14 +257,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
+
+  const rawProfession = resolvedParams.profession.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const override = professionOverrides[rawProfession];
+
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const q1 = override ? override.q1 : faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override ? override.a1 : faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override ? override.q2 : faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override ? override.a2 : faqData.a2.replace('{profession}', professionTitle);
+  const faqHeader = override ? override.faqHeader : faqData.faqHeader;
+  const snapshot = override ? override.snapshot : localeData.snapshot;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,32 +304,39 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {override ? override.title : `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
+          {override ? override.desc : `Stand out in your industry with a premium, interactive digital business card designed specifically for ${professionTitle.toLowerCase()} professionals.`}
         </p>
       </header>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
-        <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {snapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
-        <ul className="list-disc pl-6 space-y-2 mb-6">
-          <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
-          <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
-          <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
-        </ul>
+        {override ? (
+           override.content
+        ) : (
+          <>
+            <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
+            <p>
+              As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+            </p>
 
-        <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
+            <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
+            <ul className="list-disc pl-6 space-y-2 mb-6">
+              <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
+              <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
+              <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
+            </ul>
+          </>
+        )}
+
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{faqHeader}</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
         <p>{a1}</p>
@@ -244,7 +346,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Ready to create your card?</h2>
-          <p className="mb-6">Join thousands of {professionTitle.toLowerCase()}s using BrandCard.</p>
+          <p className="mb-6">Join thousands of professionals using BrandCard.</p>
           <Link href="/" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 transition-colors">
             Get Started Free
           </Link>

@@ -168,5 +168,77 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'minimalist-white',
+    name: 'Minimalist White',
+    category: 'Minimalist',
+    preview: '/templates/minimalist-white.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 525,
+        y: 280,
+        width: 1000,
+        text: 'JANE SMITH',
+        fontSize: 48,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#000000',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 525,
+        y: 340,
+        width: 1000,
+        text: 'Freelancer',
+        fontSize: 24,
+        fontFamily: 'sans-serif',
+        fill: '#666666',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'creative-pop',
+    name: 'Creative Pop',
+    category: 'Creative',
+    preview: '/templates/creative-pop.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffcc00',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 300,
+        width: 800,
+        text: 'CHRIS EVANS',
+        fontSize: 64,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: '900',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 380,
+        width: 800,
+        text: 'Designer',
+        fontSize: 32,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#000000',
+        textAlign: 'left'
+      }
+    ]
   }
 ];
