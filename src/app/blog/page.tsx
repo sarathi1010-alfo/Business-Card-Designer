@@ -38,42 +38,42 @@ export default function BlogPage() {
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/what-is-a-digital-business-card" className="hover:underline">
                 What is a Digital Business Card? — Complete Guide
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               Learn the fundamentals of digital business cards, how they compare to physical cards, and why you need one in 2026.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/what-is-a-digital-business-card" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
 
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/digital-vs-physical-business-cards" className="hover:underline">
                 Digital vs Physical Business Cards — Which is Better?
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               A comprehensive breakdown of the pros and cons of digital vs physical business cards for modern professionals.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/digital-vs-physical-business-cards" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
 
          <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/how-to-design-digital-business-card" className="hover:underline">
                 How to Design a Digital Business Card That Converts
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               Learn the core design principles to make your digital business card stand out and capture more leads.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/how-to-design-digital-business-card" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
       </div>
