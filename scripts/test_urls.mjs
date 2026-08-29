@@ -6,6 +6,12 @@ import puppeteer from 'puppeteer';
 
   const urlsToTest = [
     '/blog/digital-business-card-guide',
+    '/blog/ultimate-guide-digital-business-cards-2026',
+    '/blog/what-is-digital-business-card',
+    '/blog/digital-vs-physical-business-cards',
+    '/blog/how-does-digital-business-card-work',
+    '/blog/why-do-i-need-digital-business-card',
+    '/blog/what-is-qr-code-business-card',
     '/professions/founder-digital-business-card',
     '/professions/freelancer-digital-business-card',
     '/professions/real-estate-agent-digital-card',
