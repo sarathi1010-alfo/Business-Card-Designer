@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+const fs = require('fs');
+let content = fs.readFileSync('next.config.ts', 'utf8');
 
-const nextConfig: NextConfig = {
-
+const redirectCode = `
   async redirects() {
     return [
       {
@@ -21,18 +21,8 @@ const nextConfig: NextConfig = {
       }
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap-articles.xml',
-        destination: '/sitemap/articles.xml',
-      },
-      {
-        source: '/sitemap-products.xml',
-        destination: '/sitemap/products.xml',
-      },
-    ];
-  },
-};
+`;
 
-export default nextConfig;
+content = content.replace("async rewrites() {", redirectCode + "  async rewrites() {");
+
+fs.writeFileSync('next.config.ts', content);
