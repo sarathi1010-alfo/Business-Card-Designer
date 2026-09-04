@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { mockTemplates } from '@/lib/templates/mock-data';
+const fs = require('fs');
+const filePath = 'src/app/templates/[category]/page.tsx';
+let content = fs.readFileSync(filePath, 'utf8');
 
-
+const overrideCode = `
 export const templateOverrides: Record<string, { titleCase: string, description: string, faqHeader: string, q1: string, a1: string, q2: string, a2: string, content: string }> = {
   'legal': {
     titleCase: 'Legal',
@@ -25,42 +25,76 @@ export const templateOverrides: Record<string, { titleCase: string, description:
     content: '<p>Healthcare networking requires a focus on clarity, accessibility, and trust. Our medical business card templates are designed to provide a clean, reassuring aesthetic. They prioritize legibility so patients can easily find crucial information like clinic hours, emergency contacts, and direct links to online scheduling systems.</p><p>Whether you are a dentist, physical therapist, or specialized surgeon, a digital medical business card allows you to share comprehensive information effortlessly. By utilizing these templates, you provide patients with a modern, convenient way to keep your practice’s details readily available on their smartphones.</p>'
   }
 };
+`;
 
-interface PageProps {
-  params: Promise<{ category: string }>;
-}
+// Insert the override code after imports
+content = content.replace("interface PageProps {", overrideCode + "\ninterface PageProps {");
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+// Update generateMetadata
+const generateMetadataSearch = `export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
-  const titleCaseDefault = category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const titleCase = category.replace(/\\b\\w/g, (c) => c.toUpperCase());
+
+  return {
+    title: \`\${titleCase} Business Card Templates Free\`,
+    description: \`Browse our collection of free \${category} business card templates. Customize and download instantly.\`,
+    alternates: {
+      canonical: \`/templates/\${resolvedParams.category}\`,
+    }
+  };
+}`;
+
+const generateMetadataReplace = `export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
+  const category = rawCategory.replace(/-/g, ' ');
+  const titleCaseDefault = category.replace(/\\b\\w/g, (c) => c.toUpperCase());
 
   const override = templateOverrides[rawCategory];
   const titleCase = override ? override.titleCase : titleCaseDefault;
-  const description = override ? override.description : `Browse our collection of free ${category} business card templates. Customize and download instantly.`;
+  const description = override ? override.description : \`Browse our collection of free \${category} business card templates. Customize and download instantly.\`;
 
   return {
-    title: `${titleCase} Business Card Templates Free`,
+    title: \`\${titleCase} Business Card Templates Free\`,
     description: description,
     alternates: {
-      canonical: `/templates/${resolvedParams.category}`,
+      canonical: \`/templates/\${resolvedParams.category}\`,
     }
   };
-}
+}`;
+content = content.replace(generateMetadataSearch, generateMetadataReplace);
 
-export default async function CategoryPage({ params }: PageProps) {
+// Update CategoryPage
+const categoryPageSearch = `export default async function CategoryPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
+  const category = rawCategory.replace(/-/g, ' ');
+  const titleCase = category.replace(/\\b\\w/g, (c) => c.toUpperCase());
+
+  // Filter templates (in a real app, this would be a DB query)
+  // We match against "Minimal", "Corporate", "Creative" etc.
+  const categoryTemplates = mockTemplates.filter(t =>
+    t.category.toLowerCase() === titleCase.toLowerCase() ||
+    titleCase.toLowerCase().includes(t.category.toLowerCase())
+  );
+  const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
+
+  const jsonLd = {`;
+
+const categoryPageReplace = `export default async function CategoryPage({ params }: PageProps) {
   const resolvedParams = await params;
   const rawCategory = resolvedParams.category.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '').replace(/-templates/g, '');
   const category = rawCategory.replace(/-/g, ' ');
 
   const override = templateOverrides[rawCategory];
-  const titleCase = override ? override.titleCase : category.replace(/\b\w/g, (c) => c.toUpperCase());
+  const titleCase = override ? override.titleCase : category.replace(/\\b\\w/g, (c) => c.toUpperCase());
 
-  const q1 = override ? override.q1 : `What are ${titleCase} business card templates?`;
-  const a1 = override ? override.a1 : `${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a ${category} aesthetic to showcase their contact details and portfolio.`;
-  const q2 = override ? override.q2 : `Can I customize the ${titleCase} digital business card templates?`;
-  const a2 = override ? override.a2 : `Yes, all ${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.`;
+  const q1 = override ? override.q1 : \`What are \${titleCase} business card templates?\`;
+  const a1 = override ? override.a1 : \`\${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a \${category} aesthetic to showcase their contact details and portfolio.\`;
+  const q2 = override ? override.q2 : \`Can I customize the \${titleCase} digital business card templates?\`;
+  const a2 = override ? override.a2 : \`Yes, all \${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.\`;
   const faqHeader = override ? override.faqHeader : "Frequently Asked Questions";
   const pageContent = override ? override.content : null;
 
@@ -72,11 +106,27 @@ export default async function CategoryPage({ params }: PageProps) {
   );
   const templatesToDisplay = categoryTemplates.length > 0 ? categoryTemplates : mockTemplates.slice(0, 3); // Fallback
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+  const jsonLd = {`;
+content = content.replace(categoryPageSearch, categoryPageReplace);
+
+const jsonLdSearch = `      {
+        "@type": "Question",
+        "name": \`What are \${titleCase} business card templates?\`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": \`\${titleCase} business card templates are pre-designed layouts optimized for professionals looking for a \${category} aesthetic to showcase their contact details and portfolio.\`
+        }
+      },
       {
+        "@type": "Question",
+        "name": \`Can I customize the \${titleCase} digital business card templates?\`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": \`Yes, all \${titleCase} templates on BrandCard are fully customizable. You can change colors, fonts, layout, and add your own logo and links.\`
+        }
+      }`;
+
+const jsonLdReplace = `      {
         "@type": "Question",
         "name": q1,
         "acceptedAnswer": {
@@ -91,52 +141,24 @@ export default async function CategoryPage({ params }: PageProps) {
           "@type": "Answer",
           "text": a2
         }
-      }
-    ]
-  };
+      }`;
+content = content.replace(jsonLdSearch, jsonLdReplace);
 
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+const renderContentSearch = `        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
+        <p className="text-xl text-muted-foreground">
+          Start with a professionally designed {category} template and customize it for your brand.
+        </p>`;
+
+const renderContentReplace = `        <h1 className="text-4xl font-bold mb-4">{titleCase} Business Card Templates</h1>
         <p className="text-xl text-muted-foreground">
           Start with a professionally designed {titleCase.toLowerCase()} template and customize it for your brand.
         </p>
         {pageContent && (
           <div className="prose prose-lg dark:prose-invert mt-6 max-w-none" dangerouslySetInnerHTML={{ __html: pageContent }} />
-        )}
-      </div>
+        )}`;
+content = content.replace(renderContentSearch, renderContentReplace);
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {templatesToDisplay.map((template) => (
-          <Link key={template.id} href={`/editor/${template.id}`} className="group block">
-            <div className="relative aspect-[1.75/1] rounded-lg border bg-muted overflow-hidden shadow-sm transition-all hover:shadow-md">
-              <div
-                className="absolute inset-0 flex items-center justify-center text-muted-foreground/50 text-sm font-medium"
-                style={{ backgroundColor: template.backgroundColor }}
-              >
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-background/90 text-foreground px-4 py-2 rounded-md font-medium shadow-sm">
-                  Customize Template
-                </span>
-              </div>
-            </div>
-            <div className="mt-4 flex justify-between items-start">
-              <div>
-                <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-                  {template.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">{template.category}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-
+const renderFaqReplace2 = `
       {categoryTemplates.length === 0 && (
         <div className="mt-8 p-4 bg-muted/50 rounded-lg text-center">
           <p className="text-muted-foreground">Showing popular templates. More {category} templates coming soon.</p>
@@ -152,4 +174,14 @@ export default async function CategoryPage({ params }: PageProps) {
       </div>
     </div>
   );
-}
+}`;
+content = content.replace(`      {categoryTemplates.length === 0 && (
+        <div className="mt-8 p-4 bg-muted/50 rounded-lg text-center">
+          <p className="text-muted-foreground">Showing popular templates. More {category} templates coming soon.</p>
+        </div>
+      )}
+    </div>
+  );
+}`, renderFaqReplace2);
+
+fs.writeFileSync(filePath, content);
