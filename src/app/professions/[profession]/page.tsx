@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -131,6 +132,97 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
 };
 
+const professionOverrides: Record<string, { title: string, desc: string, snapshot: string, faqHeader: string, q1: string, a1: string, q2: string, a2: string, content: React.ReactNode }> = {
+  'software-engineer-digital-business-card': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your',
+    snapshot: 'A digital business card for software engineers allows you to showcase your GitHub, technical blog, and recent projects with a simple scan.',
+    faqHeader: 'Frequently Asked Questions for Engineers',
+    q1: 'Why does a Software Engineer need a digital business card?',
+    a1: 'It allows you to instantly share your code repositories, personal website, and contact information without carrying paper.',
+    q2: 'What should a Software Engineer include on their digital business card?',
+    a2: 'Include links to your GitHub, LinkedIn, technical portfolio, and a brief summary of your tech stack.',
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Optimizing Networking for Software Engineers</h2>
+        <p>In the fast-paced tech industry, exchanging contact information needs to be as efficient as the code you write. A digital business card for a software engineer is not just a tool for sharing an email address; it is a gateway to your entire professional identity online. Whether you are attending a hackathon, a tech conference, or a casual meetup, having a digital card ensures that you can instantly connect with recruiters, founders, and fellow developers.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Showcasing Your Technical Portfolio</h3>
+        <p>Unlike traditional professions, software engineers rely heavily on a portfolio of work. Your digital business card acts as a central hub. By linking directly to your GitHub profile, you allow potential employers or collaborators to dive straight into your repositories, see your commit history, and evaluate your coding style. Additionally, linking to your technical blog or personal website provides a comprehensive view of your expertise and thought leadership in the community.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Seamless Integration and Analytics</h3>
+        <p>As a developer, you appreciate data. With a digital business card, you can track interactions. You can see how many people scanned your QR code or clicked your links after a tech conference. This data helps you understand which parts of your profile are generating the most interest, allowing you to iterate and optimize your networking strategy over time.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Standing Out in a Competitive Market</h3>
+        <p>The tech job market is competitive. A sleek, modern digital business card demonstrates that you are forward-thinking and embrace digital solutions. It shows attention to detail and a commitment to leveraging technology for better communication. By customizing the design to reflect your personal brand—perhaps using a minimalist, dark-mode aesthetic—you leave a memorable impression that sets you apart from candidates still using paper resumes or generic social media profiles.</p>
+      </>
+    )
+  },
+  'designer-digital-business-card': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your',
+    snapshot: 'Designers can use digital business cards to instantly share their Dribbble, Behance, or personal portfolio with a single tap.',
+    faqHeader: 'Frequently Asked Questions for Designers',
+    q1: 'Why does a Designer need a digital business card?',
+    a1: 'It provides a dynamic, visual way to share your design portfolio and contact details instantly.',
+    q2: 'What should a Designer include on their digital business card?',
+    a2: 'A link to your portfolio, Dribbble or Behance profiles, your resume, and a clear call to action.',
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Elevating Your Design Portfolio</h2>
+        <p>For graphic designers, UI/UX designers, and creatives, aesthetics matter. A digital business card is an extension of your design portfolio. It is the first touchpoint a potential client or employer has with your personal brand. By utilizing a digital card, you can ensure that this initial interaction is visually striking and perfectly aligned with your design sensibilities, all without the constraints of printed media.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Interactive and Dynamic Content</h3>
+        <p>Paper cards are static, but your work is dynamic. A digital business card allows you to include interactive elements. You can link directly to a video reel of your motion graphics, an interactive prototype on Figma, or your latest case study. This immediate access to your best work is invaluable when networking at creative industry events or pitching to new clients.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Always Up-to-Date</h3>
+        <p>Design trends evolve quickly, and so does your portfolio. With a digital business card, you never have to worry about handing out outdated information or old portfolio links. When you complete a major project, you simply update the link on your digital card platform, and everyone who has your card instantly has access to your newest work.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Eco-Friendly Networking</h3>
+        <p>Many clients in the design industry value sustainability. By ditching paper cards, you demonstrate a commitment to eco-friendly practices. This subtle choice can resonate with environmentally conscious clients and agencies, adding another positive layer to your professional image while streamlining your networking process.</p>
+      </>
+    )
+  },
+  'lawyer-digital-business-card': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your',
+    snapshot: 'Lawyers can securely and professionally share their contact information, firm details, and scheduling links instantly.',
+    faqHeader: 'Frequently Asked Questions for Lawyers',
+    q1: 'Is a digital business card professional enough for a lawyer?',
+    a1: 'Yes, premium digital business cards offer a highly professional, secure way to share firm details and contact information.',
+    q2: 'What should a Lawyer include on their digital business card?',
+    a2: 'Firm name, direct contact number, secure email, areas of practice, and a link to schedule a consultation.',
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Modernizing Legal Networking</h2>
+        <p>The legal profession is built on trust, authority, and professionalism. While traditional networking often involves exchanging heavy stock paper cards, a digital business card offers a modernized approach without sacrificing prestige. For lawyers, attorneys, and legal consultants, a digital card provides a secure, instantaneous method to share contact information with clients, opposing counsel, and partners.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Streamlining Client Intake</h3>
+        <p>A digital business card can be a powerful tool for client acquisition. Instead of just sharing an email address, your digital card can include a direct link to your firm's secure intake form or a calendar link to schedule an initial consultation. This reduces friction, allowing potential clients to take immediate action while your conversation is still fresh in their minds.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Updating Information Seamlessly</h3>
+        <p>Lawyers often change firms, update their areas of practice, or acquire new certifications. With a digital card, these updates are instantaneous. You never have to worry about a former client trying to reach you at an old firm. Your contact details remain current, ensuring you never miss an important communication or referral.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Maintaining Security and Privacy</h3>
+        <p>Security is paramount in the legal field. Digital business cards allow you to control exactly what information you share. You can choose to share your direct line with trusted colleagues while providing a general firm number to new contacts. This flexibility ensures that you maintain professional boundaries while optimizing your networking efficiency.</p>
+      </>
+    )
+  },
+  'musician-digital-business-card': {
+    title: 'Digital Business Card for',
+    desc: 'Create a professional digital business card for your',
+    snapshot: 'Musicians can share their latest tracks, Spotify profile, social media, and booking contacts instantly with industry professionals.',
+    faqHeader: 'Frequently Asked Questions for Musicians',
+    q1: 'Why does a Musician need a digital business card?',
+    a1: 'It allows you to instantly share your music, social profiles, and booking information with fans and industry professionals.',
+    q2: 'What should a Musician include on their digital business card?',
+    a2: 'Links to Spotify/Apple Music, upcoming tour dates, social media handles, and contact details for booking.',
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Connecting in the Music Industry</h2>
+        <p>For musicians, bands, and producers, networking is essential for getting gigs, finding collaborators, and building a fanbase. In a loud, fast-paced venue or industry event, exchanging paper cards is often ineffective. A digital business card allows you to connect instantly, ensuring that A&R reps, promoters, and fans have immediate access to your music and contact information.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Instant Access to Your Sound</h3>
+        <p>The most important part of your networking is your music. A digital business card allows you to embed links directly to your Spotify, Apple Music, or SoundCloud profiles. When you meet an industry professional, they can listen to your latest track immediately, rather than having to remember to search for your name later. This instant access can be the difference between securing a gig and being forgotten.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Centralizing Your Online Presence</h3>
+        <p>Musicians often have a fragmented online presence—social media, streaming platforms, merchandise stores, and tour schedules. A digital business card acts as a central hub, bringing all these elements together in one sleek interface. It makes it easy for a new fan to follow you on Instagram, stream your music, and buy a ticket to your next show, all from a single scan.</p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Professionalism in Booking</h3>
+        <p>When dealing with booking agents and venue managers, presenting a polished, professional image is crucial. A well-designed digital business card demonstrates that you take your career seriously. It provides a clean, organized way to share your press kit, technical rider, and booking contact details, streamlining the process for event organizers.</p>
+      </>
+    )
+  }
+};
+
 function extractLanguageAndProfession(slug: string) {
   // Check if slug ends with a known language code, e.g. "-es" or "-en"
   const parts = slug.split('-');
@@ -168,9 +260,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
+  const rawSlug = resolvedParams.profession;
+  const override = professionOverrides[rawSlug];
+
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+
+  const localeData = override ? {
+    title: override.title,
+    desc: override.desc,
+    snapshot: override.snapshot
+  } : (langMap[lang] || langMap.en);
+
+  const faqData = override ? {
+    faqHeader: override.faqHeader,
+    q1: override.q1,
+    a1: override.a1,
+    q2: override.q2,
+    a2: override.a2
+  } : (faqMap[lang] || faqMap.en);
+
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
@@ -241,6 +349,12 @@ export default async function ProfessionPage({ params }: PageProps) {
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
         <p>{a2}</p>
+
+        {override && override.content && (
+          <div className="mt-12">
+            {override.content}
+          </div>
+        )}
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Ready to create your card?</h2>

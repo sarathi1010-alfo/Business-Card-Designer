@@ -168,5 +168,78 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'tech-startup',
+    name: 'Tech Startup Minimal',
+    category: 'Tech Startup',
+    preview: '/templates/tech-startup.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0a0a0a',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'FOUNDER NAME',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 280,
+        width: 850,
+        text: 'CEO & CO-FOUNDER',
+        fontSize: 24,
+        fontFamily: 'Inter, sans-serif',
+        fill: '#a1a1aa',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'elegant',
+    name: 'Elegant Luxe',
+    category: 'Elegant',
+    preview: '/templates/elegant.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfbf7',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'Elegance Personified',
+        fontSize: 56,
+        fontFamily: 'Georgia, serif',
+        fontWeight: 'normal',
+        fill: '#1a1a1a',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'Bespoke Consultant',
+        fontSize: 20,
+        fontFamily: 'Georgia, serif',
+        fontStyle: 'italic',
+        fill: '#4a4a4a',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
