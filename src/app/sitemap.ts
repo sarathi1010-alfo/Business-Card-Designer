@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "trade-show-digital-business-card",
+  "b2b-sales-digital-business-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -55,6 +57,7 @@ export default async function sitemap({
     const staticRoutes = [
       { path: '/', priority: 1.0, changeFrequency: 'weekly' },
       { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
+      { path: '/blog/industry-specific-networking-guide', priority: 0.8, changeFrequency: 'weekly' },
       { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
       { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
       { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
