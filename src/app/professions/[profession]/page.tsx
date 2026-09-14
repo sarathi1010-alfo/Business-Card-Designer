@@ -166,16 +166,105 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const professionOverrides: Record<string, { title: string; desc: string; snapshot: string; faqHeader: string; q1: string; a1: string; q2: string; a2: string; content: React.ReactNode }> = {
+  "event-planner-digital-business-card": {
+    title: "Digital Business Card for Event Planners",
+    desc: "Create a stunning digital business card for your event planning career. Showcase past events and capture client leads instantly.",
+    snapshot: "Event planners use digital business cards to instantly share interactive portfolios, vendor lists, and contact forms via a simple QR code, ensuring they never miss a potential client lead at a busy event.",
+    faqHeader: "Frequently Asked Questions for Event Planners",
+    q1: "How can an event planner use a digital business card during a live event?",
+    a1: "An event planner can display their digital business card's QR code on their phone lock screen or a lanyard, allowing vendors, sponsors, or potential clients to instantly scan and save their contact details without fumbling for paper cards.",
+    q2: "Can I showcase my past events on my digital business card?",
+    a2: "Yes, you can easily embed links to image galleries, video highlights, or case studies of your most successful events directly into your digital business card profile.",
+    content: (
+      <>
+        <p>
+          As an event planner, your ability to organize, coordinate, and execute flawless experiences is your primary selling point. Networking at the very events you manage, or attending industry showcases, requires a tool that matches your level of professionalism and efficiency. A digital business card is the perfect solution.
+        </p>
+        <p>
+          Imagine running a 500-person corporate retreat. A key sponsor asks for your card for a future project. Instead of searching your pockets for a crumpled paper card, you present a sleek QR code. With one scan, they have your contact info, a link to your portfolio, and a form to submit their project details.
+        </p>
+      </>
+    )
+  },
+  "software-engineer-digital-business-card": {
+    title: "Digital Business Card for Software Engineers",
+    desc: "Create a professional digital business card for your software engineering career. Link to GitHub and impress tech recruiters.",
+    snapshot: "Software engineers leverage digital business cards to instantly share their GitHub repositories, live side projects, and technical blogs, providing a comprehensive view of their coding skills in seconds.",
+    faqHeader: "Frequently Asked Questions for Software Engineers",
+    q1: "Why does a software engineer need a digital business card?",
+    a1: "In a tech-driven industry, paper cards are obsolete. A digital card allows software engineers to seamlessly connect their professional network directly to their technical portfolios, GitHub, and live deployments.",
+    q2: "What links should a developer include?",
+    a2: "Developers should include links to their GitHub, personal portfolio site, LinkedIn profile, technical blog (like Dev.to or Medium), and any notable live projects they've contributed to.",
+    content: (
+      <>
+        <p>
+          For software engineers, your code is your resume. When networking at hackathons, tech meetups, or developer conferences, you need a way to quickly bridge the gap between a face-to-face introduction and your digital footprint. A digital business card does exactly that.
+        </p>
+        <p>
+          By utilizing a digital card, you show that you embrace modern technology. You can track which recruiters or peers clicked on your GitHub link after a meetup, giving you valuable data for follow-ups. It&apos;s a streamlined, efficient way to manage your professional identity.
+        </p>
+      </>
+    )
+  },
+  "fitness-trainer-digital-business-card": {
+    title: "Digital Business Card for Fitness Trainers",
+    desc: "Create a dynamic digital business card for your fitness training business. Share booking links and transform gym interactions into clients.",
+    snapshot: "Fitness trainers use digital business cards to easily share workout schedules, client transformation galleries, and direct booking links with potential clients they meet on the gym floor.",
+    faqHeader: "Frequently Asked Questions for Fitness Trainers",
+    q1: "How can a fitness trainer get more clients with a digital card?",
+    a1: "By adding a lead capture form and a direct link to their booking calendar, trainers can convert casual conversations at the gym or health fairs into scheduled consultation calls instantly.",
+    q2: "Can I link my social media?",
+    a2: "Absolutely. Linking your Instagram or TikTok where you post workout tips and client transformations is one of the most effective ways to build trust and authority through your digital card.",
+    content: (
+      <>
+        <p>
+          As a fitness trainer, you are your brand. Whether you are on the gym floor, at a health expo, or running a boot camp in the park, opportunities to acquire new clients are everywhere. A digital business card equips you to capitalize on these moments without carrying around stacks of paper.
+        </p>
+        <p>
+          When someone asks about your training rates, you can immediately share your digital card. They can instantly see your client success stories, view your available slots, and book a session right from their phone. It turns a casual inquiry into a tangible lead.
+        </p>
+      </>
+    )
+  },
+  "marketing-manager-digital-business-card": {
+    title: "Digital Business Card for Marketing Managers",
+    desc: "Create a sleek digital business card for your marketing career. Highlight campaign successes and connect with industry leaders.",
+    snapshot: "Marketing managers utilize digital business cards to showcase successful campaigns, share their agency portfolio, and seamlessly collect contact info from potential partners at industry summits.",
+    faqHeader: "Frequently Asked Questions for Marketing Managers",
+    q1: "Why is a digital business card essential for marketers?",
+    a1: "Marketers understand the value of data and user experience. A digital card provides both—a seamless onboarding experience for a new connection, and analytics on how they interact with your shared links.",
+    q2: "How can I use it for lead generation?",
+    a2: "Embed a contact form directly on your digital card. When you meet a potential client or partner at a conference, they can enter their email on the spot to receive a free audit or marketing case study.",
+    content: (
+      <>
+        <p>
+          Marketing managers thrive on metrics, branding, and efficient funnels. Your personal networking should reflect these same principles. Handing out a static paper card is a missed opportunity to demonstrate your understanding of modern digital engagement.
+        </p>
+        <p>
+          A digital business card acts as a personalized landing page for your professional brand. You can direct traffic to your most successful campaign case studies, your LinkedIn articles, or your agency&apos;s main site. By tracking views and clicks, you can approach your follow-ups with the same data-driven precision you apply to your marketing campaigns.
+        </p>
+      </>
+    )
+  }
+};
+
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
   const localeData = langMap[lang] || langMap.en;
   const faqData = faqMap[lang] || faqMap.en;
 
-  const q1 = faqData.q1.replace('{profession}', professionTitle);
-  const a1 = faqData.a1.replace('{profession}', professionTitle);
-  const q2 = faqData.q2.replace('{profession}', professionTitle);
-  const a2 = faqData.a2.replace('{profession}', professionTitle);
+  const override = professionOverrides[resolvedParams.profession];
+
+  const pageTitle = override ? override.title : `${localeData.title} ${professionTitle}s`;
+  const pageSnapshot = override ? override.snapshot : localeData.snapshot;
+  const pageFaqHeader = override ? override.faqHeader : faqData.faqHeader;
+
+  const q1 = override ? override.q1 : faqData.q1.replace('{profession}', professionTitle);
+  const a1 = override ? override.a1 : faqData.a1.replace('{profession}', professionTitle);
+  const q2 = override ? override.q2 : faqData.q2.replace('{profession}', professionTitle);
+  const a2 = override ? override.a2 : faqData.a2.replace('{profession}', professionTitle);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -209,7 +298,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {pageTitle}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -220,12 +309,17 @@ export default async function ProfessionPage({ params }: PageProps) {
         <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
-            <strong>AI Snapshot:</strong> {localeData.snapshot}
+            <strong>AI Snapshot:</strong> {pageSnapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
+
+        {override ? (
+          override.content
+        ) : (
+          <p>
+            As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+          </p>
+        )}
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
         <ul className="list-disc pl-6 space-y-2 mb-6">
@@ -234,7 +328,7 @@ export default async function ProfessionPage({ params }: PageProps) {
           <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
         </ul>
 
-        <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{pageFaqHeader}</h2>
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
         <p>{a1}</p>

@@ -19,6 +19,21 @@ export default function BlogPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* New Pillar Post */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/industry-networking-guide" className="hover:underline text-primary">
+                The Ultimate Guide to Industry-Specific Networking in 2026
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Master the art of niche networking, from tech conferences to creative showcases, and learn how to capture more high-quality leads.
+            </p>
+            <Link href="/blog/industry-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Added actual first pillar post */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
