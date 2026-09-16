@@ -34,6 +34,21 @@ export default function BlogPage() {
           </div>
         </div>
 
+        {/* Industry Networking Guide */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/industry-networking-guide" className="hover:underline">
+                Industry-Specific Networking: Tailor Your Digital Card
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how to optimize your digital business card for specific industries. From tech and design to real estate and healthcare, discover strategies for high-conversion networking.
+            </p>
+            <Link href="/blog/industry-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Placeholder for future blog posts */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">

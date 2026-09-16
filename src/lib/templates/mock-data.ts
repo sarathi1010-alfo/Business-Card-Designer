@@ -168,5 +168,87 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'bold-impact',
+    name: 'Bold Impact',
+    category: 'Bold',
+    preview: '/templates/bold-impact.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ff3366',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 250,
+        width: 950,
+        text: 'JORDAN LEE',
+        fontSize: 80,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: '900',
+        fill: '#ffffff',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 350,
+        width: 950,
+        text: 'VISIONARY FOUNDER',
+        fontSize: 24,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#000000',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'elegant-serif',
+    name: 'Elegant Serif',
+    category: 'Elegant',
+    preview: '/templates/elegant-serif.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfbf7',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'Eleanor Vance',
+        fontSize: 60,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#1a1a1a',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'Consultant & Advisor',
+        fontSize: 22,
+        fontFamily: 'sans-serif',
+        fill: '#666666',
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 475,
+        y: 380,
+        width: 100,
+        height: 1,
+        fill: '#cccccc',
+      }
+    ]
   }
 ];
