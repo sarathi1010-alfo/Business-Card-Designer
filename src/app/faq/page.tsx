@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | BrandCard",
@@ -60,7 +61,7 @@ export default function FAQPage() {
           </p>
         </div>
         <p className="text-xl text-muted-foreground">
-          Everything you need to know about creating, sharing, and optimizing your digital business card.
+          Everything you need to know about creating, sharing, and optimizing your digital business card. For specific examples, check out our <Link href="/blog/industry-networking-guide" className="text-primary hover:underline">industry networking guide</Link>.
         </p>
       </div>
 
