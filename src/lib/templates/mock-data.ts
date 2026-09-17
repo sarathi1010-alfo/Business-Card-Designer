@@ -168,5 +168,88 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'bold-red',
+    name: 'Bold Red',
+    category: 'Bold',
+    preview: '/templates/bold-red.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#dc2626', // red-600
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 200,
+        width: 950,
+        text: 'MAXIMILIAN POWER',
+        fontSize: 80,
+        fontFamily: 'sans-serif',
+        fontWeight: '900',
+        fill: '#ffffff',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 300,
+        width: 950,
+        text: 'LEAD DEVELOPER',
+        fontSize: 30,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#fca5a5', // red-300
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'elegant-gold',
+    name: 'Elegant Gold',
+    category: 'Elegant',
+    preview: '/templates/elegant-gold.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#18181b', // zinc-900
+    elements: [
+      {
+        id: 'border-rect',
+        type: 'rect',
+        x: 20,
+        y: 20,
+        width: 1010,
+        height: 560,
+        fill: 'transparent',
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'Victoria Sterling',
+        fontSize: 64,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fontStyle: 'italic',
+        fill: '#fbbf24', // amber-400
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 350,
+        width: 850,
+        text: 'FINE ARTS APPRAISER',
+        fontSize: 18,
+        fontFamily: 'sans-serif',
+        fill: '#d4d4d8', // zinc-300
+        textAlign: 'center'
+      }
+    ]
   }
 ];
