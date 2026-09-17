@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -110,10 +111,38 @@ export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: st
     a1: "{profession} potrzebuje cyfrowej wizytówki, aby błyskawicznie udostępniać swoje portfolio, dane kontaktowe i poświadczenia zawodowe klientom i współpracownikom, bez ograniczeń tradycyjnych papierowych wizytówek.",
     q2: "Co {profession} powinien umieścić na swojej cyfrowej wizytówce?",
     a2: "Kluczowe elementy to profesjonalne zdjęcie, czytelne dane kontaktowe, bezpośrednie linki do ostatnich prac lub projektów, profile społecznościowe oraz formularz kontaktowy do pozyskiwania potencjalnych klientów."
+  },
+  "event-planner-digital-business-card": {
+    faqHeader: "Event Planner Networking FAQs",
+    q1: "Why does an Event Planner need a digital business card?",
+    a1: "An Event Planner needs a digital business card to quickly share dynamic portfolios of past events, instantly collect vendor or client contact info, and manage networking on-the-go at busy venues.",
+    q2: "What should an Event Planner include on their digital business card?",
+    a2: "Key elements include links to event galleries, booking calendars, a lead capture form for new inquiries, and direct contact methods like phone or WhatsApp."
+  },
+  "photographer-digital-business-card": {
+    faqHeader: "Photographer Networking FAQs",
+    q1: "Why does a Photographer need a digital business card?",
+    a1: "A Photographer needs a digital card to instantly showcase high-resolution galleries, easily share pricing guides, and provide an immediate booking link without fumbling for paper cards on a shoot.",
+    q2: "What should a Photographer include on their digital business card?",
+    a2: "Crucial elements include a stunning profile picture, links to your primary portfolio (website or Instagram), a link to book a session, and a lead capture form to gather client details."
+  },
+  "fitness-trainer-digital-business-card": {
+    faqHeader: "Fitness Trainer Networking FAQs",
+    q1: "Why does a Fitness Trainer need a digital business card?",
+    a1: "A Fitness Trainer needs a digital card to seamlessly sign up new gym members, share workout schedules, and direct clients to their training apps or social media fitness content instantly.",
+    q2: "What should a Fitness Trainer include on their digital business card?",
+    a2: "Include a link to your class schedule, a booking calendar for personal training sessions, transformation galleries, and your professional social media accounts."
+  },
+  "musician-digital-business-card": {
+    faqHeader: "Musician Networking FAQs",
+    q1: "Why does a Musician need a digital business card?",
+    a1: "A Musician needs a digital card to instantly share their latest tracks, direct industry contacts to their Spotify or Apple Music profiles, and provide booking agents with an immediate way to reach them after a gig.",
+    q2: "What should a Musician include on their digital business card?",
+    a2: "Essential elements include streaming links (Spotify, Soundcloud), a link to your electronic press kit (EPK), upcoming tour dates, and booking contact information."
   }
 };
 
-const langMap: Record<string, { title: string, desc: string, snapshot: string }> = {
+const langMap: Record<string, { title: string, desc: string, snapshot: string, content?: React.ReactNode }> = {
   en: { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card allows you to instantly share your professional profile, contact details, and portfolio via a simple QR code or link, eliminating the need for physical paper." },
   es: { title: "Tarjeta de Presentación Digital para", desc: "Crea una tarjeta de presentación digital profesional para tu", snapshot: "Una tarjeta de presentación digital le permite compartir instantáneamente su perfil profesional, datos de contacto y cartera a través de un simple código QR o enlace, eliminando la necesidad de papel físico." },
   fr: { title: "Carte de Visite Numérique pour", desc: "Créez une carte de visite numérique professionnelle pour votre", snapshot: "Une carte de visite numérique vous permet de partager instantanément votre profil professionnel, vos coordonnées et votre portfolio via un simple code QR ou un lien, éliminant ainsi le besoin de papier physique." },
@@ -128,7 +157,67 @@ const langMap: Record<string, { title: string, desc: string, snapshot: string }>
   ar: { title: "بطاقة عمل رقمية لـ", desc: "أنشئ بطاقة عمل رقمية احترافية لمسيرتك في", snapshot: "تتيح لك بطاقة العمل الرقمية مشاركة ملفك المهني وتفاصيل الاتصال ومحفظة أعمالك على الفور عبر رمز QR أو رابط بسيط، مما يلغي الحاجة إلى الورق المادي." },
   hi: { title: "डिजिटल बिजनेस कार्ड", desc: "अपने करियर के लिए एक पेशेवर डिजिटल बिजनेस कार्ड बनाएं", snapshot: "एक डिजिटल बिजनेस कार्ड आपको एक साधारण क्यूआर कोड या लिंक के माध्यम से अपने पेशेवर प्रोफ़ाइल, संपर्क विवरण और पोर्टफोलियो को तुरंत साझा करने की अनुमति देता है, जिससे भौतिक कागज की आवश्यकता समाप्त हो जाती है।" },
   tr: { title: "Dijital Kartvizit", desc: "Kariyeriniz için profesyonel bir dijital kartvizit oluşturun", snapshot: "Dijital bir kartvizit, profesyonel profilinizi, iletişim bilgilerinizi ve portföyünüzü basit bir QR kodu veya bağlantı yoluyla anında paylaşmanıza olanak tanır ve fiziksel kağıt ihtiyacını ortadan kaldırır." },
-  pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." }
+  pl: { title: "Cyfrowa Wizytówka dla", desc: "Stwórz profesjonalną cyfrową wizytówkę dla swojej", snapshot: "Cyfrowa wizytówka pozwala na błyskawiczne udostępnianie profilu zawodowego, danych kontaktowych i portfolio za pomocą prostego kodu QR lub linku, eliminując potrzebę używania fizycznego papieru." },
+  "event-planner-digital-business-card": {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "A digital business card allows event planners to instantly share portfolios, capture vendor details, and present a polished image without fumbling for paper.",
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Streamline Your Events</h3>
+        <p>Event planning requires constant connection. A dynamic digital card helps you manage your network effortlessly while on the move, ensuring you never lose a vendor contact or client lead again.</p>
+        <ul className="list-disc pl-6 space-y-2 mb-6 mt-4">
+          <li><strong>Instant Portfolio:</strong> Show off your past event designs immediately.</li>
+          <li><strong>Contact Collection:</strong> Use forms to gather info from potential clients.</li>
+        </ul>
+      </>
+    )
+  },
+  "photographer-digital-business-card": {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "Photographers can use a digital business card to provide instant access to high-res galleries, pricing sheets, and direct booking links.",
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Showcase Your Lens</h3>
+        <p>As a visual artist, your business card should highlight your visual work. Digital cards allow you to link directly to your best galleries, making an immediate visual impact on potential clients.</p>
+        <ul className="list-disc pl-6 space-y-2 mb-6 mt-4">
+          <li><strong>Gallery Links:</strong> Direct clients to your latest shoots.</li>
+          <li><strong>Easy Booking:</strong> Integrate scheduling tools right on the card.</li>
+        </ul>
+      </>
+    )
+  },
+  "fitness-trainer-digital-business-card": {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "Fitness trainers can leverage digital cards to share class schedules, transformation galleries, and capture new client sign-ups instantly.",
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Build Your Client Base</h3>
+        <p>Whether you're at the gym or a fitness expo, you need to turn conversations into clients. A digital card lets you share your schedule and capture their info before they walk away.</p>
+        <ul className="list-disc pl-6 space-y-2 mb-6 mt-4">
+          <li><strong>Share Schedules:</strong> Link directly to your weekly class timetable.</li>
+          <li><strong>Transformation Proof:</strong> Highlight success stories to build trust.</li>
+        </ul>
+      </>
+    )
+  },
+  "musician-digital-business-card": {
+    title: "Digital Business Card for",
+    desc: "Create a professional digital business card for your",
+    snapshot: "Musicians use digital business cards to instantly share their latest tracks, EPKs, and gig schedules with promoters and fans.",
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Amplify Your Network</h3>
+        <p>The music industry moves fast. When you meet a promoter or a new fan, give them instant access to your music and upcoming tour dates with a single scan.</p>
+        <ul className="list-disc pl-6 space-y-2 mb-6 mt-4">
+          <li><strong>Stream Instantly:</strong> Link to Spotify, Apple Music, or Soundcloud.</li>
+          <li><strong>Gig Updates:</strong> Keep your network informed of your next shows.</li>
+        </ul>
+      </>
+    )
+  }
 };
 
 function extractLanguageAndProfession(slug: string) {
@@ -233,6 +322,8 @@ export default async function ProfessionPage({ params }: PageProps) {
           <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
           <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
         </ul>
+
+        {localeData.content && localeData.content}
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 

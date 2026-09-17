@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">
@@ -5,7 +7,7 @@ export default function AboutPage() {
 
       <div className="prose dark:prose-invert max-w-none text-lg">
         <p className="mb-6">
-          Welcome to the <strong>alfo.online</strong> ecosystem. We build fast, free, and intuitive internet infrastructure to help you work better.
+          Welcome to the <strong>alfo.online</strong> ecosystem. We build fast, free, and intuitive internet infrastructure to help you work better. For strategies on optimizing your professional connections using our tools, check out our <Link href="/blog/industry-networking-guide" className="text-primary hover:underline">Industry-Specific Networking Strategies</Link> guide.
         </p>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">Our Mission</h2>
