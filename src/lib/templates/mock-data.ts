@@ -168,5 +168,142 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'healthcare-clean',
+    name: 'Healthcare Clean',
+    category: 'Healthcare',
+    preview: '/templates/modern-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'header-bar',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: CARD_WIDTH,
+        height: 150,
+        fill: '#0d9488', // teal-600
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 250,
+        width: 950,
+        text: 'DR. ELIZABETH CHEN',
+        fontSize: 48,
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 310,
+        width: 950,
+        text: 'Chief of Pediatrics',
+        fontSize: 24,
+        fontFamily: 'Arial, sans-serif',
+        fill: '#64748b',
+        textAlign: 'left'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 50,
+        y: 450,
+        width: 950,
+        text: 'P: (555) 123-4567\nE: echen@memorialhospital.org',
+        fontSize: 20,
+        fontFamily: 'Arial, sans-serif',
+        fill: '#334155',
+        textAlign: 'left'
+      }
+    ]
+  },
+  {
+    id: 'legal-classic',
+    name: 'Legal Classic',
+    category: 'Legal',
+    preview: '/templates/corporate-blue.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#f8fafc',
+    elements: [
+      {
+        id: 'border',
+        type: 'rect',
+        x: 20,
+        y: 20,
+        width: CARD_WIDTH - 40,
+        height: CARD_HEIGHT - 40,
+        fill: 'transparent'
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 200,
+        width: 800,
+        text: 'JAMES HARRISON, ESQ.',
+        fontSize: 52,
+        fontFamily: 'Georgia, serif',
+        fontWeight: 'bold',
+        fill: '#1e293b',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 270,
+        width: 800,
+        text: 'Partner, Corporate Litigation',
+        fontSize: 22,
+        fontFamily: 'Georgia, serif',
+        fontStyle: 'italic',
+        fill: '#475569',
+        textAlign: 'center'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: (CARD_WIDTH / 2) - 150,
+        y: 320,
+        width: 300,
+        height: 2,
+        fill: '#94a3b8'
+      },
+      {
+        id: 'firm',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 400,
+        width: 800,
+        text: 'HARRISON & WRIGHT LLP',
+        fontSize: 28,
+        fontFamily: 'Georgia, serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'center'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 450,
+        width: 800,
+        text: 'jharrison@hwlaw.com | 1-800-555-0198',
+        fontSize: 18,
+        fontFamily: 'Arial, sans-serif',
+        fill: '#475569',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
