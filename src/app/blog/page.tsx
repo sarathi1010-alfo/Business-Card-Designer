@@ -34,46 +34,101 @@ export default function BlogPage() {
           </div>
         </div>
 
-        {/* Placeholder for future blog posts */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/what-is-a-digital-business-card" className="hover:underline">
                 What is a Digital Business Card? — Complete Guide
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               Learn the fundamentals of digital business cards, how they compare to physical cards, and why you need one in 2026.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/what-is-a-digital-business-card" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
 
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/digital-vs-physical-business-cards" className="hover:underline">
                 Digital vs Physical Business Cards — Which is Better?
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               A comprehensive breakdown of the pros and cons of digital vs physical business cards for modern professionals.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/digital-vs-physical-business-cards" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
 
          <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/design-digital-business-card" className="hover:underline">
                 How to Design a Digital Business Card That Converts
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
               Learn the core design principles to make your digital business card stand out and capture more leads.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/design-digital-business-card" className="text-primary font-medium hover:underline">Read More →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/ultimate-guide-digital-business-cards-2026" className="hover:underline text-primary">
+                Ultimate Guide to Digital Business Cards 2026
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              The comprehensive pillar guide covering everything you need to know about professional networking with digital business cards in 2026.
+            </p>
+            <Link href="/blog/ultimate-guide-digital-business-cards-2026" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/how-does-it-work" className="hover:underline">
+                How Does a Digital Business Card Work?
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Discover the technology behind digital business cards, from NFC and dynamic QR codes to real-time analytics.
+            </p>
+            <Link href="/blog/how-does-it-work" className="text-primary font-medium hover:underline">Read More →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/why-do-i-need-one" className="hover:underline">
+                Why Do I Need a Digital Business Card?
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Explore the critical reasons why adopting a digital business card is essential for networking ROI.
+            </p>
+            <Link href="/blog/why-do-i-need-one" className="text-primary font-medium hover:underline">Read More →</Link>
+          </div>
+        </div>
+
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/what-is-a-qr-code-business-card" className="hover:underline">
+                What is a QR Code Business Card?
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how QR code business cards function and how they bridge the gap between physical networking and digital lead capture.
+            </p>
+            <Link href="/blog/what-is-a-qr-code-business-card" className="text-primary font-medium hover:underline">Read More →</Link>
           </div>
         </div>
       </div>
