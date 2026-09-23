@@ -59,6 +59,13 @@ export default async function sitemap({
       { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
       { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
       { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+      { path: '/blog/what-is-a-digital-business-card', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/digital-vs-physical-business-cards', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/design-digital-business-card', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/ultimate-guide-digital-business-cards-2026', priority: 0.9, changeFrequency: 'weekly' },
+      { path: '/blog/how-does-it-work', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/why-do-i-need-one', priority: 0.8, changeFrequency: 'monthly' },
+      { path: '/blog/what-is-a-qr-code-business-card', priority: 0.8, changeFrequency: 'monthly' },
     ] as const;
 
     staticRoutes.forEach(route => {
