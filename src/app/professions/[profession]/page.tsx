@@ -1,11 +1,40 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import React from 'react';
 
 interface PageProps {
   params: Promise<{ profession: string }>;
 }
 
 export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: string, faqHeader: string }> = {
+  'doctor-digital-business-card': {
+    faqHeader: "Frequently Asked Questions for Doctors",
+    q1: "Why does a Doctor need a digital business card?",
+    a1: "Doctors need digital business cards to quickly share their clinic location, secure contact methods, and professional credentials with colleagues, referring physicians, and patients without relying on unsanitary or easily lost paper cards.",
+    q2: "Is it secure to use a digital business card in healthcare?",
+    a2: "Yes, our platform allows you to control exactly what information is shared, ensuring you only provide public-facing contact details or HIPAA-compliant portals."
+  },
+  'lawyer-digital-business-card': {
+    faqHeader: "Frequently Asked Questions for Lawyers",
+    q1: "Why does a Lawyer need a digital business card?",
+    a1: "Lawyers use digital business cards to project a modern, professional image while providing instant access to their practice areas, firm website, and consultation booking links.",
+    q2: "Can I track who views my digital business card?",
+    a2: "Yes, advanced analytics let you see when potential clients or partners view your card, helping you time your follow-ups effectively."
+  },
+  'chef-digital-business-card': {
+    faqHeader: "Frequently Asked Questions for Chefs",
+    q1: "Why does a Chef need a digital business card?",
+    a1: "A Chef can use a digital business card to showcase their culinary portfolio, link directly to restaurant reservations, or promote private catering services dynamically.",
+    q2: "Can I include links to my menus or Instagram?",
+    a2: "Absolutely. A digital business card is perfect for linking directly to your visual portfolio on Instagram or your latest seasonal menu."
+  },
+  'teacher-digital-business-card': {
+    faqHeader: "Frequently Asked Questions for Teachers",
+    q1: "Why does a Teacher need a digital business card?",
+    a1: "Teachers and educators use digital business cards to seamlessly share their contact information, educational resources, and tutoring availability with parents and school administrators.",
+    q2: "Can I link to my educational resources?",
+    a2: "Yes, you can include links to your class website, syllabus, or online teaching materials for easy access."
+  },
   en: {
     faqHeader: "Frequently Asked Questions",
     q1: "Why does a {profession} need a digital business card?",
@@ -113,7 +142,87 @@ export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: st
   }
 };
 
-const langMap: Record<string, { title: string, desc: string, snapshot: string }> = {
+const langMap: Record<string, { title: string, desc: string, snapshot: string, content?: React.ReactNode }> = {
+  'doctor-digital-business-card': {
+    title: "Digital Business Card for Doctors",
+    desc: "Create a professional digital business card for your medical",
+    snapshot: "A digital business card for doctors allows for instant sharing of clinic details, secure contact information, and professional credentials, streamlining medical networking.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Modern Networking for Medical Professionals</h2>
+        <p>
+          As a medical professional, your time is incredibly valuable. Exchanging outdated paper cards at medical conferences or with referring physicians is inefficient and often leads to lost connections.
+          A specialized digital business card ensures your peers and patients always have your most up-to-date contact information.
+        </p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Essential Features for Doctors</h3>
+        <ul className="list-disc pl-6 space-y-2 mb-6">
+          <li><strong>Clinic Information:</strong> Share your practice address, hours, and specialty instantly.</li>
+          <li><strong>Secure Contacts:</strong> Provide links to HIPAA-compliant portals or secure messaging systems.</li>
+          <li><strong>Professional Credentials:</strong> Easily link to your medical board certifications and published research.</li>
+        </ul>
+      </>
+    )
+  },
+  'lawyer-digital-business-card': {
+    title: "Digital Business Card for Lawyers",
+    desc: "Create a professional digital business card for your legal",
+    snapshot: "Lawyers use digital business cards to present an authoritative, modern image while offering direct links to practice areas and consultation scheduling.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Authoritative Networking for Attorneys</h2>
+        <p>
+          In the legal field, first impressions are critical. While paper cards are traditional, they lack the actionable features required in modern business.
+          A digital business card allows you to present a polished, conservative aesthetic while providing immediate utility to prospective clients and partners.
+        </p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Why Lawyers Choose Digital Cards</h3>
+        <ul className="list-disc pl-6 space-y-2 mb-6">
+          <li><strong>Instant Scheduling:</strong> Embed links for potential clients to book a confidential consultation directly.</li>
+          <li><strong>Practice Area Focus:</strong> Highlight your specific legal expertise and link to your firm's case studies.</li>
+          <li><strong>Vcard Integration:</strong> Ensure your contact details are saved directly into a client's phone seamlessly.</li>
+        </ul>
+      </>
+    )
+  },
+  'chef-digital-business-card': {
+    title: "Digital Business Card for Chefs",
+    desc: "Create a professional digital business card for your culinary",
+    snapshot: "Chefs utilize digital business cards to visually showcase their culinary portfolio, link to restaurant reservations, and promote private catering services.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Showcase Your Culinary Creations</h2>
+        <p>
+          The culinary industry is highly visual and competitive. A standard paper card cannot capture the essence of your cuisine.
+          A digital business card serves as a dynamic portfolio, allowing chefs, restaurateurs, and caterers to share their menus and food photography instantly.
+        </p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for Culinary Professionals</h3>
+        <ul className="list-disc pl-6 space-y-2 mb-6">
+          <li><strong>Visual Portfolio:</strong> Link directly to your Instagram or a gallery of your best dishes.</li>
+          <li><strong>Direct Reservations:</strong> Include a call-to-action button linking to your restaurant's booking system.</li>
+          <li><strong>Catering Inquiries:</strong> Use built-in lead capture forms for private event catering requests.</li>
+        </ul>
+      </>
+    )
+  },
+  'teacher-digital-business-card': {
+    title: "Digital Business Card for Teachers",
+    desc: "Create a professional digital business card for your educational",
+    snapshot: "Educators and teachers use digital business cards to efficiently share contact info, syllabi, and tutoring resources with parents and students.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Streamlined Communication for Educators</h2>
+        <p>
+          Teachers and educational professionals need efficient ways to communicate with parents, students, and administration.
+          A digital business card centralizes all your essential educational resources and contact methods into one easily shareable link.
+        </p>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Advantages for Teachers and Tutors</h3>
+        <ul className="list-disc pl-6 space-y-2 mb-6">
+          <li><strong>Resource Sharing:</strong> Link to your class website, syllabus, or essential reading materials.</li>
+          <li><strong>Parent Communication:</strong> Provide clear office hours and preferred contact methods.</li>
+          <li><strong>Tutoring Services:</strong> Easily promote private tutoring availability and accept booking requests.</li>
+        </ul>
+      </>
+    )
+  },
   en: { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card allows you to instantly share your professional profile, contact details, and portfolio via a simple QR code or link, eliminating the need for physical paper." },
   es: { title: "Tarjeta de Presentación Digital para", desc: "Crea una tarjeta de presentación digital profesional para tu", snapshot: "Una tarjeta de presentación digital le permite compartir instantáneamente su perfil profesional, datos de contacto y cartera a través de un simple código QR o enlace, eliminando la necesidad de papel físico." },
   fr: { title: "Carte de Visite Numérique pour", desc: "Créez une carte de visite numérique professionnelle pour votre", snapshot: "Une carte de visite numérique vous permet de partager instantanément votre profil professionnel, vos coordonnées et votre portfolio via un simple code QR ou un lien, éliminant ainsi le besoin de papier physique." },
@@ -154,12 +263,17 @@ function extractLanguageAndProfession(slug: string) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const { lang, profession } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
+  const slug = resolvedParams.profession;
+  const { lang, profession } = extractLanguageAndProfession(slug);
+  const localeData = langMap[slug] || langMap[lang] || langMap.en;
 
   return {
-    title: `${localeData.title} ${profession}`,
-    description: `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
+    title: localeData.title.endsWith(profession + 's') || localeData.title.endsWith(profession)
+      ? localeData.title
+      : `${localeData.title} ${profession}`,
+    description: localeData.desc.endsWith(profession.toLowerCase())
+      ? `${localeData.desc} career. Impress clients and capture leads instantly.`
+      : `${localeData.desc} ${profession.toLowerCase()} career. Impress clients and capture leads instantly.`,
     alternates: {
       canonical: `/professions/${resolvedParams.profession}`,
     }
@@ -168,9 +282,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+  const slug = resolvedParams.profession;
+  const { lang, profession: professionTitle } = extractLanguageAndProfession(slug);
+  const localeData = langMap[slug] || langMap[lang] || langMap.en;
+  const faqData = faqMap[slug] || faqMap[lang] || faqMap.en;
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
@@ -209,7 +324,7 @@ export default async function ProfessionPage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          {localeData.title} {professionTitle}s
+          {localeData.title.endsWith(professionTitle + 's') || localeData.title.endsWith(professionTitle) ? localeData.title : `${localeData.title} ${professionTitle}s`}
         </h1>
         <p className="text-xl text-muted-foreground">
           Stand out in your industry with a premium, interactive digital business card designed specifically for {professionTitle.toLowerCase()} professionals.
@@ -217,22 +332,27 @@ export default async function ProfessionPage({ params }: PageProps) {
       </header>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
-        <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
         <div className="p-4 bg-muted/50 rounded-lg border-l-4 border-primary mb-8 not-prose">
           <p className="text-sm font-medium leading-relaxed m-0 text-muted-foreground">
             <strong>AI Snapshot:</strong> {localeData.snapshot}
           </p>
         </div>
-        <p>
-          As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
-        </p>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
-        <ul className="list-disc pl-6 space-y-2 mb-6">
-          <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
-          <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
-          <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
-        </ul>
+        {localeData.content ? localeData.content : (
+          <>
+            <h2 className="text-3xl font-semibold mt-12 mb-6">Why upgrade your professional networking?</h2>
+            <p>
+              As a {professionTitle}, your network is your net worth. Whether you are meeting new clients, attending industry events, or pitching projects, a digital business card ensures you leave a memorable and professional first impression.
+            </p>
+
+            <h3 className="text-2xl font-semibold mt-10 mb-4">Key Benefits for {professionTitle}s</h3>
+            <ul className="list-disc pl-6 space-y-2 mb-6">
+              <li><strong>Instant Sharing:</strong> Share via QR code, text, or email in seconds.</li>
+              <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
+              <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
+            </ul>
+          </>
+        )}
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 
