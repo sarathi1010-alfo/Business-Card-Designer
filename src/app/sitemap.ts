@@ -53,6 +53,13 @@ export default async function sitemap({
 
   if (resolvedId === 'core') {
     const staticRoutes = [
+      { path: '/blog/what-is-a-digital-business-card', priority: 0.7, changeFrequency: 'monthly' },
+      { path: '/blog/digital-vs-physical-business-cards', priority: 0.7, changeFrequency: 'monthly' },
+      { path: '/blog/how-to-design-a-digital-business-card', priority: 0.7, changeFrequency: 'monthly' },
+      { path: '/blog/ultimate-guide-to-digital-business-cards', priority: 0.8, changeFrequency: 'weekly' },
+      { path: '/blog/how-does-it-work', priority: 0.7, changeFrequency: 'monthly' },
+      { path: '/blog/why-do-i-need-one', priority: 0.7, changeFrequency: 'monthly' },
+      { path: '/blog/what-is-a-qr-code-business-card', priority: 0.7, changeFrequency: 'monthly' },
       { path: '/', priority: 1.0, changeFrequency: 'weekly' },
       { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
       { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
