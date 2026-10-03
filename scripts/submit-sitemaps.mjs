@@ -1,7 +1,7 @@
 import https from 'https';
 
 const DOMAIN = 'brandcard.alfo.online';
-const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573'; // Example key, ideally from env
+const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573';
 
 const sitemaps = [
   `https://${DOMAIN}/sitemap.xml`,
@@ -10,6 +10,9 @@ const sitemaps = [
 ];
 
 const newUrls = [
+  `https://${DOMAIN}/blog/what-is-a-digital-business-card`,
+  `https://${DOMAIN}/blog/digital-vs-physical-business-cards`,
+  `https://${DOMAIN}/blog/how-to-design-a-digital-business-card`,
   `https://${DOMAIN}/blog/digital-business-card-guide`,
   `https://${DOMAIN}/professions/founder-digital-business-card`,
   `https://${DOMAIN}/professions/freelancer-digital-business-card`,
