@@ -8,6 +8,30 @@ export const CARD_HEIGHT = 600;
 
 export const mockTemplates: Template[] = [
   {
+    id: 'minimalist-digital-business-card',
+    name: 'Minimalist Digital Business Card',
+    category: 'Minimalist',
+    preview: '/templates/modern-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'MINIMALIST TEMPLATE',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#09090b',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
     id: 'modern-minimal',
     name: 'Modern Minimal',
     category: 'Minimal',
