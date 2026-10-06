@@ -59,6 +59,7 @@ export default async function sitemap({
       { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
       { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
       { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+      { path: '/blog/digital-business-card-converts-guide', priority: 0.8, changeFrequency: 'weekly' },
     ] as const;
 
     staticRoutes.forEach(route => {
@@ -79,6 +80,20 @@ export default async function sitemap({
         changeFrequency: 'weekly',
         priority: 0.8,
       });
+    });
+
+    sitemapData.push({
+      url: generateCanonicalUrl('/use-cases/networking-event-digital-card'),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    });
+
+    sitemapData.push({
+      url: generateCanonicalUrl('/use-cases/conference-digital-business-card'),
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
     });
   }
 
