@@ -1,9 +1,45 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
 interface PageProps {
   params: Promise<{ profession: string }>;
 }
+
+export const professionOverrides: Record<string, { content?: React.ReactNode }> = {
+  "architect-digital-business-card": {
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Architect Digital Cards</h3>
+        <p>Architects need a digital presence that reflects their attention to structure and design. Your card acts as a mini-portfolio for your best projects.</p>
+      </>
+    )
+  },
+  "artist-digital-business-card": {
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Artist Digital Cards</h3>
+        <p>For artists, visual impact is everything. Instantly connect gallery owners, collectors, and fans directly to your latest exhibitions and social channels.</p>
+      </>
+    )
+  },
+  "designer-digital-business-card": {
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Designer Digital Cards</h3>
+        <p>Designers must showcase their aesthetic immediately. A digital card allows you to share your curated work flawlessly without worrying about print quality.</p>
+      </>
+    )
+  },
+  "photographer-digital-business-card": {
+    content: (
+      <>
+        <h3 className="text-2xl font-semibold mt-10 mb-4">Photographer Digital Cards</h3>
+        <p>Photographers can turn a simple connection into a booking. Share high-res galleries, booking links, and contact details seamlessly with one scan.</p>
+      </>
+    )
+  }
+};
 
 export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: string, faqHeader: string }> = {
   en: {
@@ -241,6 +277,8 @@ export default async function ProfessionPage({ params }: PageProps) {
 
         <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
         <p>{a2}</p>
+
+        {professionOverrides[resolvedParams.profession]?.content}
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Ready to create your card?</h2>
