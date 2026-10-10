@@ -34,6 +34,21 @@ export default function BlogPage() {
           </div>
         </div>
 
+        {/* New Pillar Post */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/industry-networking-guide" className="hover:underline text-primary">
+                Industry-Specific Networking Guide
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how to master industry-specific networking in 2026. Discover design psychology, targeted strategies, and how to use digital business cards for your niche.
+            </p>
+            <Link href="/blog/industry-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Placeholder for future blog posts */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
