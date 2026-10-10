@@ -13,7 +13,14 @@ import puppeteer from 'puppeteer';
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/blog/what-is-a-digital-business-card',
+    '/blog/digital-vs-physical-business-cards',
+    '/blog/how-to-design-digital-business-card',
+    '/blog/ultimate-guide-digital-business-cards-2026',
+    '/blog/how-does-a-digital-business-card-work',
+    '/blog/why-do-i-need-a-digital-business-card',
+    '/blog/what-is-a-qr-code-business-card'
   ];
 
   console.log('Starting headless browser tests...');
@@ -57,8 +64,32 @@ import puppeteer from 'puppeteer';
        hasErrors = true;
     }
 
-    // We cannot definitively test full canvas editor logic without a complex setup,
-    // but we can ensure there are no severe page crashes on the main landing
+    console.log('Evaluating Core Web Vitals (LCP/CLS)...');
+    const vitals = await page.evaluate(() => {
+      return new Promise((resolve) => {
+        let lcp = null;
+        let cls = 0;
+
+        new PerformanceObserver((entryList) => {
+          for (const entry of entryList.getEntries()) {
+            lcp = entry.startTime;
+          }
+        }).observe({type: 'largest-contentful-paint', buffered: true});
+
+        new PerformanceObserver((entryList) => {
+          for (const entry of entryList.getEntries()) {
+            if (!entry.hadRecentInput) {
+              cls += entry.value;
+            }
+          }
+        }).observe({type: 'layout-shift', buffered: true});
+
+        setTimeout(() => {
+          resolve({ lcp, cls });
+        }, 1000);
+      });
+    });
+    console.log(`✅ Core Web Vitals -> LCP: ${vitals.lcp}, CLS: ${vitals.cls}`);
 
   } catch (e) {
     console.error(`❌ Failed during main page functional test: ${e.message}`);
