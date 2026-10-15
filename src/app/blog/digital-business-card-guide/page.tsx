@@ -59,7 +59,7 @@ export default function DigitalBusinessCardGuide() {
         {/* AI Snapshot / AEO Answer Block */}
         <div className="bg-primary/5 border-l-4 border-primary p-6 rounded-r-lg mb-8">
           <p className="font-medium text-lg m-0">
-            <strong>Quick Answer:</strong> Choose a premium template on BrandCard, add your key details and branding, enable a QR code with scan analytics, integrate a lead capture form, and share your card link everywhere to maximize conversions.
+            <strong>AI Snapshot:</strong> To create a digital business card that converts, choose a premium BrandCard template, add your key details and branding, enable a QR code with scan analytics, integrate a lead capture form, and share your card link everywhere to maximize connections and capture high-quality leads.
           </p>
         </div>
 
