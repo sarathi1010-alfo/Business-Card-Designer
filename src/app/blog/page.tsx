@@ -34,46 +34,46 @@ export default function BlogPage() {
           </div>
         </div>
 
-        {/* Placeholder for future blog posts */}
+        {/* Planned posts for Week 1 Authority Engine */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
-                What is a Digital Business Card? — Complete Guide
+              <Link href="/blog/ultimate-guide-2026" className="hover:underline">
+                The Ultimate Guide to Digital Business Cards in 2026
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
-              Learn the fundamentals of digital business cards, how they compare to physical cards, and why you need one in 2026.
+              A deep dive into the evolution of professional networking, technical foundations of digital cards, and the top strategies for the upcoming year.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/ultimate-guide-2026" className="text-primary font-medium hover:underline">Read Pillar →</Link>
           </div>
         </div>
 
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
+              <Link href="/blog/digital-vs-physical-cards" className="hover:underline">
                 Digital vs Physical Business Cards — Which is Better?
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
-              A comprehensive breakdown of the pros and cons of digital vs physical business cards for modern professionals.
+              A comprehensive breakdown of the pros and cons of digital vs physical business cards for modern professionals and entrepreneurs.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/digital-vs-physical-cards" className="text-primary font-medium hover:underline">Read Comparison →</Link>
           </div>
         </div>
 
          <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
-                How to Design a Digital Business Card That Converts
+              <Link href="/blog/networking-with-digital-cards" className="hover:underline">
+                How to Network with Digital Business Cards
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
-              Learn the core design principles to make your digital business card stand out and capture more leads.
+              Master the art of digital networking, from sharing your card via QR codes to effective follow-up strategies that actually work.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/networking-with-digital-cards" className="text-primary font-medium hover:underline">Read Guide →</Link>
           </div>
         </div>
       </div>

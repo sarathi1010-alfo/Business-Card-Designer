@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container px-4 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="flex flex-col gap-4">
-            <span className="font-bold text-xl tracking-tight">CardStudio</span>
+            <span className="font-bold text-xl tracking-tight">BrandCard</span>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Design professional business cards in minutes. Built for speed, privacy, and modern aesthetics.
             </p>
