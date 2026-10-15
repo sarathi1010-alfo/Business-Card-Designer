@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "networking-event-digital-card",
+  "conference-digital-business-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -72,6 +74,7 @@ export default async function sitemap({
   }
 
   if (resolvedId === 'use-cases') {
+    // Core use cases from logic
     VALID_USE_CASES.forEach(useCase => {
       sitemapData.push({
         url: generateCanonicalUrl(`/business-card/${useCase}`),
@@ -80,12 +83,43 @@ export default async function sitemap({
         priority: 0.8,
       });
     });
+
+    // Specifically requested programmatic SEO slugs
+    const extraUseCases = [
+      "networking-event-digital-card",
+      "conference-digital-business-card"
+    ];
+    extraUseCases.forEach(slug => {
+      if (!VALID_USE_CASES.includes(slug)) {
+        sitemapData.push({
+          url: generateCanonicalUrl(`/business-card/${slug}`),
+          lastModified: new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        });
+      }
+    });
   }
 
   if (resolvedId === 'templates') {
+    // Base categories
     TEMPLATE_CATEGORIES.forEach(category => {
       sitemapData.push({
         url: generateCanonicalUrl(`/templates/${category}`),
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+
+    // Specifically requested long-tail template slugs
+    const extraTemplates = [
+      "minimalist-digital-business-card",
+      "creative-digital-business-card"
+    ];
+    extraTemplates.forEach(slug => {
+      sitemapData.push({
+        url: generateCanonicalUrl(`/templates/${slug}`),
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
@@ -98,18 +132,41 @@ export default async function sitemap({
     if (LANGUAGES.includes(lang)) {
       const professions = professionsData as string[];
       const now = new Date();
+
+      // Specifically requested profession slugs
+      const requestedProfessions = [
+        "founder-digital-business-card",
+        "freelancer-digital-business-card",
+        "real-estate-agent-digital-card",
+        "consultant-digital-business-card"
+      ];
+
+      if (lang === 'en') {
+        requestedProfessions.forEach(slug => {
+          sitemapData.push({
+            url: generateCanonicalUrl(`/professions/${slug}`),
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+          });
+        });
+      }
+
       professions.forEach(profession => {
         const slug = profession.toLowerCase().replace(/[\s_]+/g, '-');
         const urlSlug = lang === 'en'
           ? `${slug}-digital-business-card`
           : `${slug}-digital-business-card-${lang}`;
 
-        sitemapData.push({
-          url: generateCanonicalUrl(`/professions/${urlSlug}`),
-          lastModified: now,
-          changeFrequency: 'weekly',
-          priority: 0.6,
-        });
+        // Avoid duplication if already added
+        if (lang !== 'en' || !requestedProfessions.includes(urlSlug)) {
+           sitemapData.push({
+            url: generateCanonicalUrl(`/professions/${urlSlug}`),
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.6,
+          });
+        }
       });
     }
   }

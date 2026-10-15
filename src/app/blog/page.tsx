@@ -4,6 +4,13 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog & Guides",
   description: "Learn how to build, share, and optimize your digital business card for professional networking and lead generation.",
+  alternates: {
+    canonical: "/blog",
+  },
+  other: {
+    "last-modified": "2025-06-15",
+    "date-refreshed": "2025-06-15",
+  }
 };
 
 export default function BlogPage() {
