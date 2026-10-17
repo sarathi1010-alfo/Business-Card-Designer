@@ -11,6 +11,9 @@ const sitemaps = [
 
 const newUrls = [
   `https://${DOMAIN}/blog/digital-business-card-guide`,
+  `https://${DOMAIN}/blog/what-is-a-digital-business-card`,
+  `https://${DOMAIN}/blog/digital-vs-physical-business-cards`,
+  `https://${DOMAIN}/blog/how-to-design-digital-business-card`,
   `https://${DOMAIN}/professions/founder-digital-business-card`,
   `https://${DOMAIN}/professions/freelancer-digital-business-card`,
   `https://${DOMAIN}/professions/real-estate-agent-digital-card`,
