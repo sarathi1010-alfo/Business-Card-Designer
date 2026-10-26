@@ -168,5 +168,110 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'psychology-minimal',
+    name: 'Psychology Minimal',
+    category: 'Psychology',
+    preview: '/templates/psychology-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fdfdfd',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 200,
+        width: 850,
+        text: 'DR. ELEANOR VANCE',
+        fontSize: 48,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#111827',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 270,
+        width: 850,
+        text: 'CLINICAL PSYCHOLOGIST',
+        fontSize: 22,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#4b5563',
+        textAlign: 'center'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 100,
+        y: 400,
+        width: 850,
+        text: 'eleanor@example.com | +1 555 123 4567',
+        fontSize: 18,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#111827',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'trust-corporate',
+    name: 'Trust Corporate',
+    category: 'Trust',
+    preview: '/templates/trust-corporate.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#0f172a',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 80,
+        y: 220,
+        width: 890,
+        text: 'MARCUS WRIGHT',
+        fontSize: 52,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 80,
+        y: 290,
+        width: 890,
+        text: 'FINANCIAL ADVISOR',
+        fontSize: 24,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#94a3b8',
+        textAlign: 'left'
+      },
+      {
+        id: 'divider',
+        type: 'rect',
+        x: 80,
+        y: 340,
+        width: 60,
+        height: 4,
+        fill: '#38bdf8'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 80,
+        y: 420,
+        width: 890,
+        text: 'Trust & Security Partners\nmarcus@trustcorp.com',
+        fontSize: 20,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#cbd5e1',
+        textAlign: 'left'
+      }
+    ]
   }
 ];
