@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">
@@ -15,7 +17,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">The Tools</h2>
         <p className="mb-6">
-          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. Check out our growing suite of utilities below.
+          From designing business cards to compressing PDFs, every tool in our ecosystem is built with a focus on speed, privacy, and user experience. For example, our approach is deeply rooted in <Link href="/blog/design-psychology-guide" className="text-primary hover:underline">the psychology of design</Link> to ensure you make the right first impression. Check out our growing suite of utilities below.
         </p>
       </div>
     </div>

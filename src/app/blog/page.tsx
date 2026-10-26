@@ -19,6 +19,21 @@ export default function BlogPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Design Psychology Pillar Post */}
+        <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold mb-2">
+              <Link href="/blog/design-psychology-guide" className="hover:underline text-primary">
+                The Psychology of Digital Business Card Design
+              </Link>
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Learn how color theory, typography, and UX design in your digital business card can instantly build trust, authority, and convert leads faster.
+            </p>
+            <Link href="/blog/design-psychology-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
+          </div>
+        </div>
+
         {/* Added actual first pillar post */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
