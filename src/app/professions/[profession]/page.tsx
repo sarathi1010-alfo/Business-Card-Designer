@@ -5,7 +5,61 @@ interface PageProps {
   params: Promise<{ profession: string }>;
 }
 
-export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: string, faqHeader: string }> = {
+import React from 'react';
+
+export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: string, faqHeader: string, content?: React.ReactNode }> = {
+  'software-engineer-digital-business-card': {
+    faqHeader: "Software Engineer Digital Business Card FAQs",
+    q1: "Why does a Software Engineer need a digital business card?",
+    a1: "A Software Engineer needs a digital business card to instantly share their GitHub, live portfolio, and technical credentials with recruiters and peers without the limitations of traditional paper cards.",
+    q2: "What should a Software Engineer include on their digital business card?",
+    a2: "Key elements include a professional headshot, clear contact details, direct links to recent coding projects, LinkedIn profile, and a lead capture form to connect with potential employers or clients.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Mastering Tech Networking</h2>
+        <p>As a software engineer, demonstrating your technical capability is crucial. Link directly to your repos and live apps.</p>
+      </>
+    )
+  },
+  'architect-digital-business-card': {
+    faqHeader: "Architect Digital Business Card FAQs",
+    q1: "Why does an Architect need a digital business card?",
+    a1: "An Architect needs a digital business card to instantly share their design portfolio and project history with clients and contractors without the limitations of traditional paper cards.",
+    q2: "What should an Architect include on their digital business card?",
+    a2: "Key elements include a professional headshot, clear contact details, direct links to visual portfolios or 3D renderings, professional profiles, and a lead capture form.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Designing Your Networking Strategy</h2>
+        <p>Architects need a card that reflects their aesthetic. Ensure your digital business card template is as well-designed as your buildings.</p>
+      </>
+    )
+  },
+  'lawyer-digital-business-card': {
+    faqHeader: "Lawyer Digital Business Card FAQs",
+    q1: "Why does a Lawyer need a digital business card?",
+    a1: "A Lawyer needs a digital business card to instantly share their specialization, firm details, and professional credentials with clients and peers.",
+    q2: "What should a Lawyer include on their digital business card?",
+    a2: "Key elements include a professional headshot, clear contact details, direct links to published articles or case studies, professional profiles, and a secure contact form.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Building Legal Authority</h2>
+        <p>Trust is everything in the legal profession. A premium digital card linking to your thought leadership helps establish immediate authority.</p>
+      </>
+    )
+  },
+  'doctor-digital-business-card': {
+    faqHeader: "Doctor Digital Business Card FAQs",
+    q1: "Why does a Doctor need a digital business card?",
+    a1: "A Doctor needs a digital business card to instantly share their specialization, clinic information, and credentials with patients and referring colleagues.",
+    q2: "What should a Doctor include on their digital business card?",
+    a2: "Key elements include a professional headshot, clear contact details, direct links to clinic booking systems or research papers, and professional profiles.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Streamlining Medical Referrals</h2>
+        <p>Make it easy for colleagues to refer patients by providing a clear, accessible digital presence with all your essential clinic details.</p>
+      </>
+    )
+  },
   en: {
     faqHeader: "Frequently Asked Questions",
     q1: "Why does a {profession} need a digital business card?",
@@ -113,7 +167,11 @@ export const faqMap: Record<string, { q1: string, a1: string, q2: string, a2: st
   }
 };
 
-const langMap: Record<string, { title: string, desc: string, snapshot: string }> = {
+const langMap: Record<string, { title: string, desc: string, snapshot: string, content?: React.ReactNode }> = {
+  'software-engineer-digital-business-card': { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card for software engineers seamlessly bridges the gap between networking and showcasing technical skills." },
+  'architect-digital-business-card': { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card for architects provides an immediate visual introduction to their design philosophy." },
+  'lawyer-digital-business-card': { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card for lawyers instantly communicates authority, specialization, and trust." },
+  'doctor-digital-business-card': { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card for doctors simplifies the referral process and provides vital credential information upfront." },
   en: { title: "Digital Business Card for", desc: "Create a professional digital business card for your", snapshot: "A digital business card allows you to instantly share your professional profile, contact details, and portfolio via a simple QR code or link, eliminating the need for physical paper." },
   es: { title: "Tarjeta de Presentación Digital para", desc: "Crea una tarjeta de presentación digital profesional para tu", snapshot: "Una tarjeta de presentación digital le permite compartir instantáneamente su perfil profesional, datos de contacto y cartera a través de un simple código QR o enlace, eliminando la necesidad de papel físico." },
   fr: { title: "Carte de Visite Numérique pour", desc: "Créez une carte de visite numérique professionnelle pour votre", snapshot: "Une carte de visite numérique vous permet de partager instantanément votre profil professionnel, vos coordonnées et votre portfolio via un simple code QR ou un lien, éliminant ainsi le besoin de papier physique." },
@@ -169,8 +227,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfessionPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { lang, profession: professionTitle } = extractLanguageAndProfession(resolvedParams.profession);
-  const localeData = langMap[lang] || langMap.en;
-  const faqData = faqMap[lang] || faqMap.en;
+  const localeData = langMap[resolvedParams.profession] || langMap[lang] || langMap.en;
+  const faqData = faqMap[resolvedParams.profession] || faqMap[lang] || faqMap.en;
 
   const q1 = faqData.q1.replace('{profession}', professionTitle);
   const a1 = faqData.a1.replace('{profession}', professionTitle);
@@ -233,6 +291,12 @@ export default async function ProfessionPage({ params }: PageProps) {
           <li><strong>Analytics & Tracking:</strong> See exactly when someone views your profile and what they click on.</li>
           <li><strong>Eco-friendly:</strong> Never print (or run out of) paper cards again.</li>
         </ul>
+
+        {faqData.content && (
+          <div className="my-8">
+            {faqData.content}
+          </div>
+        )}
 
         <h2 className="text-3xl font-semibold mt-12 mb-6">{faqData.faqHeader}</h2>
 

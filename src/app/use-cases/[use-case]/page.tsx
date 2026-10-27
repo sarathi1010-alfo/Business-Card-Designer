@@ -1,28 +1,73 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import React from 'react';
 
 interface PageProps {
   params: Promise<{ 'use-case': string }>;
 }
 
+const useCaseOverrides: Record<string, { title: string, description: string, faqHeader: string, q1: string, a1: string, q2: string, a2: string, content?: React.ReactNode }> = {
+  'tech-conference-digital-card': {
+    title: "Digital Business Cards for Tech Conferences",
+    description: "Optimize your networking at your next tech conference with a customized digital business card. Share GitHub links instantly and capture developer leads.",
+    faqHeader: "Tech Conference Networking FAQs",
+    q1: "How to use a digital business card for a Tech Conference?",
+    a1: "For a tech conference, prepare your digital business card ahead of time by adding relevant links (like your GitHub, portfolio, or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.",
+    q2: "Is a digital business card better than a physical one for a Tech Conference?",
+    a2: "Yes. During a busy tech conference, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your repo.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Mastering Tech Conference Networking</h2>
+        <p>Tech conferences move fast. Ensure your digital business card highlights your technical skills and links directly to your latest open-source projects.</p>
+      </>
+    )
+  },
+  'industry-meetup-digital-business-card': {
+    title: "Digital Business Cards for Industry Meetups",
+    description: "Optimize your networking at your next industry meetup with a customized digital business card. Share details instantly and capture leads.",
+    faqHeader: "Industry Meetup Networking FAQs",
+    q1: "How to use a digital business card for an Industry Meetup?",
+    a1: "For an industry meetup, tailor your digital business card to the specific niche of the event by adding relevant case studies or portfolio pieces.",
+    q2: "Is a digital business card better than a physical one for an Industry Meetup?",
+    a2: "Yes. In a specialized industry meetup, a digital card allows you to share comprehensive information like whitepapers or specialized portfolios that wouldn't fit on a paper card.",
+    content: (
+      <>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">Connecting at Industry Meetups</h2>
+        <p>Industry meetups are highly focused. Use your digital business card to demonstrate deep expertise in your specific niche.</p>
+      </>
+    )
+  }
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const useCaseSlug = resolvedParams['use-case'];
+  const override = useCaseOverrides[useCaseSlug];
+
+  const rawUseCase = useCaseSlug.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCase = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
-    title: `Digital Business Card for ${useCase} - BrandCard`,
-    description: `Optimize your networking at your next ${useCase.toLowerCase()} with a customized digital business card. Share details instantly and capture leads.`,
+    title: override ? `${override.title} - BrandCard` : `Digital Business Card for ${useCase} - BrandCard`,
+    description: override ? override.description : `Optimize your networking at your next ${useCase.toLowerCase()} with a customized digital business card. Share details instantly and capture leads.`,
     alternates: {
-      canonical: `/use-cases/${resolvedParams['use-case']}`,
+      canonical: `/use-cases/${useCaseSlug}`,
     }
   };
 }
 
 export default async function UseCasePage({ params }: PageProps) {
   const resolvedParams = await params;
-  const rawUseCase = resolvedParams['use-case'].replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
+  const useCaseSlug = resolvedParams['use-case'];
+  const override = useCaseOverrides[useCaseSlug];
+
+  const rawUseCase = useCaseSlug.replace(/-digital-business-card/g, '').replace(/-digital-card/g, '');
   const useCaseTitle = rawUseCase.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const q1 = override ? override.q1 : `How to use a digital business card for a ${useCaseTitle}?`;
+  const a1 = override ? override.a1 : `For a ${useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.`;
+  const q2 = override ? override.q2 : `Is a digital business card better than a physical one for a ${useCaseTitle}?`;
+  const a2 = override ? override.a2 : `Yes. During a busy ${useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -30,18 +75,18 @@ export default async function UseCasePage({ params }: PageProps) {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `How to use a digital business card for a ${useCaseTitle}?`,
+        "name": q1,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `For a ${useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.`
+          "text": a1
         }
       },
       {
         "@type": "Question",
-        "name": `Is a digital business card better than a physical one for a ${useCaseTitle}?`,
+        "name": q2,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes. During a busy ${useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.`
+          "text": a2
         }
       }
     ]
@@ -56,10 +101,10 @@ export default async function UseCasePage({ params }: PageProps) {
 
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading text-primary">
-          Digital Business Cards for {useCaseTitle}
+          {override ? override.title : `Digital Business Cards for ${useCaseTitle}`}
         </h1>
         <p className="text-xl text-muted-foreground">
-          Maximize your connections at your next {useCaseTitle.toLowerCase()} with a smart, trackable digital business card.
+          {override ? override.description : `Maximize your connections at your next ${useCaseTitle.toLowerCase()} with a smart, trackable digital business card.`}
         </p>
       </header>
 
@@ -76,13 +121,19 @@ export default async function UseCasePage({ params }: PageProps) {
           <li><strong>Follow-up Context:</strong> See exactly who clicked what after the event to personalize your follow-ups.</li>
         </ul>
 
-        <h2 className="text-3xl font-semibold mt-12 mb-6">Frequently Asked Questions</h2>
+        {override?.content && (
+          <div className="my-8">
+            {override.content}
+          </div>
+        )}
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">How to use a digital business card for a {useCaseTitle}?</h3>
-        <p>For a {useCaseTitle}, prepare your digital business card ahead of time by adding relevant links (like a presentation or event-specific landing page) and easily share it by having your unique QR code open on your phone screen.</p>
+        <h2 className="text-3xl font-semibold mt-12 mb-6">{override ? override.faqHeader : "Frequently Asked Questions"}</h2>
 
-        <h3 className="text-2xl font-semibold mt-6 mb-2">Is a digital business card better than a physical one for a {useCaseTitle}?</h3>
-        <p>Yes. During a busy {useCaseTitle}, physical cards often get lost. A digital card ensures your contact info goes straight into their phone and lets you track who actually viewed your profile.</p>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{q1}</h3>
+        <p>{a1}</p>
+
+        <h3 className="text-2xl font-semibold mt-6 mb-2">{q2}</h3>
+        <p>{a2}</p>
 
         <div className="mt-12 text-center p-8 bg-muted rounded-xl">
           <h2 className="text-2xl font-bold mb-4">Prepare for your next {useCaseTitle.toLowerCase()}</h2>

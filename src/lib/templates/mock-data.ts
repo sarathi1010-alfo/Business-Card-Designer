@@ -168,5 +168,77 @@ export const mockTemplates: Template[] = [
         textAlign: 'left'
       }
     ]
+  },
+  {
+    id: 'industry-specific-standard',
+    name: 'Industry Specific Standard',
+    category: 'Industry Specific',
+    preview: '/templates/modern-minimal.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#f8fafc',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 225,
+        y: 200,
+        width: 600,
+        text: 'JANE DOE',
+        fontSize: 64,
+        fontFamily: 'Inter, sans-serif',
+        fontWeight: 'bold',
+        fill: '#0f172a',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 225,
+        y: 280,
+        width: 600,
+        text: 'INDUSTRY EXPERT',
+        fontSize: 24,
+        fontFamily: 'Inter, sans-serif',
+        fill: '#475569',
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'professional-networking-pro',
+    name: 'Professional Networking Pro',
+    category: 'Professional Networking',
+    preview: '/templates/corporate-blue.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#1e293b',
+    elements: [
+      {
+        id: 'name',
+        type: 'text',
+        x: 100,
+        y: 250,
+        width: 850,
+        text: 'JOHN SMITH',
+        fontSize: 56,
+        fontFamily: 'system-ui, sans-serif',
+        fontWeight: 'bold',
+        fill: '#f8fafc',
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 100,
+        y: 330,
+        width: 850,
+        text: 'SENIOR NETWORKER',
+        fontSize: 20,
+        fontFamily: 'system-ui, sans-serif',
+        fill: '#94a3b8',
+        textAlign: 'center'
+      }
+    ]
   }
 ];
