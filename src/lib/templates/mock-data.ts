@@ -169,4 +169,112 @@ export const mockTemplates: Template[] = [
       }
     ]
   }
+,
+
+  {
+    id: 'elegant-serif',
+    name: 'Elegant Serif',
+    category: 'Elegant',
+    preview: '/templates/elegant-serif.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#fafaf9', // stone-50
+    elements: [
+      {
+        id: 'border-rect',
+        type: 'rect',
+        x: 20,
+        y: 20,
+        width: CARD_WIDTH - 40,
+        height: CARD_HEIGHT - 40,
+        fill: 'transparent',
+        // In a real app, might want a border property, but we'll use a hack or just rely on a rect
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 250,
+        width: 800,
+        text: 'Eleanor Vance',
+        fontSize: 60,
+        fontFamily: 'serif',
+        fontWeight: 'normal',
+        fill: '#44403c', // stone-700
+        textAlign: 'center'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: CARD_WIDTH / 2,
+        y: 330,
+        width: 800,
+        text: 'Interior Designer',
+        fontSize: 22,
+        fontFamily: 'sans-serif',
+        fontWeight: '300',
+        fill: '#78716c', // stone-500
+        textAlign: 'center'
+      }
+    ]
+  },
+  {
+    id: 'professional-standard',
+    name: 'Professional Standard',
+    category: 'Professional',
+    preview: '/templates/professional-standard.webp',
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    backgroundColor: '#ffffff',
+    elements: [
+      {
+        id: 'header-bg',
+        type: 'rect',
+        x: 0,
+        y: 0,
+        width: CARD_WIDTH,
+        height: 150,
+        fill: '#0f172a', // slate-900
+      },
+      {
+        id: 'name',
+        type: 'text',
+        x: 50,
+        y: 85,
+        width: 500,
+        text: 'MICHAEL CHEN',
+        fontSize: 48,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fill: '#ffffff',
+        textAlign: 'left'
+      },
+      {
+        id: 'title',
+        type: 'text',
+        x: 50,
+        y: 130,
+        width: 500,
+        text: 'VP OF OPERATIONS',
+        fontSize: 18,
+        fontFamily: 'sans-serif',
+        fontWeight: 'normal',
+        fill: '#94a3b8', // slate-400
+        textAlign: 'left'
+      },
+      {
+        id: 'contact',
+        type: 'text',
+        x: 50,
+        y: 250,
+        width: 500,
+        text: 'm.chen@enterprise.com\n(555) 123-4567',
+        fontSize: 24,
+        fontFamily: 'sans-serif',
+        fontWeight: 'normal',
+        fill: '#334155', // slate-700
+        textAlign: 'left'
+      }
+    ]
+  }
 ];

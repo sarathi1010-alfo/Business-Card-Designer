@@ -10,10 +10,19 @@ import puppeteer from 'puppeteer';
     '/professions/freelancer-digital-business-card',
     '/professions/real-estate-agent-digital-card',
     '/professions/consultant-digital-business-card',
+    '/professions/designer-digital-business-card',
+    '/professions/engineer-digital-business-card',
+    '/professions/salesperson-digital-business-card',
+    '/professions/marketer-digital-business-card',
+    '/blog/industry-networking-guide',
     '/use-cases/networking-event-digital-card',
     '/use-cases/conference-digital-business-card',
+    '/use-cases/industry-event-digital-card',
+    '/use-cases/trade-show-digital-business-card',
     '/templates/minimalist-digital-business-card',
-    '/templates/creative-digital-business-card'
+    '/templates/creative-digital-business-card',
+    '/templates/elegant-digital-business-card',
+    '/templates/professional-digital-business-card'
   ];
 
   console.log('Starting headless browser tests...');
