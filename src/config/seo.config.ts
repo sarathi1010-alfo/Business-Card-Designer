@@ -3,7 +3,7 @@ import { siteConfig } from "./site";
 export const seoConfig = {
   global: {
     titleTemplate: `%s | ${siteConfig.name}`,
-    defaultTitle: `${siteConfig.name} | Create Professional Cards Instantly`,
+    defaultTitle: "Business Card Designer | Free Online Brand Card Maker",
     defaultDescription: siteConfig.description,
     siteName: siteConfig.name,
     url: siteConfig.url,
