@@ -44,11 +44,11 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 font-heading text-balance leading-tight"
         >
-          Your{" "}
+          Free{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-blue-600">
-            AI-powered
+            Business Card Designer
           </span>
-          {" "}professional identity.
+          {" "}& Digital Brand Card Creator
         </motion.h1>
 
         <motion.p

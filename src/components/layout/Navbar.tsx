@@ -39,10 +39,10 @@ export function Navbar() {
             Powered by <a href="https://alfo.online" className="hover:text-foreground transition-colors underline underline-offset-2">alfo.online</a>
           </span>
           <Link href="/templates">
-            <Button variant="ghost" size="sm">Log in</Button>
+            <Button variant="ghost" className="min-h-[44px] min-w-[44px] px-3">Log in</Button>
           </Link>
           <Link href="/templates">
-            <Button size="sm">Start Designing</Button>
+            <Button className="min-h-[44px] min-w-[44px] px-4">Start Designing</Button>
           </Link>
         </div>
       </div>

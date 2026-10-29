@@ -67,7 +67,7 @@ export function constructMetadata({
         },
       ],
       locale: seoConfig.global.locale,
-      type: seoConfig.global.type as any,
+      type: (seoConfig.global.type as "website"),
     },
     twitter: {
       card: "summary_large_image",

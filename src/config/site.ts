@@ -5,7 +5,7 @@ export const siteConfig = {
 
   // Shared global metadata
   name: "Business Card Designer",
-  description: "Design professional business cards in minutes — no design skills needed.",
+  description: "Free business card designer to create custom printable and digital business cards in minutes. Choose professional templates and export print-ready PDF files.",
   creator: "alfo.online",
   ogImage: "/og.png",
   twitterHandle: "@alfo_online",
