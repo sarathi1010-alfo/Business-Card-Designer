@@ -9,6 +9,7 @@ import { EditorToolbar } from "@/components/editor/EditorToolbar";
 import { ShareCardModal } from "@/components/editor/ShareCardModal";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/gtag";
 
 // Dynamically import the canvas to avoid SSR issues with Konva
 const CardCanvas = dynamic(
@@ -43,6 +44,8 @@ export default function EditorClient({ initialTemplate }: EditorClientProps) {
   }
 
   const handleExport = () => {
+    trackEvent('download_card', { template: initialTemplate.name });
+    trackEvent('export_design', { format: 'png', template: initialTemplate.name });
     const stage = document.querySelector('canvas');
     if (stage) {
       const dataURL = stage.toDataURL();

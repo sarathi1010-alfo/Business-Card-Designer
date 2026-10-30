@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/gtag";
 
 export function ShareCardModal() {
   const template = useEditorStore((state) => state.template);
@@ -33,6 +34,8 @@ export function ShareCardModal() {
   };
 
   const handleDownloadQR = () => {
+    trackEvent('download_card', { format: 'qr' });
+    trackEvent('export_design', { format: 'qr' });
     const svg = document.getElementById("qr-code");
     if (!svg) return;
     const svgData = new XMLSerializer().serializeToString(svg);

@@ -1,6 +1,8 @@
 import { getContacts } from './tracker';
+import { trackEvent } from '@/lib/gtag';
 
 export const exportContactsCSV = () => {
+  trackEvent('export_design', { format: 'csv' });
   const contacts = getContacts().sort((a, b) => b.score - a.score);
 
   if (contacts.length === 0) {
@@ -40,6 +42,8 @@ export const exportContactsCSV = () => {
 };
 
 export const exportAnalyticsPDF = (elementId: string) => {
+  trackEvent('export_design', { format: 'pdf' });
+  trackEvent('download_card', { format: 'pdf' });
   const originalTitle = document.title;
   document.title = "BrandCard_Analytics_Report";
 
