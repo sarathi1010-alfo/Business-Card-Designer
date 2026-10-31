@@ -1,7 +1,7 @@
 import https from 'https';
 
 const DOMAIN = 'brandcard.alfo.online';
-const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573'; // Example key, ideally from env
+const INDEXNOW_KEY = '5a4c514838db4db1a7f14b609db20573';
 
 const sitemaps = [
   `https://${DOMAIN}/sitemap.xml`,
@@ -18,7 +18,14 @@ const newUrls = [
   `https://${DOMAIN}/use-cases/networking-event-digital-card`,
   `https://${DOMAIN}/use-cases/conference-digital-business-card`,
   `https://${DOMAIN}/templates/minimalist-digital-business-card`,
-  `https://${DOMAIN}/templates/creative-digital-business-card`
+  `https://${DOMAIN}/templates/creative-digital-business-card`,
+  `https://${DOMAIN}/blog/what-is-a-digital-business-card`,
+  `https://${DOMAIN}/blog/digital-vs-physical-business-cards`,
+  `https://${DOMAIN}/blog/how-to-design-a-digital-business-card-that-converts`,
+  `https://${DOMAIN}/blog/ultimate-guide-digital-business-cards-2026`,
+  `https://${DOMAIN}/blog/how-do-digital-business-cards-work`,
+  `https://${DOMAIN}/blog/why-do-i-need-a-digital-business-card`,
+  `https://${DOMAIN}/blog/what-is-a-qr-code-business-card`
 ];
 
 async function pingSitemap(sitemapUrl) {
