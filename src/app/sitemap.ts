@@ -21,98 +21,56 @@ const TEMPLATE_CATEGORIES = [
   "corporate",
 ];
 
-const LANGUAGES = ["en", "es", "fr", "de", "it", "pt", "nl", "ru", "zh", "ja", "ko", "ar", "hi", "tr", "pl"];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const sitemapData: MetadataRoute.Sitemap = [];
+  const now = new Date();
 
-export async function generateSitemaps() {
-  const sitemaps = [
-    { id: 'core' },
-    { id: 'use-cases' },
-    { id: 'templates' },
-  ];
+  const staticRoutes = [
+    { path: '/', priority: 1.0, changeFrequency: 'weekly' },
+    { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
+    { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
+    { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+  ] as const;
 
-  LANGUAGES.forEach(lang => {
-    sitemaps.push({ id: `professions-${lang}` });
+  staticRoutes.forEach(route => {
+    sitemapData.push({
+      url: generateCanonicalUrl(route.path),
+      lastModified: now,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+    });
   });
 
-  return sitemaps;
-}
-
-export default async function sitemap({
-  id,
-}: {
-  id: string;
-}): Promise<MetadataRoute.Sitemap> {
-  // In Next.js App Router, dynamic params/id can be Promises or directly evaluated.
-  // Wait, no. The sitemap function signature in Next.js 15+ is:
-  // export default async function sitemap({ id }: { id: string }): Promise<MetadataRoute.Sitemap>
-  // However, Next.js dynamic params are promises now. Let's use `await` if it's passed as a promise,
-  // or just handle it if it's not a string directly.
-  const resolvedId = await Promise.resolve(id);
-
-  const sitemapData: MetadataRoute.Sitemap = [];
-
-  if (resolvedId === 'core') {
-    const staticRoutes = [
-      { path: '/', priority: 1.0, changeFrequency: 'weekly' },
-      { path: '/templates', priority: 0.9, changeFrequency: 'daily' },
-      { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
-      { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
-      { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
-      { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
-    ] as const;
-
-    staticRoutes.forEach(route => {
-      sitemapData.push({
-        url: generateCanonicalUrl(route.path),
-        lastModified: new Date(),
-        changeFrequency: route.changeFrequency,
-        priority: route.priority,
-      });
+  VALID_USE_CASES.forEach(useCase => {
+    sitemapData.push({
+      url: generateCanonicalUrl(`/business-card/${useCase}`),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     });
-  }
+  });
 
-  if (resolvedId === 'use-cases') {
-    VALID_USE_CASES.forEach(useCase => {
-      sitemapData.push({
-        url: generateCanonicalUrl(`/business-card/${useCase}`),
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.8,
-      });
+  TEMPLATE_CATEGORIES.forEach(category => {
+    sitemapData.push({
+      url: generateCanonicalUrl(`/templates/${category}`),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     });
-  }
+  });
 
-  if (resolvedId === 'templates') {
-    TEMPLATE_CATEGORIES.forEach(category => {
-      sitemapData.push({
-        url: generateCanonicalUrl(`/templates/${category}`),
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      });
+  const professions = professionsData as string[];
+  professions.forEach(profession => {
+    const slug = profession.toLowerCase().replace(/[\s_]+/g, '-');
+    sitemapData.push({
+      url: generateCanonicalUrl(`/professions/${slug}-digital-business-card`),
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.6,
     });
-  }
-
-  if (typeof resolvedId === 'string' && resolvedId.startsWith('professions-')) {
-    const lang = resolvedId.split('-')[1];
-    if (LANGUAGES.includes(lang)) {
-      const professions = professionsData as string[];
-      const now = new Date();
-      professions.forEach(profession => {
-        const slug = profession.toLowerCase().replace(/[\s_]+/g, '-');
-        const urlSlug = lang === 'en'
-          ? `${slug}-digital-business-card`
-          : `${slug}-digital-business-card-${lang}`;
-
-        sitemapData.push({
-          url: generateCanonicalUrl(`/professions/${urlSlug}`),
-          lastModified: now,
-          changeFrequency: 'weekly',
-          priority: 0.6,
-        });
-      });
-    }
-  }
+  });
 
   return sitemapData;
 }
