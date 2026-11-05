@@ -11,6 +11,8 @@ const VALID_USE_CASES = [
   "linkedin-brand-card",
   "resume-card",
   "startup-founder-profile",
+  "trade-show-digital-business-card",
+  "industry-mixer-digital-card",
 ];
 
 // Mock templates mapping to represent dynamic DB entries
@@ -19,6 +21,8 @@ const TEMPLATE_CATEGORIES = [
   "modern",
   "creative",
   "corporate",
+  "healthcare",
+  "tech",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -32,6 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' },
     { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' },
+    { path: '/blog/industry-specific-networking-guide', priority: 0.8, changeFrequency: 'monthly' },
   ] as const;
 
   staticRoutes.forEach(route => {

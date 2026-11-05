@@ -34,18 +34,18 @@ export default function BlogPage() {
           </div>
         </div>
 
-        {/* Placeholder for future blog posts */}
+        {/* Added actual second pillar post */}
         <div className="bg-card text-card-foreground shadow-sm rounded-lg border overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-semibold mb-2">
-              <Link href="#" className="hover:underline">
-                What is a Digital Business Card? — Complete Guide
+              <Link href="/blog/industry-specific-networking-guide" className="hover:underline text-primary">
+                The Ultimate Guide to Industry-Specific Networking in 2026
               </Link>
             </h2>
             <p className="text-muted-foreground mb-4">
-              Learn the fundamentals of digital business cards, how they compare to physical cards, and why you need one in 2026.
+              Learn industry specific networking strategies using digital business cards. Discover how to tailor your digital presence for healthcare, tech, finance, and more.
             </p>
-            <Link href="#" className="text-primary font-medium hover:underline">Read More →</Link>
+            <Link href="/blog/industry-specific-networking-guide" className="text-primary font-medium hover:underline">Read Guide →</Link>
           </div>
         </div>
 
