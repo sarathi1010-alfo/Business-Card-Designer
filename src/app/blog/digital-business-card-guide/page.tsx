@@ -97,7 +97,7 @@ export default function DigitalBusinessCardGuide() {
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">1. Keep it Contextual</h3>
         <p>
-          If you&apos;re at a design conference, highlight your portfolio. If you&apos;re at an investor meetup, highlight your pitch deck. You can create multiple variations of your digital card for different contexts. This level of personalization shows your audience that you understand their needs and have tailored your presentation specifically for them.
+          If you&apos;re at a design conference, highlight your portfolio. If you&apos;re at an investor meetup, highlight your pitch deck. You can create multiple variations of your digital card for different contexts. This level of personalization shows your audience that you understand their needs and have tailored your presentation specifically for them. For more specific examples by sector, check out our <Link href="/blog/industry-specific-networking-guide" className="text-primary hover:underline font-medium">Industry-Specific Networking Guide</Link>.
         </p>
 
         <h3 className="text-2xl font-semibold mt-10 mb-4">2. The &quot;Double Opt-in&quot; Introduction</h3>
