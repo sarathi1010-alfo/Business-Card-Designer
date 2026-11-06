@@ -20,7 +20,7 @@ export function Navbar() {
                 <a href="https://fontfusion.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">Font Fusion</a>
                 <a href="https://brandforge.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">Brand Forge</a>
                 <a href="https://pdfutility.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">PDF Utility</a>
-                <a href="https://qrgenerator.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">QR Generator</a>
+                <a href="https://qr.alfo.online" className="block px-4 py-2 text-sm hover:bg-muted">QR Generator</a>
               </div>
             </div>
             <Link href="/blog" className="transition-colors hover:text-foreground/80 text-foreground/60">

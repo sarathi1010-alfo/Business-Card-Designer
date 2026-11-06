@@ -19,7 +19,7 @@ export function Footer() {
               <a href="https://fontfusion.alfo.online" className="hover:text-foreground transition-colors">Font Fusion</a>
               <a href="https://brandforge.alfo.online" className="hover:text-foreground transition-colors">Brand Forge</a>
               <a href="https://pdfutility.alfo.online" className="hover:text-foreground transition-colors">PDF Utility</a>
-              <a href="https://qrgenerator.alfo.online" className="hover:text-foreground transition-colors">QR Generator</a>
+              <a href="https://qr.alfo.online" className="hover:text-foreground transition-colors">QR Generator</a>
             </div>
           </div>
 

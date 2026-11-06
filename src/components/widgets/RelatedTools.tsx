@@ -22,7 +22,7 @@ const RELATED_TOOLS = [
   {
     name: "QR Generator",
     description: "Create custom QR codes for your business cards instantly.",
-    url: "https://qrgenerator.alfo.online",
+    url: "https://qr.alfo.online",
     category: "Utility",
   }
 ];
