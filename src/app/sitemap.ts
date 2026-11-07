@@ -28,6 +28,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/privacy-policy', priority: 0.3, changeFrequency: 'yearly' as const },
     { path: '/terms-of-service', priority: 0.3, changeFrequency: 'yearly' as const },
     { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
+    { path: '/blog/digital-business-card-guide', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/what-is-a-digital-business-card', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/digital-vs-physical-business-cards', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/how-to-design-a-digital-business-card-that-converts', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/ultimate-guide-digital-business-cards-2026', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/how-does-it-work', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/why-do-i-need-one', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog/what-is-a-qr-code-business-card', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/faq', priority: 0.8, changeFrequency: 'monthly' as const },
   ];
 
